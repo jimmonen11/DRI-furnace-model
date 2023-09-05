@@ -1,3 +1,5 @@
+'Hello world'
+
 n_furnace = 10;
 
 c_H2Oinit = 1*ones(1, n_furnace);
