@@ -21,6 +21,9 @@ DRIflow = 52; %kg/s
 Reducerflow = 8.4309; %kg/s
 %Reducerflow = 10.685; % kg/s
 
+eps_bed = 0.4; %S. Yu, L. Shao, Z. Zou, and H. Saxén, “A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling,” Processes, vol. 9, no. 12, 2021, doi: 10.3390/pr9122134.
+rho_p = 4750; %kg/m^3 %A. Ranzani Da Costa, D. Wagner, and F. Patisson, “Modelling a new, low CO2 emissions, hydrogen steelmaking process,” J. Clean. Prod., vol. 46, pp. 27–35, 2013, doi: 10.1016/j.jclepro.2012.07.045.
+
 reducerflowmole = Reducerflow/4 * 1000;
 
 r_furnace = 6.6/2; %m, radius of furnace
@@ -53,9 +56,9 @@ tau_furnace = h_furnace*A_furnace/(DRIflow/rho_bed)
 n_pellets = pellet_flow*tau_furnace/(n_furnace);
 
 
-rho_pellet = 5275; %kg/m^3, Fe2O3
+rho_p = 5275; %kg/m^3, Fe2O3
 V_pellet = (4/3)*pi*r_p^3;
-m_pellet = rho_pellet*V_pellet;
+m_pellet = rho_p*V_pellet;
 
 M_Fe2O3 = 159.69; %g/mol
 
