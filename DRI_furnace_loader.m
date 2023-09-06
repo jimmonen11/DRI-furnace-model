@@ -34,7 +34,7 @@ rho_gas = 0.0374; %kg/m^3, density of gas
 
 
 u_s = DRIflow/rho_bed/A_furnace;
-u_g = Reducerflow/rho_gas/A_furnace;
+%u_g = Reducerflow/rho_gas/A_furnace;
 
 dz = h_furnace/n_furnace;
 
@@ -67,8 +67,9 @@ P = 101325*1.16; %thesis de Costa
 R = 8.314; %(m^3*Pa)/(K*mol)
 ct = P/(R*T)
 
-M_H2 = 2;
-M_H2O = 18;
+MM_H2 = 2.016;
+MM_H2O = 18.015;
+MM_N2 = 28.02;
 
 x_H2in = 0.98;
 x_H2Oin = 1 - x_H2in;
@@ -77,7 +78,7 @@ x_H2Oin = 1 - x_H2in;
 %c_H2Oin = ct*x_H2Oin;
 
 n_gas_in = 3634; %mol/s
-flow = (n_gas_in*M_H2*x_H2in + n_gas_in*M_H2O*x_H2Oin)/1000;
+flow = (n_gas_in*MM_H2*x_H2in + n_gas_in*MM_H2O*x_H2Oin)/1000;
 
 % c_H2Oinit = n_gas_in*x_H2Oin*ones(1, n_furnace);
 % c_H2init = n_gas_in*x_H2Oin*ones(1, n_furnace);
