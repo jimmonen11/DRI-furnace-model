@@ -1,4 +1,4 @@
-function [V1, V2, V3] = USCM(X1, X2, X3, r0, T, c_H2, ct, V_node, n_pellets)
+function [V1, V2, V3] = USCM(X1, X2, X3, r0, T, c_H2, ct)
 
 %% Clean Up
 
