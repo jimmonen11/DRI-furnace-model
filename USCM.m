@@ -1,4 +1,4 @@
-function [V1, V2, V3] = USCM(X1, X2, X3, r0, T, c_H2, ct)
+function [V1, V2, V3] = USCM(X1, X2, X3, r0, T, c_H2, ct, rxns)
 
 %% Clean Up
 
@@ -80,15 +80,39 @@ B3 = (1-X3)*r0/(D_H2*X3);
 F = 1/kf;
 
 W1 = (A1+B1)*(A3*(A2+B2+B3+F) + (A2+B2)*(B3+F)) + A2*(A3*(B2+B3+F) + B2*(B3+F));
+W2 = (A2+B2)*(A3+B3+F) + A3*(B3+F);
+W3 = A3 + B3 + F;
 
 %%
 
-V1 = (4*pi*r0^2*( ((A3*(A2+B2+B3+F)) + (A2+B2)*(B3+F))*(c_H2-c_H2eq1)...
-    - (B3+F)*A2*(c_H2-c_H2eq3) - (A3*(B2+B3+F)+B2*(B3+F))*(c_H2-c_H2eq2)) / W1);
+if rxns == 3
 
-V2 = (4*pi*r0^2*( ((A1+B1+B2)*(A3+B3+F) + A3*(B3+F))*(c_H2-c_H2eq2)...
-    - (B2*(A3+B3+F)+(A3*(B3+F)))*(c_H2-c_H2eq1) - ((A1+B1)*(B3+F))*(c_H2-c_H2eq3)) / W1);
+    V1 = 4*pi*r0^2*( ((A3*(A2+B2+B3+F)) + (A2+B2)*(B3+F))*(c_H2-c_H2eq1)...
+        - (B3+F)*A2*(c_H2-c_H2eq3) - (A3*(B2+B3+F)+B2*(B3+F))*(c_H2-c_H2eq2)) / W1;
 
-V3 = (4*pi*r0^2*( ((A1+B1)*(A2+B2+B3+F) + A2*(B2+B3+F))*(c_H2-c_H2eq3)...
-    - (A2*(B3+F))*(c_H2-c_H2eq1) - ((A1+B1)*(B3+F))*(c_H2-c_H2eq2)) / W1);
+    V2 = 4*pi*r0^2*( ((A1+B1+B2)*(A3+B3+F) + A3*(B3+F))*(c_H2-c_H2eq2)...
+        - (B2*(A3+B3+F)+(A3*(B3+F)))*(c_H2-c_H2eq1) - ((A1+B1)*(B3+F))*(c_H2-c_H2eq3)) / W1;
+
+    V3 = 4*pi*r0^2*( ((A1+B1)*(A2+B2+B3+F) + A2*(B2+B3+F))*(c_H2-c_H2eq3)...
+        - (A2*(B3+F))*(c_H2-c_H2eq1) - ((A1+B1)*(B3+F))*(c_H2-c_H2eq2)) / W1;
+
+elseif rxns == 2
+
+    V1 = 0;
+
+    V2 = 4*pi*r0^2*( (A3+B3+F)*(c_H2-c_H2eq2)...
+        - (B3+F)*(c_H2-c_H2eq1) )/ W2 ;
+
+    V3 = 4*pi*r0^2*( ((A1+B1)*(A2+B2+B3+F) + A2*(B2+B3+F))*(c_H2-c_H2eq3)...
+        - (A2*(B3+F))*(c_H2-c_H2eq1) - ((A1+B1)*(B3+F))*(c_H2-c_H2eq2)) / W2;
+else
+    
+    V1 = 0;
+    
+    V2 = 0;
+    
+    V3 = 4*pi*r0^2*(c_H2-c_H2eq3)/ W3; 
+    
+    
+end
 
