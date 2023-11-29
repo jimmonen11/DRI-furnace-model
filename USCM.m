@@ -27,7 +27,7 @@ D_H2_3 = exp(4.77 - 5.9e3/T)/100^2;%m^2/s
 %kf = 0.01; %m/s
 kf = 0.47; %m/s
 
-D_H2 = 4.767751e-5;
+%D_H2 = 4.767751e-5;
 
 %% Equilibrium Constants and Parameters
 %From "The Effect of Gas and Solids Maldistribution on the Performance of
@@ -73,9 +73,9 @@ A1 = 1/(X1^2*(k1*(1+1/K1)));
 A2 = 1/(X2^2*(k2*(1+1/K2)));
 A3 = 1/(X3^2*(k3*(1+1/K3)));
 
-B1 = (X2-X1)*r0/(D_H2*X1*X2);
-B2 = (X3-X2)*r0/(D_H2*X2*X3);
-B3 = (1-X3)*r0/(D_H2*X3);
+B1 = (X2-X1)*r0/(D_H2_1*X1*X2);
+B2 = (X3-X2)*r0/(D_H2_2*X2*X3);
+B3 = (1-X3)*r0/(D_H2_3*X3);
 
 F = 1/kf;
 
