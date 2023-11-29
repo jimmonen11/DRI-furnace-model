@@ -3,16 +3,16 @@ function [V1, V2, V3] = USCM(X1, X2, X3, r0, T, c_H2, ct, rxns)
 %% Clean Up
 
 % %Makes sure X values are positive
-if X1 < 1e-15
-    X1 = 1e-15;
+if X1 < 1e-5
+    X1 = 1e-5;
 end
 
-if X2 < 1e-15
-    X2 = 1e-15;
+if X2 < 1e-5
+    X2 = 1e-5;
 end
 
-if X3 < 1e-15
-    X3 = 1e-15;
+if X3 < 1e-5
+    X3 = 1e-5;
 end
 
 %% Effective Diffusion Relations
@@ -20,14 +20,17 @@ end
 %S. Yu, L. Shao, Z. Zou, and H. Saxén, “A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling,” Processes, vol. 9, no. 12, 2021, doi: 10.3390/pr9122134.
 %which references:
 %R. Takahashi, Y. Takahashi, J. Yagi, and Y. Omori, “Operation and Simulation of Pressurized Shaft Furnace for Direct Reduction,” Trans. Iron Steel Inst. Japan, vol. 26, no. 9, pp. 765–774, 1986.
-D_H2_1 = exp(3.43 - 4.2e3/T)/100^2; %m^2/s
-D_H2_2 = exp(5.65 - 6.8e3/T)/100^2; %m^2/s
-D_H2_3 = exp(4.77 - 5.9e3/T)/100^2;%m^2/s
+%D_H2_1 = exp(3.43 - 4.2e3/T)/100^2; %m^2/s
+%D_H2_2 = exp(5.65 - 6.8e3/T)/100^2; %m^2/s
+%D_H2_3 = exp(4.77 - 5.9e3/T)/100^2;%m^2/s
 
 %kf = 0.01; %m/s
 kf = 0.47; %m/s
 
-%D_H2 = 4.767751e-5;
+D_H2_1 = 4.767751e-5;
+D_H2_2 = 4.767751e-5;
+D_H2_3 = 4.767751e-5;
+
 
 %% Equilibrium Constants and Parameters
 %From "The Effect of Gas and Solids Maldistribution on the Performance of
