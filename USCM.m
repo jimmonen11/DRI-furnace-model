@@ -2,17 +2,17 @@ function [V1, V2, V3] = USCM(X1, X2, X3, r0, T, c_H2, ct, rxns)
 
 %% Clean Up
 
-%Makes sure X values are positive
-if X1 < 1e-3
-    X1 = 1e-10;
+% %Makes sure X values are positive
+if X1 < 1e-15
+    X1 = 1e-15;
 end
 
-if X2 < 1e-3
-    X2 = 1e-10;
+if X2 < 1e-15
+    X2 = 1e-15;
 end
 
-if X3 < 1e-3
-    X3 = 1e-10;
+if X3 < 1e-15
+    X3 = 1e-15;
 end
 
 %% Effective Diffusion Relations
