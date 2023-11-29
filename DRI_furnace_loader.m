@@ -9,10 +9,10 @@ c_H2init = 12*ones(1, n_furnace);
 %c_H2Oinit = 2*ones(1, n_furnace);
 %c_H2Oinit = 2*ones(1, n_furnace);
 
-c_Fe2O3init = rho_bed*ones(1, n_furnace);
-c_Fe3O4init = 1e-20*ones(1, n_furnace);
-c_FeOinit = 1e-20*ones(1, n_furnace);
-c_Feinit = 1e-20*ones(1, n_furnace);
+c_Fe2O3init = rho_bed*1.25*ones(1, n_furnace);
+c_Fe3O4init = rho_bed/4*ones(1, n_furnace);
+c_FeOinit = rho_bed/4*ones(1, n_furnace);
+c_Feinit = rho_bed/4*ones(1, n_furnace);
 
 T_sinit = (500+273)*ones(1, n_furnace);
 T_ginit = (900+273)*ones(1, n_furnace);
