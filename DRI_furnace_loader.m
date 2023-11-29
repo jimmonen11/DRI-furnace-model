@@ -17,6 +17,8 @@ c_Feinit = 1e-20*ones(1, n_furnace);
 T_sinit = (500+273)*ones(1, n_furnace);
 T_ginit = (900+273)*ones(1, n_furnace);
 
+nrinit = zeros(1, n_furnace);
+
 c_H2in = 12;
 c_H2Oin = 1;
 
@@ -50,7 +52,7 @@ r_p = 6e-3; %m
 a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange
 
 
-pellet_flow = (3*DRIflow)/(4*pi*r_p^3*rho_bed)
+pellet_flow = (3*DRIflow)/(4*pi*r_p^3*rho_bed); %s^-1
 tau_furnace = h_furnace*A_furnace/(DRIflow/rho_bed)
 n_pellets = pellet_flow*tau_furnace/(n_furnace);
 
