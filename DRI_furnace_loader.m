@@ -9,10 +9,20 @@ c_H2init = 12*ones(1, n_furnace);
 %c_H2Oinit = 2*ones(1, n_furnace);
 %c_H2Oinit = 2*ones(1, n_furnace);
 
-c_Fe2O3init = rho_bed*1.25*ones(1, n_furnace);
-c_Fe3O4init = rho_bed/4*ones(1, n_furnace);
-c_FeOinit = rho_bed/4*ones(1, n_furnace);
-c_Feinit = rho_bed/4*ones(1, n_furnace);
+% c_Fe2O3init = rho_bed*1.25*ones(1, n_furnace);
+% %c_Fe2O3init  = linspace(rho_bed*1.25, rho_bed/3, n_furnace);
+% c_Fe3O4init  = linspace(rho_bed, rho_bed/4, n_furnace);
+% %c_Fe3O4init = rho_bed/2*ones(1, n_furnace);
+% c_FeOinit  = linspace(rho_bed, rho_bed/4, n_furnace);
+% 
+% %c_FeOinit = rho_bed/2*ones(1, n_furnace);
+% c_Feinit = rho_bed/10*ones(1, n_furnace);
+
+
+c_Fe2O3init = rho_bed*0.25*ones(1, n_furnace);
+c_Fe3O4init  = linspace(rho_bed, rho_bed/4, n_furnace)*1e-5;
+c_FeOinit  = linspace(rho_bed, rho_bed/4, n_furnace)*1e-5;
+c_Feinit = rho_bed/10*ones(1, n_furnace)*1e-5;
 
 T_sinit = (500+273)*ones(1, n_furnace);
 T_ginit = (900+273)*ones(1, n_furnace);
@@ -52,12 +62,12 @@ r_p = 6e-3; %m
 a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange
 
 
-pellet_flow = (3*DRIflow)/(4*pi*r_p^3*rho_bed); %s^-1
+pellet_flow = (3*DRIflow)/(4*pi*r_p^3*rho_bed) %s^-1
 tau_furnace = h_furnace*A_furnace/(DRIflow/rho_bed)
 n_pellets = pellet_flow*tau_furnace/(n_furnace);
 
 
-rho_p = 5275; %kg/m^3, Fe2O3
+%rho_p = 5275; %kg/m^3, Fe2O3
 V_pellet = (4/3)*pi*r_p^3;
 m_pellet = rho_p*V_pellet;
 
