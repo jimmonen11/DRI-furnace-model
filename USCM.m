@@ -20,9 +20,9 @@ function [V1, V2, V3] = USCM(X1, X2, X3, r0, T, c_H2, ct, rxns)
 %S. Yu, L. Shao, Z. Zou, and H. Saxén, “A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling,” Processes, vol. 9, no. 12, 2021, doi: 10.3390/pr9122134.
 %which references:
 %R. Takahashi, Y. Takahashi, J. Yagi, and Y. Omori, “Operation and Simulation of Pressurized Shaft Furnace for Direct Reduction,” Trans. Iron Steel Inst. Japan, vol. 26, no. 9, pp. 765–774, 1986.
-D_H2_1 = exp(3.43 - 4.2e3/T)/100^2; %m^2/s
-D_H2_2 = exp(5.65 - 6.8e3/T)/100^2; %m^2/s
-D_H2_3 = exp(4.77 - 5.9e3/T)/100^2;%m^2/s
+D_H2_1 = exp(3.43 - 4.2e3/T)/(100^2); %m^2/s
+D_H2_2 = exp(5.65 - 6.8e3/T)/(100^2); %m^2/s
+D_H2_3 = exp(4.77 - 5.9e3/T)/(100^2);%m^2/s
 
 %kf = 0.01; %m/s
 kf = 0.47; %m/s
@@ -79,6 +79,11 @@ k3 = 3.8337e-2*exp(-50129/(R*T));
 % k1 = 1.44e5*exp(-6650/T)/3600;
 % k2 = 2.88e5*exp(-8000/T)/3600;
 % k3 = 2.45e7*exp(-1400/T)/3600;
+
+%UyS. et al. A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling 
+% k1 = exp(4.49 - 33.4/(R*T));
+% k2 = exp(6.7 - 58.2/(R*T));
+% k3 = exp(6.97 - 57.1/(R*T));
 
 
 %%
