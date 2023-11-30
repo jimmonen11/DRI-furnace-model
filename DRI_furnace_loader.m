@@ -6,6 +6,7 @@ rho_bed = rho_p*(1-eps_bed);
 
 c_H2Oinit = 1*ones(1, n_furnace);
 c_H2init = 12*ones(1, n_furnace);
+c_N2int = 0*ones(1, n_furnace);
 %c_H2Oinit = 2*ones(1, n_furnace);
 %c_H2Oinit = 2*ones(1, n_furnace);
 
