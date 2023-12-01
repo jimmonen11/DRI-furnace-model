@@ -1,4 +1,4 @@
-function [V1, V2, V3] = USCM(X1, X2, X3, r0, T, c_H2, ct, rxns)
+function [V1, V2, V3] = USCM(X1, X2, X3, r0, T, c_H2, ct, rxns, kf)
 
 %% Clean Up
 
@@ -25,7 +25,7 @@ D_H2_2 = exp(5.65 - 6.8e3/T)/(100^2); %m^2/s
 D_H2_3 = exp(4.77 - 5.9e3/T)/(100^2);%m^2/s
 
 %kf = 0.01; %m/s
-kf = 0.47; %m/s
+%kf = 0.47; %m/s
 
 % D_H2_1 = 4.767751e-5;
 % D_H2_2 = 4.767751e-5;
