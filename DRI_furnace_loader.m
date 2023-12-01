@@ -4,31 +4,27 @@ eps_bed = 0.4; %S. Yu, L. Shao, Z. Zou, and H. Saxén, “A numerical study on t
 rho_p = 4750; %kg/m^3 %A. Ranzani Da Costa, D. Wagner, and F. Patisson, “Modelling a new, low CO2 emissions, hydrogen steelmaking process,” J. Clean. Prod., vol. 46, pp. 27–35, 2013, doi: 10.1016/j.jclepro.2012.07.045.
 rho_bed = rho_p*(1-eps_bed);
 
-c_H2Oinit = 1*ones(1, n_furnace);
-c_H2init = 12*ones(1, n_furnace);
+load('initcond.mat')
+
+% c_H2Oinit = 1*ones(1, n_furnace);
+% c_H2init = 12*ones(1, n_furnace);
 c_N2int = 0*ones(1, n_furnace);
 %c_H2Oinit = 2*ones(1, n_furnace);
 %c_H2Oinit = 2*ones(1, n_furnace);
 
-% c_Fe2O3init = rho_bed*1.25*ones(1, n_furnace);
-% %c_Fe2O3init  = linspace(rho_bed*1.25, rho_bed/3, n_furnace);
-% c_Fe3O4init  = linspace(rho_bed, rho_bed/4, n_furnace);
-% %c_Fe3O4init = rho_bed/2*ones(1, n_furnace);
-% c_FeOinit  = linspace(rho_bed, rho_bed/4, n_furnace);
+
+
+% c_Fe2O3init = rho_bed*0.25*ones(1, n_furnace);
+% c_Fe3O4init  = linspace(rho_bed, rho_bed/4, n_furnace)*1e-5;
+% c_FeOinit  = linspace(rho_bed, rho_bed/4, n_furnace)*1e-5;
+% c_Feinit = rho_bed/10*ones(1, n_furnace)*1e-5;
 % 
-% %c_FeOinit = rho_bed/2*ones(1, n_furnace);
-% c_Feinit = rho_bed/10*ones(1, n_furnace);
-
-
-c_Fe2O3init = rho_bed*0.25*ones(1, n_furnace);
-c_Fe3O4init  = linspace(rho_bed, rho_bed/4, n_furnace)*1e-5;
-c_FeOinit  = linspace(rho_bed, rho_bed/4, n_furnace)*1e-5;
-c_Feinit = rho_bed/10*ones(1, n_furnace)*1e-5;
-
-T_sinit = (500+273)*ones(1, n_furnace);
-T_ginit = (900+273)*ones(1, n_furnace);
-
-nrinit = zeros(1, n_furnace);
+% T_sinit = (500+273)*ones(1, n_furnace);
+% T_ginit = (900+273)*ones(1, n_furnace);
+% 
+% nr1init = zeros(1, n_furnace);
+% nr2init = zeros(1, n_furnace);
+% nr3init = zeros(1, n_furnace);
 
 c_H2in = 12;
 c_H2Oin = 1;
