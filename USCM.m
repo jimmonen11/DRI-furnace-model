@@ -59,14 +59,12 @@ c_H2eq3 = (1/(K3+1))*ct;
 
 %% Reaction rate Coefficient
 
-% k1 = 7.79e-7*exp(-27000/(R*T));
-% k2 = 1.11e-2*exp(-55000/(R*T));
-% k3 = 16*exp(-136000/(R*T));
+
 
 %wagner thesis m/s
-k1 = 6.3587e-2*exp(-43276/(R*T));
-k2 = 1.1290e-3*exp(-21570/(R*T));
-k3 = 3.8337e-2*exp(-50129/(R*T));
+% k1 = 6.3587e-2*exp(-43276/(R*T));
+% k2 = 1.1290e-3*exp(-21570/(R*T));
+% k3 = 3.8337e-2*exp(-50129/(R*T));
 
 
 %da costa thesis m/s
@@ -76,14 +74,14 @@ k3 = 3.8337e-2*exp(-50129/(R*T));
 
 %%From "The Effect of Gas and Solids Maldistribution on the Performance of
 %Moving-bed Reactors: The Reduction of Iron Oxide Pelletswith Hydrogen"
-% k1 = 1.44e5*exp(-6650/T)/3600;
-% k2 = 2.88e5*exp(-8000/T)/3600;
-% k3 = 2.45e7*exp(-1400/T)/3600;
+k1 = 1.44e5*exp(-6650/T)/3600;
+k2 = 2.88e5*exp(-8000/T)/3600;
+k3 = 2.45e7*exp(-1400/T)/3600;
 
-%UyS. et al. A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling 
-% k1 = exp(4.49 - 33.4/(R*T));
-% k2 = exp(6.7 - 58.2/(R*T));
-% k3 = exp(6.97 - 57.1/(R*T));
+% %UyS. et al. A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling 
+% k1 = exp(4.49 - 33.4/(R*T))/100;
+% k2 = exp(6.7 - 58.2/(R*T))/100;
+% k3 = exp(6.97 - 57.1/(R*T))/100;
 
 
 %%
