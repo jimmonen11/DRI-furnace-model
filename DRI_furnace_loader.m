@@ -57,7 +57,7 @@ r_p = 6e-3; %m
 
 
 a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange
-a_sh = 2*pi*r_furnace*dz; %m^2, surface area to lose heat to environment
+a_sh = (2*pi*r_furnace*dz)/(A_furnace*dz); %m^2/m^3, surface area to lose heat to environment
 
 
 pellet_flow = (3*DRIflow)/(4*pi*r_p^3*rho_bed) %s^-1
