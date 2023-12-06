@@ -1,7 +1,8 @@
 n_furnace = 15;
 
 eps_bed = 0.4; %S. Yu, L. Shao, Z. Zou, and H. Saxén, “A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling,” Processes, vol. 9, no. 12, 2021, doi: 10.3390/pr9122134.
-rho_p = 4750; %kg/m^3 %A. Ranzani Da Costa, D. Wagner, and F. Patisson, “Modelling a new, low CO2 emissions, hydrogen steelmaking process,” J. Clean. Prod., vol. 46, pp. 27–35, 2013, doi: 10.1016/j.jclepro.2012.07.045.
+rho_p = 4750; %kg/m^3 density of a pellet 10% porosity, from Da Costa thesis
+%A. Ranzani Da Costa, D. Wagner, and F. Patisson, “Modelling a new, low CO2 emissions, hydrogen steelmaking process,” J. Clean. Prod., vol. 46, pp. 27–35, 2013, doi: 10.1016/j.jclepro.2012.07.045.
 rho_bed = rho_p*(1-eps_bed);
 
 load('initcond.mat')
@@ -57,6 +58,8 @@ reducerflowmole = Reducerflow/4 * 1000;
 r_furnace = 6.6/2; %m, radius of furnace
 h_furnace = 6; %m, height of furnace
 A_furnace = pi*r_furnace^2; %m^2, c.s. area of flow
+
+A_furnace_pel = A_furnace*(1-eps_bed); %c.s. area for pellet flow - excludes gas lanes
 
 V_furnace = A_furnace*h_furnace;
 
