@@ -117,7 +117,7 @@ properties = [...
 ];
 
 tempinterp = properties(:,1);
-interp = interp1q(tempinterp, properties, T_H2O);
+interp = interp1(tempinterp, properties, T_H2O);
 
 rho_H2O = interp(2); %density, kg/m^3
 mu_H2O = interp(3); %viscocity, Pa*s
