@@ -1,4 +1,4 @@
-n_furnace = 15;
+n_furnace = 10;
 
 eps_bed = 0.4; %S. Yu, L. Shao, Z. Zou, and H. Saxén, “A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling,” Processes, vol. 9, no. 12, 2021, doi: 10.3390/pr9122134.
 rho_p = 4750; %kg/m^3 density of a pellet 10% porosity, from Da Costa thesis
@@ -6,7 +6,6 @@ rho_p = 4750; %kg/m^3 density of a pellet 10% porosity, from Da Costa thesis
 rho_bed = rho_p*(1-eps_bed);
 
 load('initcond.mat')
-
 
 T_ginit = interp1([1:1:length(T_ginit)],T_ginit, linspace(1,10,n_furnace));
 T_sinit = interp1([1:1:length(T_sinit)],T_sinit, linspace(1,10,n_furnace));
@@ -80,9 +79,9 @@ a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange
 a_sh = (2*pi*r_furnace*dz)/(A_furnace*dz); %m^2/m^3, surface area to lose heat to environment
 
 
-pellet_flow = (3*DRIflow)/(4*pi*r_p^3*rho_bed) %s^-1
+%pellet_flow = (3*DRIflow)/(4*pi*r_p^3*rho_bed) %s^-1
 tau_furnace = h_furnace*A_furnace/(DRIflow/rho_bed)
-n_pellets = pellet_flow*tau_furnace/(n_furnace);
+%n_pellets = pellet_flow*tau_furnace/(n_furnace);
 
 
 %rho_p = 5275; %kg/m^3, Fe2O3
