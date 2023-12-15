@@ -46,8 +46,8 @@ c_N2int = 0*ones(1, n_furnace);
 c_H2in = 12;
 c_H2Oin = 1;
 
-%DRIflow = 50.33; %kg/s
-DRIflow = 52; %kg/s
+DRIflow = 50.33; %kg/s
+%DRIflow = 35; %kg/s
 Reducerflow = 8.4309; %kg/s
 %Reducerflow = 10.685; % kg/s
 
