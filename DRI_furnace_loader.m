@@ -5,6 +5,7 @@ rho_p = 4750; %kg/m^3 density of a pellet 10% porosity, from Da Costa thesis
 %A. Ranzani Da Costa, D. Wagner, and F. Patisson, “Modelling a new, low CO2 emissions, hydrogen steelmaking process,” J. Clean. Prod., vol. 46, pp. 27–35, 2013, doi: 10.1016/j.jclepro.2012.07.045.
 rho_bed = rho_p*(1-eps_bed);
 
+
 load('initcond.mat')
 
 T_ginit = interp1([1:1:length(T_ginit)],T_ginit, linspace(1,10,n_furnace));
@@ -60,7 +61,13 @@ A_furnace = pi*r_furnace^2; %m^2, c.s. area of flow
 
 A_furnace_pel = A_furnace*(1-eps_bed); %c.s. area for pellet flow - excludes gas lanes
 
+r_p = 6e-3; %m
+
 V_furnace = A_furnace*h_furnace;
+V_pellet_bed = ((4/3)*pi*r_p^3)/(1-eps_bed);
+
+n_pellets = V_furnace/V_pellet_bed;
+n_pellets_dz = n_pellets/n_furnace;
 
 %rho_bed = 4750; %kg/m^3, density of bed
 %rho_gas = 0.0374; %kg/m^3, density of gas
@@ -72,44 +79,41 @@ V_furnace = A_furnace*h_furnace;
 dz = h_furnace/n_furnace;
 
 
-r_p = 6e-3; %m
-
 
 a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange, Wagner thesis
 a_sh = (2*pi*r_furnace*dz)/(A_furnace*dz); %m^2/m^3, surface area to lose heat to environment
 
 
-%pellet_flow = (3*DRIflow)/(4*pi*r_p^3*rho_bed) %s^-1
-tau_furnace = h_furnace*A_furnace/(DRIflow/rho_bed)
-%n_pellets = pellet_flow*tau_furnace/(n_furnace);
-
-
-%rho_p = 5275; %kg/m^3, Fe2O3
-V_pellet = (4/3)*pi*r_p^3;
-m_pellet = rho_p*V_pellet;
-
-M_Fe2O3 = 159.69; %g/mol
-
-molesO2pellet = 0.63*m_pellet/M_Fe2O3*1000;
-kappa = molesO2pellet%m_pellet;
-
-T = 800+273;
-P = 101325*1.16; %thesis de Costa
-R = 8.314; %(m^3*Pa)/(K*mol)
-ct = P/(R*T)
-
-MM_H2 = 2.016;
-MM_H2O = 18.015;
-MM_N2 = 28.02;
-
-x_H2in = 0.98;
-x_H2Oin = 1 - x_H2in;
-
-%c_H2in = ct*x_H2in;
-%c_H2Oin = ct*x_H2Oin;
-
-n_gas_in = 3634; %mol/s
-flow = (n_gas_in*MM_H2*x_H2in + n_gas_in*MM_H2O*x_H2Oin)/1000;
+% pellet_flow = (3*DRIflow)/(4*pi*r_p^3*rho_bed); %s^-1
+% tau_furnace = h_furnace*A_furnace/(DRIflow/rho_bed)
+% n_pellets = pellet_flow*tau_furnace/(n_furnace)
+% 
+% 
+% %rho_p = 5275; %kg/m^3, Fe2O3
+% m_pellet = rho_p*V_pellet;
+% 
+% M_Fe2O3 = 159.69; %g/mol
+% 
+% molesO2pellet = 0.63*m_pellet/M_Fe2O3*1000;
+% kappa = molesO2pellet%m_pellet;
+% 
+% T = 800+273;
+% P = 101325*1.16; %thesis de Costa
+% R = 8.314; %(m^3*Pa)/(K*mol)
+% ct = P/(R*T)
+% 
+% MM_H2 = 2.016;
+% MM_H2O = 18.015;
+% MM_N2 = 28.02;
+% 
+% x_H2in = 0.98;
+% x_H2Oin = 1 - x_H2in;
+% 
+% %c_H2in = ct*x_H2in;
+% %c_H2Oin = ct*x_H2Oin;
+% 
+% n_gas_in = 3634; %mol/s
+% flow = (n_gas_in*MM_H2*x_H2in + n_gas_in*MM_H2O*x_H2Oin)/1000;
 
 % c_H2Oinit = n_gas_in*x_H2Oin*ones(1, n_furnace);
 % c_H2init = n_gas_in*x_H2Oin*ones(1, n_furnace);
