@@ -5,6 +5,18 @@ rho_p = 4750; %kg/m^3 density of a pellet 10% porosity, from Da Costa thesis
 %A. Ranzani Da Costa, D. Wagner, and F. Patisson, “Modelling a new, low CO2 emissions, hydrogen steelmaking process,” J. Clean. Prod., vol. 46, pp. 27–35, 2013, doi: 10.1016/j.jclepro.2012.07.045.
 rho_bed = rho_p*(1-eps_bed);
 
+% Molar mass of species in kg/mol
+MM_Fe2O3 = 159.69/1000;
+MM_Fe3O4 = 251.53/1000;
+MM_FeO = 71.844/1000;
+MM_Fe = 55.845/1000;
+
+% Molar mass of species in g/mol
+MM_H2O = 18.015;
+MM_H2 = 2.016;
+MM_N2 = 28.013;
+
+R = 8.314; %(m^3*Pa)/(K*mol)
 
 load('initcond.mat')
 
@@ -13,6 +25,7 @@ T_sinit = interp1([1:1:length(T_sinit)],T_sinit, linspace(1,10,n_furnace));
 
 c_H2Oinit = interp1([1:1:length(c_H2Oinit)],c_H2Oinit, linspace(1,10,n_furnace));
 c_H2init = interp1([1:1:length(c_H2init)],c_H2init, linspace(1,10,n_furnace));
+c_N2init = 0*ones(1, n_furnace);
 
 c_Feinit = interp1([1:1:length(c_Feinit)],c_Feinit, linspace(1,10,n_furnace));
 c_FeOinit = interp1([1:1:length(c_FeOinit)],c_FeOinit, linspace(1,10,n_furnace));
@@ -23,38 +36,9 @@ nr1init = interp1([1:1:length(nr1init)],nr1init, linspace(1,10,n_furnace));
 nr2init = interp1([1:1:length(nr2init)],nr2init, linspace(1,10,n_furnace));
 nr3init = interp1([1:1:length(nr3init)],nr3init, linspace(1,10,n_furnace));
 
-
-
-% c_H2Oinit = 1*ones(1, n_furnace);
-% c_H2init = 12*ones(1, n_furnace);
-%c_H2Oinit = 2*ones(1, n_furnace);
-%c_H2Oinit = 2*ones(1, n_furnace);
-
-c_N2int = 0*ones(1, n_furnace);
-
-% c_Fe2O3init = rho_bed*0.25*ones(1, n_furnace);
-% c_Fe3O4init  = linspace(rho_bed, rho_bed/4, n_furnace)*1e-5;
-% c_FeOinit  = linspace(rho_bed, rho_bed/4, n_furnace)*1e-5;
-% c_Feinit = rho_bed/10*ones(1, n_furnace)*1e-5;
-% 
-% T_sinit = (500+273)*ones(1, n_furnace);
-% T_ginit = (900+273)*ones(1, n_furnace);
-% 
-% nr1init = zeros(1, n_furnace);
-% nr2init = zeros(1, n_furnace);
-% nr3init = zeros(1, n_furnace);
-
-c_H2in = 12;
-c_H2Oin = 1;
-
 DRIflow = 50.46; %kg/s
-%DRIflow = 35; %kg/s
 %Reducerflow = 8.4309; %kg/s
-
 Reducerflow = 12.675; % kg/s
-
-
-reducerflowmole = Reducerflow/4 * 1000;
 
 r_furnace = 6.6/2; %m, radius of furnace
 h_furnace = 6; %m, height of furnace
@@ -70,63 +54,11 @@ V_pellet_bed = ((4/3)*pi*r_p^3)/(1-eps_bed);
 n_pellets = V_furnace/V_pellet_bed;
 n_pellets_dz = n_pellets/n_furnace;
 
-V_g = (4/3)*pi*r_p^3*n_pellets_dz*(eps_bed/(1-eps_bed));
-A_g = V_g/dz;
-
-%rho_bed = 4750; %kg/m^3, density of bed
-%rho_gas = 0.0374; %kg/m^3, density of gas
-
-
-%u_s = DRIflow/rho_bed/A_furnace;
-%u_g = Reducerflow/rho_gas/A_furnace;
-
 dz = h_furnace/n_furnace;
 
-
+V_g = (4/3)*pi*r_p^3*n_pellets_dz*(eps_bed/(1-eps_bed));
+A_g = V_g/dz;
 
 a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange, Wagner thesis
 a_sh = (2*pi*r_furnace*dz)/(A_furnace*dz); %m^2/m^3, surface area to lose heat to environment
 
-
-% pellet_flow = (3*DRIflow)/(4*pi*r_p^3*rho_bed); %s^-1
-% tau_furnace = h_furnace*A_furnace/(DRIflow/rho_bed)
-% n_pellets = pellet_flow*tau_furnace/(n_furnace)
-% 
-% 
-% %rho_p = 5275; %kg/m^3, Fe2O3
-% m_pellet = rho_p*V_pellet;
-% 
-% M_Fe2O3 = 159.69; %g/mol
-% 
-% molesO2pellet = 0.63*m_pellet/M_Fe2O3*1000;
-% kappa = molesO2pellet%m_pellet;
-% 
-% T = 800+273;
-% P = 101325*1.16; %thesis de Costa
-% R = 8.314; %(m^3*Pa)/(K*mol)
-% ct = P/(R*T)
-% 
-% MM_H2 = 2.016;
-% MM_H2O = 18.015;
-% MM_N2 = 28.02;
-% 
-% x_H2in = 0.98;
-% x_H2Oin = 1 - x_H2in;
-% 
-% %c_H2in = ct*x_H2in;
-% %c_H2Oin = ct*x_H2Oin;
-% 
-% n_gas_in = 3634; %mol/s
-% flow = (n_gas_in*MM_H2*x_H2in + n_gas_in*MM_H2O*x_H2Oin)/1000;
-
-% c_H2Oinit = n_gas_in*x_H2Oin*ones(1, n_furnace);
-% c_H2init = n_gas_in*x_H2Oin*ones(1, n_furnace);
-
-%Actually flows
-% c_H2in = n_gas_in*x_H2in;
-% c_H2Oin = n_gas_in*x_H2Oin;
-% 
-% c_Fe2O3init = 52*ones(1, n_furnace);
-% c_Fe3O4init = 1e-20*ones(1, n_furnace);
-% c_FeOinit = 1e-20*ones(1, n_furnace);
-% c_Feinit = 1e-20*ones(1, n_furnace);
