@@ -1,4 +1,4 @@
-n_furnace = 10;
+n_furnace = 25;
 
 eps_bed = 0.4; %S. Yu, L. Shao, Z. Zou, and H. Saxén, "A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling," Processes, vol. 9, no. 12, 2021, doi: 10.3390/pr9122134.
 rho_p = 4750; %kg/m^3 density of a pellet 10% porosity, from Da Costa thesis
@@ -22,6 +22,12 @@ load('initcond.mat')
 
 T_ginit = interp1([1:1:length(T_ginit)],T_ginit, linspace(1,10,n_furnace));
 T_sinit = interp1([1:1:length(T_sinit)],T_sinit, linspace(1,10,n_furnace));
+
+%T_ginit =  (900+273)*ones(1, n_furnace);
+%T_sinit =  (25+273)*ones(1, n_furnace);
+
+% T_ginit =  linspace(900+273, 500+273, n_furnace);
+% T_sinit =  linspace(25+273, 450+273, n_furnace);
 
 c_H2Oinit = interp1([1:1:length(c_H2Oinit)],c_H2Oinit, linspace(1,10,n_furnace));
 c_H2init = interp1([1:1:length(c_H2init)],c_H2init, linspace(1,10,n_furnace));

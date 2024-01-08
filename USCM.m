@@ -59,8 +59,6 @@ c_H2eq3 = (1/(K3+1))*ct;
 
 %% Reaction rate Coefficient
 
-
-
 %wagner thesis m/s
 % k1 = 6.3587e-2*exp(-43276/(R*T));
 % k2 = 1.1290e-3*exp(-21570/(R*T));
