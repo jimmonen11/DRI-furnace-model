@@ -118,6 +118,13 @@ properties = [...
 tempinterp = properties(:,1);
 interp = interp1q(tempinterp, properties, T_hydrogen);
 
+if isnan(interp)
+    interp(2) = 0.0201766462982859;
+    interp(3) = 2.63030512927210e-05;
+    interp(4) = 0.622036914375164;
+    interp(5) = 15802.8095537373;
+end
+
 rho_hydrogen = interp(2); %density, kg/m^3
 mu_hydrogen = interp(3); %viscocity, Pa*s
 k_hydrogen = interp(4); %conductive heat trans coef (W/mK)
