@@ -66,5 +66,6 @@ V_g = (4/3)*pi*r_p^3*n_pellets_dz*(eps_bed/(1-eps_bed));
 A_g = V_g/dz;
 
 a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange, Wagner thesis
-a_sh = (2*pi*r_furnace*dz)/(A_furnace*dz); %m^2/m^3, surface area to lose heat to environment
+%a_sh = (2*pi*r_furnace*dz)/(A_furnace*dz); %m^2/m^3, surface area to lose heat to environment
 
+A_wall = (2*pi*r_furnace*dz); %m^2 surface area of furnace
