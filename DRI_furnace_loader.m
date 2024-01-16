@@ -43,8 +43,8 @@ nr2init = interp1([1:1:length(nr2init)],nr2init, linspace(1,10,n_furnace));
 nr3init = interp1([1:1:length(nr3init)],nr3init, linspace(1,10,n_furnace));
 
 DRIflow = 50.46; %kg/s
-%Reducerflow = 8.4309; %kg/s
-Reducerflow = 12.675; % kg/s
+Reducerflow = 8.4309; %kg/s
+%Reducerflow = 12.675; % kg/s
 
 r_furnace = 6.6/2; %m, radius of furnace
 h_furnace = 6; %m, height of furnace
