@@ -1,4 +1,4 @@
-n_furnace = 10;
+n_furnace = 50;
 
 eps_bed = 0.4; %S. Yu, L. Shao, Z. Zou, and H. Saxén, "A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling," Processes, vol. 9, no. 12, 2021, doi: 10.3390/pr9122134.
 rho_p = 4750; %kg/m^3 density of a pellet 10% porosity, from Da Costa thesis
@@ -42,7 +42,7 @@ Reducerflow = 8.4309; %kg/s
 %Reducerflow = 12.675; % kg/s
 
 r_furnace = 6.6/2; %m, radius of furnace
-h_furnace = 6; %m, height of furnace
+h_furnace = 4; %m, height of furnace
 A_furnace = pi*r_furnace^2; %m^2, c.s. area of flow
 
 A_furnace_pel = A_furnace*(1-eps_bed); %c.s. area for pellet flow - excludes gas lanes
