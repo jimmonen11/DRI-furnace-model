@@ -63,7 +63,7 @@ end
 
 
 figure('units','normalized','outerposition',[0 0 1 1])
-gif('myfile.gif')
+gif('myfile2-test.gif')
 
 %clf
 %legend('Fe2O3','Fe3O4', 'FeO', 'Fe')
