@@ -21,8 +21,8 @@ R = 8.314; %(m^3*Pa)/(K*mol)
 load('initcond.mat')
 
 T_ginit = interp1([1:1:length(T_ginit)],T_ginit, linspace(1,10,n_furnace));
+%T_ginit = ones(size(T_ginit))*1073;
 T_sinit = interp1([1:1:length(T_sinit)],T_sinit, linspace(1,10,n_furnace));
-
 
 c_H2Oinit = interp1([1:1:length(c_H2Oinit)],c_H2Oinit, linspace(1,10,n_furnace));
 c_H2init = interp1([1:1:length(c_H2init)],c_H2init, linspace(1,10,n_furnace));
@@ -41,8 +41,12 @@ DRIflow = 50.46; %kg/s
 Reducerflow = 8.4309; %kg/s
 %Reducerflow = 12.675; % kg/s
 
-r_furnace = 6.6/2; %m, radius of furnace
-h_furnace = 4; %m, height of furnace
+r_furnace = 2.75; % m
+h_furnace = 9.68; % m
+
+%r_furnace = 6.6/2; %m, radius of furnace
+%h_furnace = 6; % m, height of furnace
+
 A_furnace = pi*r_furnace^2; %m^2, c.s. area of flow
 
 A_furnace_pel = A_furnace*(1-eps_bed); %c.s. area for pellet flow - excludes gas lanes

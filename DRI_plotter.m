@@ -4,7 +4,7 @@ Fe2O3col = "#A13D2D";
 Fe3O4col = "#654321";
 FeOcol = 'k';
 Fecol = '#808080';
-H2col = [0 .8 0];
+H2col = [0 0.8 0];
 H2Ocol = 'b';
 
 z = linspace(0.120, h_furnace, n_furnace);
