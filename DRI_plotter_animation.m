@@ -7,6 +7,9 @@ Fecol = '#808080';
 H2col = [0 .8 0];
 H2Ocol = 'b';
 
+time = out.Fe2O3_conc.time;
+time_interp = linspace(0,time(end), 100);
+
 z = linspace(0.120, h_furnace, n_furnace);
 
 rho_b = out.Fe2O3_conc.data + out.Fe3O4_conc.data + out.FeO_conc.data + out.Fe_conc.data; 
@@ -17,6 +20,10 @@ w_FeO = out.FeO_conc.data./rho_b;
 w_Fe = out.Fe_conc.data./rho_b;
 
 gas_conc = out.H2_conc.data + out.H2O_conc.data;
+gas_conc_in = out.H2_concin.data + out.H2O_concin.data;
+
+
+
 x_H2 = out.H2_conc.data./gas_conc;
 x_H2O = out.H2O_conc.data./gas_conc;
 
@@ -24,8 +31,6 @@ x_H2O = out.H2O_conc.data./gas_conc;
 T_s = out.T_s.data -273;
 T_g = out.T_g.data -273;
 
-time = out.Fe2O3_conc.time;
-time_interp = linspace(0,time(end), 100);
 
 T_s_plot = zeros(length(time_interp), n_furnace) ;
 T_g_plot = zeros(length(time_interp), n_furnace) ;
@@ -49,6 +54,10 @@ for i =1:n_furnace
     w_Fe_plot(:,i) = vq(:,6);
 
 end
+
+x_H2_plot =  [ones(size(time_interp'))*out.H2_concin.data x_H2_plot];
+x_H2O_plot =  [ones(size(time_interp'))*out.H2O_concin.data x_H2O_plot];
+
 
 % figure(1)
 % figure('units','normalized','outerposition',[0 0 1 1])
@@ -94,8 +103,8 @@ for i = 1:length(time_interp)-1
     subplot(1,2,2)
     box on
     hold on
-    plot(x_H2_plot(i,:), z, 'linewidth', 6,'color', H2col)
-    plot(x_H2O_plot(i,:), z, 'linewidth', 6,'color', H2Ocol)
+    plot(x_H2_plot(i,:), [0 z], 'linewidth', 6,'color', H2col)
+    plot(x_H2O_plot(i,:), [0 z], 'linewidth', 6,'color', H2Ocol)
     
     xlabel('Mole Fraction')
     ylabel('Furnace Height (m)')
