@@ -7,7 +7,7 @@ Fecol = '#808080';
 H2col = [0 0.8 0];
 H2Ocol = 'b';
 
-z = linspace(h_furnace/n_furnace, h_furnace, n_furnace);
+z = linspace(h_furnace/(n_furnace+1), h_furnace, n_furnace);
 
 rho_b = out.Fe2O3_conc.data(end,:) + out.Fe3O4_conc.data(end,:) + out.FeO_conc.data(end,:) + out.Fe_conc.data(end,:); 
 
