@@ -23,7 +23,6 @@ gas_conc = out.H2_conc.data + out.H2O_conc.data;
 gas_conc_in = out.H2_concin.data + out.H2O_concin.data;
 
 
-
 x_H2 = out.H2_conc.data./gas_conc;
 x_H2O = out.H2O_conc.data./gas_conc;
 
@@ -34,6 +33,9 @@ T_g = out.T_g.data -273;
 
 T_s_plot = zeros(length(time_interp), n_furnace) ;
 T_g_plot = zeros(length(time_interp), n_furnace) ;
+
+x_H2_plot = zeros(length(time_interp), n_furnace);
+x_H2O_plot = zeros(length(time_interp), n_furnace);
 
 w_Fe2O3_plot = zeros(length(time_interp), n_furnace) ;
 w_Fe3O4_plot = zeros(length(time_interp), n_furnace) ;
@@ -72,7 +74,7 @@ x_H2O_plot =  [ones(size(time_interp'))*out.H2O_concin.data x_H2O_plot];
 
 
 figure('units','normalized','outerposition',[0 0 1 1])
-gif('myfile2-test.gif')
+gif('gas_step_change_75_nodes.gif')
 
 %clf
 %legend('Fe2O3','Fe3O4', 'FeO', 'Fe')

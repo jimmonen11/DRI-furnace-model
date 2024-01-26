@@ -1,4 +1,4 @@
-n_furnace = 100;
+n_furnace = 12;
 
 eps_bed = 0.4; %S. Yu, L. Shao, Z. Zou, and H. Saxén, "A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling," Processes, vol. 9, no. 12, 2021, doi: 10.3390/pr9122134.
 rho_p = 4750; %kg/m^3 density of a pellet 10% porosity, from Da Costa thesis
@@ -20,22 +20,41 @@ R = 8.314; %(m^3*Pa)/(K*mol)
 
 load('initcond.mat')
 
-% T_ginit = interp1([1:1:length(T_ginit)],T_ginit, linspace(1,length(T_ginit),n_furnace));
-% %T_ginit = ones(size(T_ginit))*1073;
-% T_sinit = interp1([1:1:length(T_sinit)],T_sinit, linspace(1,length(T_sinit),n_furnace));
-% 
-% c_H2Oinit = interp1([1:1:length(c_H2Oinit)],c_H2Oinit, linspace(1,length(c_H2Oinit),n_furnace));
-% c_H2init = interp1([1:1:length(c_H2init)],c_H2init, linspace(1,length(c_H2init),n_furnace));
+T_ginit = interp1([1:1:length(T_ginit)],T_ginit, linspace(1,length(T_ginit),n_furnace));
+%T_ginit = ones(size(T_ginit))*1073;
+T_sinit = interp1([1:1:length(T_sinit)],T_sinit, linspace(1,length(T_sinit),n_furnace));
+
+c_H2Oinit = interp1([1:1:length(c_H2Oinit)],c_H2Oinit, linspace(1,length(c_H2Oinit),n_furnace));
+c_H2init = interp1([1:1:length(c_H2init)],c_H2init, linspace(1,length(c_H2init),n_furnace));
 c_N2init = 0*ones(1, n_furnace);
-% 
-% c_Feinit = interp1([1:1:length(c_Feinit)],c_Feinit, linspace(1,length(c_Feinit),n_furnace));
-% c_FeOinit = interp1([1:1:length(c_FeOinit)],c_FeOinit, linspace(1,length(c_FeOinit),n_furnace));
-% c_Fe3O4init = interp1([1:1:length(c_Fe3O4init)],c_Fe3O4init, linspace(1,length(c_Fe3O4init),n_furnace));
-% c_Fe2O3init = interp1([1:1:length(c_Fe2O3init)],c_Fe2O3init, linspace(1,length(c_Fe2O3init),n_furnace));
-% 
-% nr1init = interp1([1:1:length(nr1init)],nr1init, linspace(1,length(nr1init),n_furnace));
-% nr2init = interp1([1:1:length(nr2init)],nr2init, linspace(1,length(nr2init),n_furnace));
-% nr3init = interp1([1:1:length(nr3init)],nr3init, linspace(1,length(nr3init),n_furnace));
+
+% c_H2Oinit = ones(size(c_H2Oinit))*0.02;
+% c_H2init = ones(size(c_H2Oinit))*0.02;
+
+c_Feinit = interp1([1:1:length(c_Feinit)],c_Feinit, linspace(1,length(c_Feinit),n_furnace));
+c_FeOinit = interp1([1:1:length(c_FeOinit)],c_FeOinit, linspace(1,length(c_FeOinit),n_furnace));
+c_Fe3O4init = interp1([1:1:length(c_Fe3O4init)],c_Fe3O4init, linspace(1,length(c_Fe3O4init),n_furnace));
+c_Fe2O3init = interp1([1:1:length(c_Fe2O3init)],c_Fe2O3init, linspace(1,length(c_Fe2O3init),n_furnace));
+
+nr1init = interp1([1:1:length(nr1init)],nr1init, linspace(1,length(nr1init),n_furnace));
+nr2init = interp1([1:1:length(nr2init)],nr2init, linspace(1,length(nr2init),n_furnace));
+nr3init = interp1([1:1:length(nr3init)],nr3init, linspace(1,length(nr3init),n_furnace));
+
+c_H2Oinit(1) = [];
+c_H2init(1) =  [];
+c_N2init(1) =  [];
+
+c_Fe2O3init(end) =  [];
+c_Fe3O4init(end) =  [];
+c_FeOinit(end) =  [];
+c_Feinit(end) =  [];
+
+nr1init(end) =  [];
+nr2init(end) =  [];
+nr3init(end) =  [];
+
+T_sinit(end) =  [];
+T_ginit(1) =  [];
 
 DRIflow = 50.46; %kg/s
 Reducerflow = 8.4309; %kg/s
@@ -65,9 +84,17 @@ V_furnace = A_furnace*h_furnace;
 V_pellet_bed = ((4/3)*pi*r_p^3)/(1-eps_bed);
 
 n_pellets = V_furnace/V_pellet_bed;
-n_pellets_dz = n_pellets/n_furnace;
 
-dz = h_furnace/n_furnace;
+zpts = 0:1:n_furnace;
+
+b = log(h_furnace+1)/(n_furnace-1);
+a = 1/exp(b);
+
+dx_fun = a*exp(b.*zpts) - 1;
+
+n_pellets_dz = n_pellets/(n_furnace-1);
+dz = h_furnace/(n_furnace-1);
+
 
 %V_g = (4/3)*pi*r_p^3*n_pellets_dz*(eps_bed/(1-eps_bed));
 
