@@ -7,14 +7,14 @@ Fecol = '#808080';
 H2col = [0 0.8 0];
 H2Ocol = 'b';
 
-z = linspace(h_furnace/(n_furnace+1), h_furnace, n_furnace);
+z = linspace(0, h_furnace, n_furnace+2);
 
 rho_b = out.Fe2O3_conc.data(end,:) + out.Fe3O4_conc.data(end,:) + out.FeO_conc.data(end,:) + out.Fe_conc.data(end,:); 
 
-w_Fe2O3 = out.Fe2O3_conc.data(end,:)./rho_b;
-w_Fe3O4 = out.Fe3O4_conc.data(end,:)./rho_b;
-w_FeO = out.FeO_conc.data(end,:)./rho_b;
-w_Fe = out.Fe_conc.data(end,:)./rho_b;
+w_Fe2O3 = [out.Fe2O3_conc.data(end,:)./rho_b out.w_Fe2O3in.data(end) ];
+w_Fe3O4 = [ out.Fe3O4_conc.data(end,:)./rho_b out.w_Fe3O4in.data(end)];
+w_FeO = [ out.FeO_conc.data(end,:)./rho_b out.w_FeOin.data(end)];
+w_Fe = [ out.Fe_conc.data(end,:)./rho_b out.w_Fein.data(end)];
 
 gas_conc = out.H2_conc.data(end,:) + out.H2O_conc.data(end,:);
 gas_conc_in = out.H2_concin.data(end) + out.H2O_concin.data(end);
@@ -51,11 +51,11 @@ T_g = [T_gin out.T_g.data(end,:) -273];
 figure(2)
 subplot(1,2,1)
 box on
-plot(w_Fe2O3, z, 'linewidth', 6, 'color', Fe2O3col )
+plot(w_Fe2O3, z(2:end) , 'linewidth', 6, 'color', Fe2O3col )
 hold on
-plot(w_Fe3O4, z, 'linewidth', 6, 'color', Fe3O4col)
-plot(w_FeO, z, 'linewidth', 6, 'color', FeOcol)
-plot(w_Fe, z, 'linewidth', 6, 'color', Fecol )
+plot(w_Fe3O4, z(2:end), 'linewidth', 6, 'color', Fe3O4col)
+plot(w_FeO, z(2:end), 'linewidth', 6, 'color', FeOcol)
+plot(w_Fe, z(2:end), 'linewidth', 6, 'color', Fecol )
 xlabel('Weight Fraction')
 ylabel('Furnace Height (m)')
 
@@ -70,9 +70,9 @@ set(gca,'FontWeight', 'bold','FontSize',18)
 
 subplot(1,2,2)
 box on
-plot(x_H2, [0 z], 'linewidth', 6, 'color', H2col )
+plot(x_H2, z(1:end-1), 'linewidth', 6, 'color', H2col )
 hold on
-plot(x_H2O, [0 z], 'linewidth', 6, 'color', H2Ocol)
+plot(x_H2O, z(1:end-1), 'linewidth', 6, 'color', H2Ocol)
 xlabel('Mole Fraction')
 ylabel('Furnace Height (m)')
 
