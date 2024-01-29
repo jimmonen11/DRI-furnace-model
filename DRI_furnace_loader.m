@@ -1,4 +1,4 @@
-n_furnace = 25;
+n_furnace = 10;
 
 eps_bed = 0.4; %S. Yu, L. Shao, Z. Zou, and H. Saxén, "A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling," Processes, vol. 9, no. 12, 2021, doi: 10.3390/pr9122134.
 rho_p = 4750; %kg/m^3 density of a pellet 10% porosity, from Da Costa thesis
@@ -33,9 +33,15 @@ c_FeOinit = interp1([1:1:length(c_FeOinit)],c_FeOinit, linspace(1,length(c_FeOin
 c_Fe3O4init = interp1([1:1:length(c_Fe3O4init)],c_Fe3O4init, linspace(1,length(c_Fe3O4init),n_furnace));
 c_Fe2O3init = interp1([1:1:length(c_Fe2O3init)],c_Fe2O3init, linspace(1,length(c_Fe2O3init),n_furnace));
 
+%c_Fe2O3init = rho_p*ones(1, n_furnace);
+
 nr1init = interp1([1:1:length(nr1init)],nr1init, linspace(1,length(nr1init),n_furnace));
 nr2init = interp1([1:1:length(nr2init)],nr2init, linspace(1,length(nr2init),n_furnace));
 nr3init = interp1([1:1:length(nr3init)],nr3init, linspace(1,length(nr3init),n_furnace));
+
+nr1init = 0*ones(1, n_furnace);
+nr2init = 0*ones(1, n_furnace);
+nr3init = 0*ones(1, n_furnace);
 
 DRIflow = 50.46; %kg/s
 Reducerflow = 8.4309; %kg/s
@@ -64,12 +70,23 @@ r_p = 14e-3/2; %m, da Costa thesis
 V_furnace = A_furnace*h_furnace;
 V_pellet_bed = ((4/3)*pi*r_p^3)/(1-eps_bed);
 
-n_pellets = V_furnace/V_pellet_bed;
-n_pellets_dz = n_pellets/(n_furnace+1);
+zpts = 1:1:n_furnace+2;
 
-dz = h_furnace/(n_furnace+1);
+b = log(h_furnace+1)/(n_furnace+1);
+a = 1/exp(b);
+
+dzfun = a*exp(b.*zpts)-1;
+dz = flip(diff(dzfun));
+
+
+% dz = ones(1, n_furnace+1)* (h_furnace/(n_furnace+1));
 
 %V_g = (4/3)*pi*r_p^3*n_pellets_dz*(eps_bed/(1-eps_bed));
+
+n_pellets = V_furnace/V_pellet_bed;
+% n_pellets_dz = n_pellets/(n_furnace+1);
+
+n_pellets_dz = n_pellets.*dz/h_furnace;
 
 % Volume of gas and solid in each spatial node - constant
 V_g = (4/3)*pi*r_p^3*n_pellets_dz*(eps_bed/(1-eps_bed)); % m^3, volume of gas
