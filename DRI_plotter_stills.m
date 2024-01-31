@@ -45,7 +45,7 @@ w_Fe_plot = zeros(length(time_interp), n_furnace) ;
 
 
 for i =1:n_furnace
-    properties = [x_H2(:,i), x_H2O(:,i), w_Fe2O3(:,i),  w_Fe3O4(:,i),  w_FeO(:,i), w_Fe(:,i), T_g(:,i), T_s(:,i)];
+    properties = [x_H2(:,i), x_H2O(:,i), w_Fe2O3(:,i),  w_Fe3O4(:,i),  w_FeO(:,i), w_Fe(:,i), T_g(:,i), T_s(:,i), out.H2_concin.data, out.H2O_concin.data];
     vq = interp1(time, properties, time_interp);
 
     x_H2_plot(:,i) = vq(:,1);
@@ -61,8 +61,11 @@ for i =1:n_furnace
 
 end
 
-x_H2_plot =  [ones(size(time_interp'))*out.H2_concin.data x_H2_plot];
-x_H2O_plot =  [ones(size(time_interp'))*out.H2O_concin.data x_H2O_plot];
+% x_H2_plot =  [ones(size(time_interp'))*out.H2_concin.data x_H2_plot];
+% x_H2O_plot =  [ones(size(time_interp'))*out.H2O_concin.data x_H2O_plot];
+
+x_H2_plot =  [vq(:, 9) x_H2_plot];
+x_H2O_plot =  [vq(:,10) x_H2O_plot];
 
 w_Fe2O3_plot =  [w_Fe2O3_plot ones(size(time_interp'))*out.w_Fe2O3in.data];
 w_Fe3O4_plot =  [w_Fe3O4_plot ones(size(time_interp'))*out.w_Fe3O4in.data];
