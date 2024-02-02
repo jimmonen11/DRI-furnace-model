@@ -38,6 +38,8 @@ D_H2_3 = exp(4.77 - 5.9e3/T)/(100^2);%m^2/s
 %T in Kelvin
 R = 8.314; %J/mol*K
 
+% G values from "The production and application of hydrogen in Steel industry"
+% Liu et al. 
 G1 = -155547 - 74.7*(T);
 G2 = 71490 - 73.12*(T);
 G3 = 23430 - 16.16*(T);

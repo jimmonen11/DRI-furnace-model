@@ -7,25 +7,27 @@ Fecol = '#808080';
 H2col = [0 0.8 0];
 H2Ocol = 'b';
 
+hour_aim = 1;
+[minval,hour_id] = min(abs(time_interp-3600*hour_aim));
+
 z = linspace(0, h_furnace, n_furnace+2);
 
-rho_b = out.Fe2O3_conc.data(end,:) + out.Fe3O4_conc.data(end,:) + out.FeO_conc.data(end,:) + out.Fe_conc.data(end,:); 
 
-w_Fe2O3 = [out.Fe2O3_conc.data(end,:)./rho_b out.w_Fe2O3in.data(end) ];
-w_Fe3O4 = [ out.Fe3O4_conc.data(end,:)./rho_b out.w_Fe3O4in.data(end)];
-w_FeO = [ out.FeO_conc.data(end,:)./rho_b out.w_FeOin.data(end)];
-w_Fe = [ out.Fe_conc.data(end,:)./rho_b out.w_Fein.data(end)];
+rho_b = out.Fe2O3_conc.data(hour_id,:) + out.Fe3O4_conc.data(hour_id,:) + out.FeO_conc.data(hour_id,:) + out.Fe_conc.data(hour_id,:); 
 
-gas_conc = out.H2_conc.data(end,:) + out.H2O_conc.data(end,:);
-gas_conc_in = out.H2_concin.data(end) + out.H2O_concin.data(end);
+w_Fe2O3 = [out.Fe2O3_conc.data(hour_id,:)./rho_b out.w_Fe2O3in.data(1) ];
+w_Fe3O4 = [ out.Fe3O4_conc.data(hour_id,:)./rho_b out.w_Fe3O4in.data(1)];
+w_FeO = [ out.FeO_conc.data(hour_id,:)./rho_b out.w_FeOin.data(1)];
+w_Fe = [ out.Fe_conc.data(hour_id,:)./rho_b out.w_Fein.data(1)];
 
-x_H2 = [out.H2_concin.data(end)./gas_conc_in  out.H2_conc.data(end,:)./gas_conc];
-x_H2O = [out.H2O_concin.data(end)./gas_conc_in out.H2O_conc.data(end,:)./gas_conc];
+gas_conc = out.H2_conc.data(hour_id,:) + out.H2O_conc.data(hour_id,:);
+gas_conc_in = out.H2_concin.data(1) + out.H2O_concin.data(1);
 
-T_gin = out.T_g.data(end) -273;
+x_H2 = [out.H2_concin.data(1)./gas_conc_in  out.H2_conc.data(hour_id,:)./gas_conc];
+x_H2O = [out.H2O_concin.data(1)./gas_conc_in out.H2O_conc.data(hour_id,:)./gas_conc];
 
-T_s = out.T_s.data(end,:) -273;
-T_g = [T_gin out.T_g.data(end,:) -273];
+T_g = [(out.T_gin.data(1)-273) out.T_g.data(hour_id,:)-273];
+T_s = [out.T_s.data(hour_id,:)-273 (out.T_sin.data(1)-273)];
 
 %Y = 1000 * [4.1962 3.5087 2.8783 2.3026 1.7775 1.2967 0.8516 0.4318]';
 %Y = interp1(Y, linspace(1,8))';
@@ -49,7 +51,7 @@ T_g = [T_gin out.T_g.data(end,:) -273];
 % colorbar
 
 figure(2)
-subplot(1,2,1)
+subplot(1,3,1)
 box on
 plot(w_Fe2O3, z(2:end) , 'linewidth', 6, 'color', Fe2O3col )
 hold on
@@ -68,7 +70,7 @@ grid on
 H.LineWidth = 3; %change to the desired value   
 set(gca,'FontWeight', 'bold','FontSize',18)
 
-subplot(1,2,2)
+subplot(1,3,2)
 box on
 plot(x_H2, z(1:end-1), 'linewidth', 6, 'color', H2col )
 hold on
@@ -80,6 +82,25 @@ xlim([0, 1])
 ylim([0, h_furnace])
 
 legend('H_2','H_2O', 'Location', 'south')
+H = gca;
+grid on
+H.LineWidth = 3; %change to the desired value   
+set(gca,'FontWeight', 'bold','FontSize',18)
+
+
+subplot(1,3,3)
+box on
+hold on
+plot(T_g, z(1:end-1), 'linewidth', 6,'color', gascol)
+plot(T_s, z(2:end), 'linewidth', 6,'color', solidscol)
+
+xlabel('Temperature (^oC)')
+ylabel('Furnace Height (m)')
+
+xlim([250, 850]);
+ylim([0, h_furnace])
+
+legend('T_g','T_s', 'Location', 'south')
 H = gca;
 grid on
 H.LineWidth = 3; %change to the desired value   
