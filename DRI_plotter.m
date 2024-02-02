@@ -8,6 +8,9 @@ H2col = [0 0.8 0];
 H2Ocol = 'b';
 
 hour_aim = 1;
+time = out.Fe2O3_conc.time(end);
+time_interp = linspace(0,time(end), 1000);
+
 [minval,hour_id] = min(abs(time_interp-3600*hour_aim));
 
 z = linspace(0, h_furnace, n_furnace+2);
