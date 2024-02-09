@@ -23,48 +23,60 @@ R = 8.314; %(m^3*Pa)/(K*mol)
 load('initcond.mat')
 
 T_ginit = interp1([1:1:length(T_ginit)],T_ginit, linspace(1,length(T_ginit),n_furnace));
-%T_ginit = ones(size(T_ginit))*1073;
 T_sinit = interp1([1:1:length(T_sinit)],T_sinit, linspace(1,length(T_sinit),n_furnace));
 
 c_H2Oinit = interp1([1:1:length(c_H2Oinit)],c_H2Oinit, linspace(1,length(c_H2Oinit),n_furnace));
 c_H2init = interp1([1:1:length(c_H2init)],c_H2init, linspace(1,length(c_H2init),n_furnace));
-c_N2init = 0*ones(1, n_furnace);
-c_COinit = 0*ones(1, n_furnace);
-c_CO2init = 0*ones(1, n_furnace);
+c_N2init = interp1([1:1:length(c_N2init)],c_N2init, linspace(1,length(c_N2init),n_furnace));
+c_COinit = interp1([1:1:length(c_COinit)],c_COinit, linspace(1,length(c_COinit),n_furnace));
+c_CO2init =interp1([1:1:length(c_CO2init)],c_CO2init, linspace(1,length(c_CO2init),n_furnace));
 
+% c_N2init = zeros(length(T_ginit));
+% c_COinit = zeros(length(T_ginit));
+% c_CO2init = zeros(length(T_ginit));
 
 c_Feinit = interp1([1:1:length(c_Feinit)],c_Feinit, linspace(1,length(c_Feinit),n_furnace));
 c_FeOinit = interp1([1:1:length(c_FeOinit)],c_FeOinit, linspace(1,length(c_FeOinit),n_furnace));
 c_Fe3O4init = interp1([1:1:length(c_Fe3O4init)],c_Fe3O4init, linspace(1,length(c_Fe3O4init),n_furnace));
 c_Fe2O3init = interp1([1:1:length(c_Fe2O3init)],c_Fe2O3init, linspace(1,length(c_Fe2O3init),n_furnace));
 
-%c_Fe2O3init = rho_p*ones(1, n_furnace);
+
+
 
 nr1init = interp1([1:1:length(nr1init)],nr1init, linspace(1,length(nr1init),n_furnace));
 nr2init = interp1([1:1:length(nr2init)],nr2init, linspace(1,length(nr2init),n_furnace));
 nr3init = interp1([1:1:length(nr3init)],nr3init, linspace(1,length(nr3init),n_furnace));
 
-% nr1init = 0*ones(1, n_furnace);
-% nr2init = 0*ones(1, n_furnace);
-% nr3init = 0*ones(1, n_furnace);
 
-DRIflow = 50.46; %kg/s
-Reducerflow = 8.4309; %kg/s
-%Reducerflow = 12.675; % kg/s
+% DRIflow = 50.46; %kg/s
+% Reducerflow = 8.4309; %kg/s
+% %Reducerflow = 12.675; % kg/s
+% 
+% % Midrex newer paper
+% r_furnace = 2.75; % m
+% h_furnace = 9.68; % m
+% 
+% % da Costa reference
+% DRIflow = 52; %kg/s
+% Reducerflow = 8.49; %kg/s 
+% 
+% Reducerflow = 15;
 
-% Midrex newer paper
-r_furnace = 2.75; % m
-h_furnace = 9.68; % m
+%Gilmore plant - 
+DRIflow = 9.84; %kg/s
 
-% da Costa reference
-DRIflow = 52; %kg/s
-Reducerflow = 8.49; %kg/s 
+DRIflow = 43.6;
 
-Reducerflow = 15;
+Reducerflow = 2178*(0.4966*MM_H2 + 0.3271*MM_CO + 0.0428*MM_H2O +0.0240*MM_CO2 + 0.1084*MM_N2)/1000;
+r_furnace = 2.13; %m
+h_furnace = 9.75; 
+r_p = 15e-3/2; %m,
+%eps_bed = 0.5624;
 
-% Midrex reference
-r_furnace = 6.6/2; %m, radius of furnace
-h_furnace = 6; % m, height of furnace
+
+% % Midrex reference
+% r_furnace = 6.6/2; %m, radius of furnace
+% h_furnace = 6; % m, height of furnace
 
 A_furnace = pi*r_furnace^2; %m^2, c.s. area of flow
 
@@ -72,8 +84,9 @@ A_furnace_pel = A_furnace*(1-eps_bed); %c.s. area for pellet flow - excludes gas
 
 %r_p = 6e-3; %m
 
-r_p = 14e-3/2; %m, da Costa thesis
+%r_p = 14e-3/2; %m, da Costa thesis
 
+V_p = 4/3*pi*r_p^3; %m^3, volume of a pellet
 V_furnace = A_furnace*h_furnace;
 V_pellet_bed = ((4/3)*pi*r_p^3)/(1-eps_bed);
 

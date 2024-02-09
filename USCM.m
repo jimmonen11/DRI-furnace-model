@@ -3,17 +3,15 @@ function [V1, V2, V3] = USCM(X1, X2, X3, r0, T, c_H2, ct, x_og, rxns, kf)
 %% Clean Up
 
 % %Makes sure X values are positive
-% if X1 < 1e-5
-%     X1 = 1e-5;
-% end
-% 
-% if X2 < 1e-5
-%     X2 = 1e-5;
-% end
-% 
-% if X3 < 1e-5
-%     X3 = 1e-5;
-% end
+
+tol = 1e-5;
+if X1 <= tol && X2 <= tol
+    rxns = 1;
+elseif X2 <= tol
+    rxns = 2;
+else
+    rxns = 3;
+end
 
 %% Effective Diffusion Relations
 %From:
@@ -48,15 +46,24 @@ K1 = exp(-G1/(R*T));
 K2 = exp(-G2/(R*T));
 K3 = exp(-G3/(R*T));
 
+%Thermodynamic Analyses of Iron Oxides Redox Reactions 
+K1 = exp((1433.37/T)+9.083);
+K2 = exp((-7393.9/T)+7.563);
+K3 = exp((-2023.8/T)+1.239);
+
+K1 = exp(6.3082 + 0.003788*T + 1822.7/T);
+K2 = exp(19.3291 - 0.007725*T - 11238.4/T);
+K3 = exp(0.6122 + 0.000362*T -2056.8/T);
+
 
 % K1 = exp((362/T)+10.32);
 % K2 = exp((-8580/T)+8.98);
 % K3 = exp((-2070/T)+1.30);
 
 
-c_H2eq1 = ((1-x_og)/(K1+1))*ct;
-c_H2eq2 = ((1-x_og)/(K2+1))*ct;
-c_H2eq3 = ((1-x_og)/(K3+1))*ct;
+c_H2eq1 = ((x_og)/(K1+1))*ct;
+c_H2eq2 = ((x_og)/(K2+1))*ct;
+c_H2eq3 = ((x_og)/(K3+1))*ct;
 
 
 %% Reaction rate Coefficient
@@ -74,15 +81,34 @@ c_H2eq3 = ((1-x_og)/(K3+1))*ct;
 
 %%From "The Effect of Gas and Solids Maldistribution on the Performance of
 %Moving-bed Reactors: The Reduction of Iron Oxide Pelletswith Hydrogen"
-k1 = 1.44e5*exp(-6650/T)/3600;
-k2 = 2.88e5*exp(-8000/T)/3600;
-k3 = 2.45e7*exp(-1400/T)/3600;
+% k1 = 1.44e5*exp(-6650/T)/3600;
+% k2 = 2.88e5*exp(-8000/T)/3600;
+% k3 = 2.45e7*exp(-1400/T)/3600;
 
-% %UyS. et al. A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling 
-% k1 = exp(4.49 - 33.4/(R*T))/100;
-% k2 = exp(6.7 - 58.2/(R*T))/100;
-% k3 = exp(6.97 - 57.1/(R*T))/100;
+% UyS. et al. A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling
+% Takahashi, Yagi, Operation for Direct and Simulation Reduction*
 
+k1 = exp(4.49 - 33.4/(R*1e-3*T))/100;
+k2 = exp(6.7 - 58.2/(R*1e-3*T))/100;
+k3 = exp(6.97 - 57.1/(R*1e-3*T))/100;
+
+% %da costa thesis m/s
+% k1 = 7.79e-4*exp(-27000/(R*T));
+% k2 = 1.11e-2*exp(-55000/(R*T));
+% k3 = 16*exp(-136000/(R*T));
+% 
+% k1 = 18437.9 -102.28*T + 0.097044*T^2;
+% k2 = 52360.5 +73.29*T - 0.097044*T^2;
+% k3 = 40087.4 -44.66*T + 0.023847*T^2;
+% 
+% k1 = 160*exp(-92092/(R*T));
+% k2 = 23*exp(-71162/(R*T));
+% k3 = 30*exp(-63627/(R*T));
+% 
+% %da costa thesis m/s
+k1 = 7.79e-4*exp(-27000/(R*T))*100;
+k2 = 1.11e-2*exp(-55000/(R*T))*100;
+k3 = 16*exp(-136000/(R*T))*100;
 
 %%
 A1 = 1/(X1^2*(k1*(1+1/K1)));
