@@ -40,11 +40,18 @@ Xred = [ out.Xred.data(hour_id,:) out.w_Fein.data(1)];
 %gas_conc = out.H2_conc.data(hour_id,:) + out.H2O_conc.data(hour_id,:);
 %gas_conc_in = out.H2_concin.data(1) + out.H2O_concin.data(1);
 
-x_H2 = [out.x_H2in.data  out.x_H2.data(hour_id,:)];
+x_H2 = [out.x_H2in.data(hour_id,:)  out.x_H2.data(hour_id,:)];
 x_H2O = [out.x_H2Oin.data out.x_H2O.data(hour_id,:)];
 x_N2 = [out.x_N2in.data out.x_N2.data(hour_id,:)];
-x_CO = [out.x_COin.data out.x_CO.data(hour_id,:)];
+x_CO = [out.x_COin.data(hour_id,:) out.x_CO.data(hour_id,:)];
 x_CO2 = [out.x_CO2in.data out.x_CO2.data(hour_id,:)];
+
+% 
+% x_H2 = [out.x_H2in.data  out.x_H2.data(hour_id,:)];
+% x_H2O = [out.x_H2Oin.data out.x_H2O.data(hour_id,:)];
+% x_N2 = [out.x_N2in.data out.x_N2.data(hour_id,:)];
+% x_CO = [out.x_COin.data out.x_CO.data(hour_id,:)];
+% x_CO2 = [out.x_CO2in.data out.x_CO2.data(hour_id,:)];
 
 T_g = [(out.T_gin.data(1)-273) out.T_g.data(hour_id,:)-273];
 T_s = [out.T_s.data(hour_id,:)-273 (out.T_sin.data(1)-273)];

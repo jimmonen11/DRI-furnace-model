@@ -5,6 +5,7 @@ Fe3O4col = "#654321";
 FeOcol = 'k';
 Fecol = '#808080';
 H2col = [0 .8 0];
+
 H2Ocol = 'b';
 
 gascol = "#0072BD";
@@ -18,28 +19,17 @@ z = linspace(0, h_furnace, n_furnace+2);
 
 rho_b = out.Fe2O3_conc.data + out.Fe3O4_conc.data + out.FeO_conc.data + out.Fe_conc.data; 
 
-w_Fe2O3 = out.Fe2O3_conc.data./rho_b;
-w_Fe3O4 = out.Fe3O4_conc.data./rho_b;
-w_FeO = out.FeO_conc.data./rho_b;
-w_Fe = out.Fe_conc.data./rho_b;
-
-gas_conc = out.H2_conc.data + out.H2O_conc.data;
-gas_conc_in = out.H2_concin.data + out.H2O_concin.data;
-
-
-x_H2 = out.H2_conc.data./gas_conc;
-x_H2O = out.H2O_conc.data./gas_conc;
-
-
 T_s = out.T_s.data -273;
 T_g = out.T_g.data -273;
-
 
 T_s_plot = zeros(length(time_interp), n_furnace) ;
 T_g_plot = zeros(length(time_interp), n_furnace) ;
 
 x_H2_plot = zeros(length(time_interp), n_furnace);
 x_H2O_plot = zeros(length(time_interp), n_furnace);
+
+x_CO2_plot = zeros(length(time_interp), n_furnace);
+x_CO_plot = zeros(length(time_interp), n_furnace);
 
 w_Fe2O3_plot = zeros(length(time_interp), n_furnace) ;
 w_Fe3O4_plot = zeros(length(time_interp), n_furnace) ;
@@ -48,24 +38,40 @@ w_Fe_plot = zeros(length(time_interp), n_furnace) ;
 
 
 for i =1:n_furnace
-    properties = [x_H2(:,i), x_H2O(:,i), w_Fe2O3(:,i),  w_Fe3O4(:,i),  w_FeO(:,i), w_Fe(:,i), T_g(:,i), T_s(:,i)];
+    properties = [out.x_H2.data(:,i), out.x_H2O.data(:,i), out.x_CO.data(:,i), out.x_CO2.data(:,i) out.w_Fe2O3.data(:,i),  out.w_Fe3O4.data(:,i),  out.w_FeO.data(:,i), out.w_Fe.data(:,i), T_g(:,i), T_s(:,i)];
     vq = interp1(time, properties, time_interp);
 
     x_H2_plot(:,i) = vq(:,1);
     x_H2O_plot(:,i) = vq(:,2);
 
-    w_Fe2O3_plot(:,i) = vq(:,3);
-    w_Fe3O4_plot(:,i) = vq(:,4);
-    w_FeO_plot(:,i) = vq(:,5);
-    w_Fe_plot(:,i) = vq(:,6);
+    x_CO_plot(:,i) = vq(:,3);
+    x_CO2_plot(:,i) = vq(:,4);
 
-    T_g_plot(:,i) = vq(:,7);
-    T_s_plot(:,i) = vq(:,8);
+
+    w_Fe2O3_plot(:,i) = vq(:,5);
+    w_Fe3O4_plot(:,i) = vq(:,6);
+    w_FeO_plot(:,i) = vq(:,7);
+    w_Fe_plot(:,i) = vq(:,8);
+
+    T_g_plot(:,i) = vq(:,9);
+    T_s_plot(:,i) = vq(:,10);
 
 end
 
-x_H2_plot =  [ones(size(time_interp'))*out.H2_concin.data x_H2_plot];
-x_H2O_plot =  [ones(size(time_interp'))*out.H2O_concin.data x_H2O_plot];
+% x_H2_plot =  [ones(size(time_interp'))*out.x_H2in.data x_H2_plot];
+% x_H2O_plot =  [ones(size(time_interp'))*out.x_H2Oin.data x_H2O_plot];
+% 
+% x_CO_plot =  [ones(size(time_interp'))*out.x_CO2in.data x_CO_plot];
+% x_CO2_plot =  [ones(size(time_interp'))*out.x_COin.data x_CO2_plot];
+
+
+x_H2_plot =  [ones(size(time_interp'))*0.5 x_H2_plot];
+x_H2O_plot =  [ones(size(time_interp'))*out.x_H2Oin.data x_H2O_plot];
+
+x_CO_plot =  [ones(size(time_interp'))*0.2 x_CO_plot];
+x_CO2_plot =  [ones(size(time_interp'))*out.x_CO2in.data x_CO2_plot];
+
+
 
 % x_H2_plot =  [vq(:, 9) x_H2_plot];
 % x_H2O_plot =  [vq(:,10) x_H2O_plot];
@@ -91,7 +97,7 @@ T_s_plot = [T_s_plot ones(size(time_interp'))*(out.T_sin.data-273)];
 
 
 figure('units','normalized','outerposition',[0 0 1 1])
-gif('DRI_step_change75nodes.gif')
+gif('test.gif')
 
 %clf
 %legend('Fe2O3','Fe3O4', 'FeO', 'Fe')
