@@ -5,11 +5,10 @@ Fe3O4col = "#654321";
 FeOcol = 'k';
 Fecol = '#808080';
 H2col = [0 0.8 0];
-
 H2Ocol = 'b';
-
 COcol = '#44734c';
 CO2col = '#98afb8';
+CH4col = '#36cfb9';
 
 gascol = "#0072BD";
 solidscol = "#D95319";
@@ -45,6 +44,8 @@ x_H2O = [out.x_H2Oin.data out.x_H2O.data(hour_id,:)];
 x_N2 = [out.x_N2in.data out.x_N2.data(hour_id,:)];
 x_CO = [out.x_COin.data(hour_id,:) out.x_CO.data(hour_id,:)];
 x_CO2 = [out.x_CO2in.data out.x_CO2.data(hour_id,:)];
+x_CH4 = [out.x_CH4in.data out.x_CH4.data(hour_id,:)];
+
 
 % 
 % x_H2 = [out.x_H2in.data  out.x_H2.data(hour_id,:)];
@@ -105,13 +106,14 @@ hold on
 plot(x_H2O, z(1:end-1), 'linewidth', 6, 'color', H2Ocol)
 plot(x_CO, z(1:end-1), 'linestyle', ':','linewidth', 6, 'color', COcol)
 plot(x_CO2, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CO2col)
+plot(x_CH4, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CH4col)
 xlabel('Mole Fraction')
 ylabel('Furnace Height (m)')
 
 xlim([0, 0.6])
 ylim([0, h_furnace])
 
-legend('H_2','H_2O', 'CO', 'CO_2', 'Location', 'south')
+legend('H_2','H_2O', 'CO', 'CO_2', 'CH_4', 'Location', 'south')
 H = gca;
 grid on
 H.LineWidth = 3; %change to the desired value   

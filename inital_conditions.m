@@ -10,6 +10,8 @@ c_H2Oinit = out.H2O_conc.data(end,:);
 c_N2init = out.N2_conc.data(end,:);
 c_COinit = out.CO_conc.data(end,:);
 c_CO2init = out.CO2_conc.data(end,:);
+c_CH4init = out.CH4_conc.data(end,:);
+
 
 T_ginit = out.T_g.data(end,:);
 T_sinit = out.T_s.data(end,:);
@@ -20,4 +22,4 @@ nr3init = out.nr3.data(end,:);
 
 
 save("initcond.mat","c_Fe2O3init","c_Fe3O4init","c_FeOinit","c_Feinit","c_H2init", "c_H2Oinit", ...
-    "c_N2init", "c_COinit", "c_CO2init", "T_ginit","T_sinit", "nr1init", "nr2init","nr3init")
+    "c_N2init", "c_COinit", "c_CO2init", "c_CH4init", "T_ginit","T_sinit", "nr1init", "nr2init","nr3init")

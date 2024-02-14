@@ -21,11 +21,13 @@ MM_H2 = 2.016;
 MM_N2 = 28.013;
 MM_CO = 28.01;
 MM_CO2 = 44.01;
+MM_CH4 = 16.04; 
 
 R = 8.314; %(m^3*Pa)/(K*mol)
 
 load('initcond.mat')
-% 
+%load('copy_of_initcond.mat')
+
 % T_ginit = interp1([1:1:length(T_ginit)],T_ginit, linspace(1,length(T_ginit),n_furnace));
 % T_sinit = interp1([1:1:length(T_sinit)],T_sinit, linspace(1,length(T_sinit),n_furnace));
 % 
@@ -34,6 +36,9 @@ load('initcond.mat')
 % c_N2init = interp1([1:1:length(c_N2init)],c_N2init, linspace(1,length(c_N2init),n_furnace));
 % c_COinit = interp1([1:1:length(c_COinit)],c_COinit, linspace(1,length(c_COinit),n_furnace));
 % c_CO2init =interp1([1:1:length(c_CO2init)],c_CO2init, linspace(1,length(c_CO2init),n_furnace));
+% c_CH4init =interp1([1:1:length(c_CH4init)],c_CH4init, linspace(1,length(c_CH4init),n_furnace));
+% 
+% %c_CH4init = ones(size(T_ginit))*5;
 % 
 % % c_N2init = zeros(size(T_ginit));
 % % c_COinit = zeros(size(T_ginit));
@@ -53,7 +58,7 @@ load('initcond.mat')
 % nr1init = interp1([1:1:length(nr1init)],nr1init, linspace(1,length(nr1init),n_furnace));
 % nr2init = interp1([1:1:length(nr2init)],nr2init, linspace(1,length(nr2init),n_furnace));
 % nr3init = interp1([1:1:length(nr3init)],nr3init, linspace(1,length(nr3init),n_furnace));
-
+% 
 
 % DRIflow = 50.46; %kg/s
 % Reducerflow = 8.4309; %kg/s
@@ -73,15 +78,26 @@ load('initcond.mat')
 % DRIflow = 9.84; %kg/s
 % Reducerflow = 659*(0.4966*MM_H2 + 0.3271*MM_CO + 0.0428*MM_H2O +0.0240*MM_CO2 + 0.1084*MM_N2)/1000;
 
+x_CH4in = 0.058305;
+x_H2in = 0.568786;
+x_COin = 0.334775;
+x_H2Oin = 0.0;
+x_CO2in = 0.022117;
+x_N2in = 0.016016;
+
+x_sumin = x_CH4in  + x_H2in + x_COin +x_H2Oin + x_CO2in + x_N2in;
 
 DRIflow = 43.6;
 % DRIflow = 40;
 
-Reducerflow = 2178*(0.4977*MM_H2 + 0.3271*MM_CO + 0.0428*MM_H2O +0.0240*MM_CO2 + 0.1084*MM_N2)/1000;
+Reducerflow = 2417.743*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000;
+%Reducerflow = 501*()
 
 r_furnace = 2.13; %m
+
+r_furnace = 2.75; %m
 h_furnace = 9.75;
-h_furnace = 10;
+% h_furnace = 10;
 r_p = 15e-3/2; %m,
 %eps_bed = 0.5624;
 
