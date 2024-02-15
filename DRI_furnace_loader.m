@@ -59,6 +59,7 @@ load('initcond.mat')
 % nr2init = interp1([1:1:length(nr2init)],nr2init, linspace(1,length(nr2init),n_furnace));
 % nr3init = interp1([1:1:length(nr3init)],nr3init, linspace(1,length(nr3init),n_furnace));
 
+ndotinit = 2228.1*ones(size(T_ginit));
 
 % DRIflow = 50.46; %kg/s
 % Reducerflow = 8.4309; %kg/s
@@ -98,7 +99,7 @@ r_furnace = 2.13; %m
 
 r_furnace = 2.75; %m
 h_furnace = 9.75;
-% h_furnace = 10;
+h_furnace = 10;
 r_p = 15e-3/2; %m,
 %eps_bed = 0.5624;
 
