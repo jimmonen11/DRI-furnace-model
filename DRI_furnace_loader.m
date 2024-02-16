@@ -1,4 +1,4 @@
-n_furnace = 75;
+n_furnace = 25;
 
 eps_bed = 0.4; %S. Yu, L. Shao, Z. Zou, and H. Saxén, "A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling," Processes, vol. 9, no. 12, 2021, doi: 10.3390/pr9122134.
 rho_p = 4750; %kg/m^3 density of a pellet 10% porosity, from Da Costa thesis
@@ -14,6 +14,8 @@ MM_Fe2O3 = 159.69/1000;
 MM_Fe3O4 = 251.53/1000;
 MM_FeO = 71.844/1000;
 MM_Fe = 55.845/1000;
+MM_C = 12.011/1000; 
+MM_Gan = 60.08/1000;
 
 % Molar mass of species in g/mol
 MM_H2O = 18.015;
@@ -27,7 +29,7 @@ R = 8.314; %(m^3*Pa)/(K*mol)
 
 load('initcond.mat')
 %load('copy_of_initcond.mat')
-
+% % 
 % T_ginit = interp1([1:1:length(T_ginit)],T_ginit, linspace(1,length(T_ginit),n_furnace));
 % T_sinit = interp1([1:1:length(T_sinit)],T_sinit, linspace(1,length(T_sinit),n_furnace));
 % 
@@ -49,6 +51,10 @@ load('initcond.mat')
 % c_Fe3O4init = interp1([1:1:length(c_Fe3O4init)],c_Fe3O4init, linspace(1,length(c_Fe3O4init),n_furnace));
 % c_Fe2O3init = interp1([1:1:length(c_Fe2O3init)],c_Fe2O3init, linspace(1,length(c_Fe2O3init),n_furnace));
 % 
+% %c_Cinit = zeros(size(T_ginit));
+% 
+% c_Cinit = interp1([1:1:length(c_Cinit)],c_Cinit, linspace(1,length(c_Cinit),n_furnace));
+% 
 % 
 % % c_Feinit = zeros(size(T_ginit));
 % % c_FeOinit = zeros(size(T_ginit));
@@ -58,8 +64,10 @@ load('initcond.mat')
 % nr1init = interp1([1:1:length(nr1init)],nr1init, linspace(1,length(nr1init),n_furnace));
 % nr2init = interp1([1:1:length(nr2init)],nr2init, linspace(1,length(nr2init),n_furnace));
 % nr3init = interp1([1:1:length(nr3init)],nr3init, linspace(1,length(nr3init),n_furnace));
+% 
+% ndotinit = interp1([1:1:length(ndotinit)],ndotinit, linspace(1,length(ndotinit),n_furnace));
 
-ndotinit = 2228.1*ones(size(T_ginit));
+%ndotinit = 2228.1*ones(size(T_ginit));
 
 % DRIflow = 50.46; %kg/s
 % Reducerflow = 8.4309; %kg/s
@@ -89,7 +97,8 @@ x_N2in = 0.017379642;
 
 x_sumin = x_CH4in  + x_H2in + x_COin +x_H2Oin + x_CO2in + x_N2in;
 
-DRIflow = 43.6;
+DRIflow = 45.11;
+% DRIflow = 43.6;
 % DRIflow = 40;
 
 Reducerflow = 2228.1*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000;

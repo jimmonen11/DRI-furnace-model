@@ -89,9 +89,9 @@ x_COeq3 = c_COeq3/ct;
 
 % Takahashi, Yagi, Operation for Direct and Simulation Reduction*
 
-% k1 = exp(3.16 - 50.2/(R*1e-3*T))/100;
-% k2 = exp(2.09 - 40/(R*1e-3*T))/100;
-% k3 = exp(5.42 - 61.4/(R*1e-3*T))/100;
+k1 = exp(3.16 - 50.2/(R*1e-3*T))/100;
+k2 = exp(2.09 - 40/(R*1e-3*T))/100;
+k3 = exp(5.42 - 61.4/(R*1e-3*T))/100;
 
 %Hara
 k1 = 41.7*exp(-66512/(R*T))/5; %Hara

@@ -13,6 +13,9 @@ Cp_Fe3O4 = (41.17 + 0.01882*T - 979500/T^2)*4.184/MM_Fe3O4;
 Cp_FeO = (12.62 + 0.001492*T - 76200/T^2)*4.184/MM_FeO;
 Cp_Fe = (4.13 + 0.00638*T)*4.184/MM_Fe;
 
+Cp_Gan = Cp_Fe2O3; %estimate
+Cp_C = 890; %estimate from NIST, doens't change with T
+
 
 % enthalpy's - enthalpy of fomfation from Smith, Van Ness et al.
 % Introduction to Chemical Engineering Thermodynamics
@@ -37,6 +40,6 @@ S_Fe = ( (4.13*log(T) + 0.00638*T ) - (4.13*log(T0) + 0.00638*T0) )*4.184 + (27.
 
 
 
-Cps = [Cp_Fe2O3, Cp_Fe3O4, Cp_FeO, Cp_Fe]; %J/mol-K
+Cps = [Cp_Fe2O3, Cp_Fe3O4, Cp_FeO, Cp_Fe, Cp_C, Cp_Gan]; %J/kg-K
 Hs = [H_Fe2O3, H_Fe3O4, H_FeO, H_Fe]; %J/mol
 Ss = [S_Fe2O3, S_Fe3O4, S_FeO, S_Fe]; %J/mol-K ]
