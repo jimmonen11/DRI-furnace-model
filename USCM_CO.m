@@ -89,18 +89,18 @@ x_COeq3 = c_COeq3/ct;
 
 % Takahashi, Yagi, Operation for Direct and Simulation Reduction*
 
-k1 = exp(3.16 - 50.2/(R*1e-3*T))/100;
-k2 = exp(2.09 - 40/(R*1e-3*T))/100;
-k3 = exp(5.42 - 61.4/(R*1e-3*T))/100;
+% k1 = exp(3.16 - 50.2/(R*1e-3*T))/100;
+% k2 = exp(2.09 - 40/(R*1e-3*T))/100;
+% k3 = exp(5.42 - 61.4/(R*1e-3*T))/100;
 
 %Hara
-k1 = 41.7*exp(-66512/(R*T))/5; %Hara
-k2 = 22.2*exp(-74826/(R*T))/5;
-k3 = 4083.3*exp(-116396/(R*T))/5;
+% k1 = 41.7*exp(-66512/(R*T))/5; %Hara
+% k2 = 22.2*exp(-74826/(R*T))/5;
+% k3 = 4083.3*exp(-116396/(R*T))/5;
 
-% k1 = 29.2*exp(-66974/(R*T))/5; %Takenaka
-% k2 = 15.6*exp(-75345/(R*T))/5;
-% k3 = 2858.3*exp(-66974/(R*T))/5;
+k1 = 29.2*exp(-66974/(R*T))/5; %Takenaka
+k2 = 15.6*exp(-75345/(R*T))/5;
+k3 = 2858.3*exp(-66974/(R*T))/5;
 
 %French latest thesis
 % k1 = 13*exp(-113859/(R*T));

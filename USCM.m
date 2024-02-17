@@ -87,14 +87,14 @@ c_H2eq3 = ((x_og)/(K3+1))*ct;
 
 % UyS. et al. A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling
 % Takahashi, Yagi, Operation for Direct and Simulation Reduction*
+% 
+% k1 = exp(4.49 - 33.4/(R*1e-3*T))/100;
+% k2 = exp(6.7 - 58.2/(R*1e-3*T))/100;
+% k3 = exp(6.97 - 57.1/(R*1e-3*T))/100;
 
-k1 = exp(4.49 - 33.4/(R*1e-3*T))/100;
-k2 = exp(6.7 - 58.2/(R*1e-3*T))/100;
-k3 = exp(6.97 - 57.1/(R*1e-3*T))/100;
-
-% k1 = 41.7*exp(-66512/(R*T)); %Hara
-% k2 = 22.2*exp(-74826/(R*T));
-% k3 = 4083.3*exp(-116396/(R*T));
+k1 = 41.7*exp(-66512/(R*T)); %Hara
+k2 = 22.2*exp(-74826/(R*T));
+k3 = 4083.3*exp(-116396/(R*T));
 
 % k1 = 29.2*exp(-66974/(R*T)); %Takenaka
 % k2 = 15.6*exp(-75345/(R*T));

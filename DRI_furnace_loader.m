@@ -4,7 +4,7 @@ eps_bed = 0.4; %S. Yu, L. Shao, Z. Zou, and H. Saxén, "A numerical study on the
 rho_p = 4750; %kg/m^3 density of a pellet 10% porosity, from Da Costa thesis
 
 eps_bed = 0.5; %S. Yu, L. Shao, Z. Zou, and H. Saxén, "A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling," Processes, vol. 9, no. 12, 2021, doi: 10.3390/pr9122134.
-rho_p = 3528; %kg/m^3 density of a pellet 10% porosity, from Da Costa thesis
+rho_p = 3528; %kg/m^3 density of a pellet
 
 %A. Ranzani Da Costa, D. Wagner, and F. Patisson, “Modelling a new, low CO2 emissions, hydrogen steelmaking process,” J. Clean. Prod., vol. 46, pp. 27–35, 2013, doi: 10.1016/j.jclepro.2012.07.045.
 rho_bed = rho_p*(1-eps_bed);
@@ -95,19 +95,28 @@ x_H2Oin = 0.042557156;
 x_CO2in = 0.024;
 x_N2in = 0.017379642;
 
+% x_CH4in = 0.0908;
+% x_H2in = 0.4977;
+% x_COin = 0.3271;
+% x_H2Oin = 0.0428;
+% x_CO2in = 0.024;
+% x_N2in = 0.0176;
+
 x_sumin = x_CH4in  + x_H2in + x_COin +x_H2Oin + x_CO2in + x_N2in;
 
-DRIflow = 45.11;
+DRIflow = 45.1;
 % DRIflow = 43.6;
 % DRIflow = 40;
 
 Reducerflow = 2228.1*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000;
+%Reducerflow = 2178*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000;
+
 %Reducerflow = 501*()
 
-r_furnace = 2.13; %m
+%r_furnace = 2.13; %m
 
 r_furnace = 2.75; %m
-h_furnace = 9.75;
+%h_furnace = 9.75;
 h_furnace = 10;
 r_p = 15e-3/2; %m,
 %eps_bed = 0.5624;
