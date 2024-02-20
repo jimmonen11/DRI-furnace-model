@@ -1,4 +1,4 @@
-n_furnace = 75;
+n_furnace = 25;
 
 eps_bed = 0.4; %S. Yu, L. Shao, Z. Zou, and H. Saxén, "A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling," Processes, vol. 9, no. 12, 2021, doi: 10.3390/pr9122134.
 rho_p = 4750; %kg/m^3 density of a pellet 10% porosity, from Da Costa thesis
@@ -29,45 +29,55 @@ R = 8.314; %(m^3*Pa)/(K*mol)
 
 load('initcond.mat')
 %load('copy_of_initcond.mat')
-% % 
-% T_ginit = interp1([1:1:length(T_ginit)],T_ginit, linspace(1,length(T_ginit),n_furnace));
-% T_sinit = interp1([1:1:length(T_sinit)],T_sinit, linspace(1,length(T_sinit),n_furnace));
-% 
-% c_H2Oinit = interp1([1:1:length(c_H2Oinit)],c_H2Oinit, linspace(1,length(c_H2Oinit),n_furnace));
-% c_H2init = interp1([1:1:length(c_H2init)],c_H2init, linspace(1,length(c_H2init),n_furnace));
-% c_N2init = interp1([1:1:length(c_N2init)],c_N2init, linspace(1,length(c_N2init),n_furnace));
-% c_COinit = interp1([1:1:length(c_COinit)],c_COinit, linspace(1,length(c_COinit),n_furnace));
-% c_CO2init =interp1([1:1:length(c_CO2init)],c_CO2init, linspace(1,length(c_CO2init),n_furnace));
-% c_CH4init =interp1([1:1:length(c_CH4init)],c_CH4init, linspace(1,length(c_CH4init),n_furnace));
-% 
-% %c_CH4init = ones(size(T_ginit))*0;
-% 
-% % c_N2init = zeros(size(T_ginit));
-% % c_COinit = zeros(size(T_ginit));
-% % c_CO2init = zeros(size(T_ginit));
-% 
-% c_Feinit = interp1([1:1:length(c_Feinit)],c_Feinit, linspace(1,length(c_Feinit),n_furnace));
-% c_FeOinit = interp1([1:1:length(c_FeOinit)],c_FeOinit, linspace(1,length(c_FeOinit),n_furnace));
-% c_Fe3O4init = interp1([1:1:length(c_Fe3O4init)],c_Fe3O4init, linspace(1,length(c_Fe3O4init),n_furnace));
-% c_Fe2O3init = interp1([1:1:length(c_Fe2O3init)],c_Fe2O3init, linspace(1,length(c_Fe2O3init),n_furnace));
-% 
-% %c_Cinit = zeros(size(T_ginit));
-% 
-% c_Cinit = interp1([1:1:length(c_Cinit)],c_Cinit, linspace(1,length(c_Cinit),n_furnace));
-% 
-% 
-% % c_Feinit = zeros(size(T_ginit));
-% % c_FeOinit = zeros(size(T_ginit));
-% % c_Fe3O4init = zeros(size(T_ginit));
-% % c_Fe2O3init = zeros(size(T_ginit));
-% 
+% %
+
+
+T_ginit = interp1([1:1:length(T_ginit)],T_ginit, linspace(1,length(T_ginit),n_furnace));
+T_sinit = interp1([1:1:length(T_sinit)],T_sinit, linspace(1,length(T_sinit),n_furnace));
+
+c_H2Oinit = interp1([1:1:length(c_H2Oinit)],c_H2Oinit, linspace(1,length(c_H2Oinit),n_furnace));
+c_H2init = interp1([1:1:length(c_H2init)],c_H2init, linspace(1,length(c_H2init),n_furnace));
+c_N2init = interp1([1:1:length(c_N2init)],c_N2init, linspace(1,length(c_N2init),n_furnace));
+c_COinit = interp1([1:1:length(c_COinit)],c_COinit, linspace(1,length(c_COinit),n_furnace));
+c_CO2init =interp1([1:1:length(c_CO2init)],c_CO2init, linspace(1,length(c_CO2init),n_furnace));
+c_CH4init =interp1([1:1:length(c_CH4init)],c_CH4init, linspace(1,length(c_CH4init),n_furnace));
+
+%c_CH4init = ones(size(T_ginit))*0;
+
+% c_N2init = zeros(size(T_ginit));
+% c_COinit = zeros(size(T_ginit));
+% c_CO2init = zeros(size(T_ginit));
+
+c_Feinit = interp1([1:1:length(c_Feinit)],c_Feinit, linspace(1,length(c_Feinit),n_furnace));
+c_FeOinit = interp1([1:1:length(c_FeOinit)],c_FeOinit, linspace(1,length(c_FeOinit),n_furnace));
+c_Fe3O4init = interp1([1:1:length(c_Fe3O4init)],c_Fe3O4init, linspace(1,length(c_Fe3O4init),n_furnace));
+c_Fe2O3init = interp1([1:1:length(c_Fe2O3init)],c_Fe2O3init, linspace(1,length(c_Fe2O3init),n_furnace));
+
+%c_Cinit = zeros(size(T_ginit));
+
+c_Cinit = interp1([1:1:length(c_Cinit)],c_Cinit, linspace(1,length(c_Cinit),n_furnace));
+
+
+% c_Feinit = zeros(size(T_ginit));
+% c_FeOinit = zeros(size(T_ginit));
+% c_Fe3O4init = zeros(size(T_ginit));
+% c_Fe2O3init = zeros(size(T_ginit));
+
 % nr1init = interp1([1:1:length(nr1init)],nr1init, linspace(1,length(nr1init),n_furnace));
 % nr2init = interp1([1:1:length(nr2init)],nr2init, linspace(1,length(nr2init),n_furnace));
 % nr3init = interp1([1:1:length(nr3init)],nr3init, linspace(1,length(nr3init),n_furnace));
-% 
-% ndotinit = interp1([1:1:length(ndotinit)],ndotinit, linspace(1,length(ndotinit),n_furnace));
-% 
-% ndotinit = 2228.1*ones(size(T_ginit));
+
+nr1init = ones(size(T_ginit))*33375;
+nr2init = ones(size(T_ginit))*22119;
+nr3init = ones(size(T_ginit))*63083;
+
+% nr1init = [33375 33375 33375 33375 33375 33375 7.1 6.1 5.1 4.10];
+% nr2init = [22119 22119 940 416 0 0 0 0 0 0];
+% nr3init = [63083 63083 940 416 10 10 10 10 10 10];
+
+ndotinit = interp1([1:1:length(ndotinit)],ndotinit, linspace(1,length(ndotinit),n_furnace));
+
+%ndotinit = 2228.1*ones(size(T_ginit));
 
 % DRIflow = 50.46; %kg/s
 % Reducerflow = 8.4309; %kg/s
@@ -147,7 +157,7 @@ dzfun = a*exp(b.*zpts)-1;
 dz = flip(diff(dzfun));
 
 
-dz = ones(1, n_furnace+1)* (h_furnace/(n_furnace+1));
+%dz = ones(1, n_furnace+1)* (h_furnace/(n_furnace+1));
 
 %V_g = (4/3)*pi*r_p^3*n_pellets_dz*(eps_bed/(1-eps_bed));
 
@@ -165,3 +175,6 @@ a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange, 
 %a_sh = (2*pi*r_furnace*dz)/(A_furnace*dz); %m^2/m^3, surface area to lose heat to environment
 
 A_wall = (2*pi*r_furnace*dz); %m^2 surface area of furnace
+
+mol_Fe2O3init = rho_p*0.9665/MM_Fe2O3*V_s(2:end);
+
