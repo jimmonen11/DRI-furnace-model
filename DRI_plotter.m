@@ -28,10 +28,22 @@ z = linspace(0, h_furnace, n_furnace+2);
 
 %rho_b = out.Fe2O3_conc.data(hour_id,:) + out.Fe3O4_conc.data(hour_id,:) + out.FeO_conc.data(hour_id,:) + out.Fe_conc.data(hour_id,:); 
 
-w_Fe2O3 = [out.w_Fe2O3.data(hour_id,:) out.w_Fe2O3in.data(1) ];
+w_Fe2O3out = out.w_Fe2O3.data(hour_id, 1) + (out.w_Fe2O3.data(hour_id,1) - out.w_Fe2O3.data(hour_id,2));
+
+w_FeOout = out.w_FeO.data(hour_id, 1) + (out.w_FeO.data(hour_id,1) - out.w_FeO.data(hour_id,2));
+w_Feout = out.w_Fe.data(hour_id, 1) + (out.w_Fe.data(hour_id,1) - out.w_Fe.data(hour_id,2));
+w_Cout = out.w_C.data(hour_id, 1) + (out.w_C.data(hour_id,1) - out.w_C.data(hour_id,2));
+
+
+T_gout = out.T_g.data(hour_id, end) + (out.T_g.data(hour_id,end) - out.T_g.data(hour_id,end-1)) - 273;
+
+
+w_Fe2O3 = [w_Fe2O3out out.w_Fe2O3.data(hour_id,:) out.w_Fe2O3in.data(1) ];
 w_Fe3O4 = [ out.w_Fe3O4.data(hour_id,:) out.w_Fe3O4in.data(1)];
-w_FeO = [ out.w_FeO.data(hour_id,:) out.w_FeOin.data(1)];
-w_Fe = [ out.w_Fe.data(hour_id,:) out.w_Fein.data(1)];
+w_FeO = [w_FeOout out.w_FeO.data(hour_id,:) out.w_FeOin.data(1)];
+w_Fe = [w_Feout out.w_Fe.data(hour_id,:) out.w_Fein.data(1)];
+w_C = [w_Cout out.w_C.data(hour_id,:) out.w_Cin.data(1)];
+
 
 Xred = [ out.Xred.data(hour_id,:) out.w_Fein.data(1)];
 
@@ -54,7 +66,9 @@ x_CH4 = [out.x_CH4in.data out.x_CH4.data(hour_id,:)];
 % x_CO = [out.x_COin.data out.x_CO.data(hour_id,:)];
 % x_CO2 = [out.x_CO2in.data out.x_CO2.data(hour_id,:)];
 
-T_g = [(out.T_gin.data(1)-273) out.T_g.data(hour_id,:)-273];
+T_g = [(out.T_gin.data(1)-273) out.T_g.data(hour_id,:)-273 T_gout];
+
+
 T_s = [out.T_s.data(hour_id,:)-273 (out.T_sin.data(1)-273)];
 
 %Y = 1000 * [4.1962 3.5087 2.8783 2.3026 1.7775 1.2967 0.8516 0.4318]';
@@ -81,12 +95,12 @@ T_s = [out.T_s.data(hour_id,:)-273 (out.T_sin.data(1)-273)];
 figure(2)
 subplot(1,3,1)
 box on
-plot(w_Fe2O3, z(2:end) , 'linewidth', 6, 'color', Fe2O3col )
+plot(w_Fe2O3, z(1:end) , 'linewidth', 6, 'color', Fe2O3col )
 hold on
 plot(w_Fe3O4, z(2:end), 'linewidth', 6, 'color', Fe3O4col)
-plot(w_FeO, z(2:end), 'linewidth', 6, 'color', FeOcol)
-plot(w_Fe, z(2:end), 'linewidth', 6, 'color', Fecol )
-plot(Xred, z(2:end), 'linewidth', 3, 'color', 'k', 'LineStyle', '--' )
+plot(w_FeO, z(1:end), 'linewidth', 6, 'color', FeOcol)
+plot(w_Fe, z(1:end), 'linewidth', 6, 'color', Fecol )
+plot(w_C, z(1:end), 'linewidth', 3, 'color', 'k', 'LineStyle', '--' )
 xlabel('Weight Fraction')
 ylabel('Furnace Height (m)')
 
@@ -123,7 +137,7 @@ set(gca,'FontWeight', 'bold','FontSize',18)
 subplot(1,3,3)
 box on
 hold on
-plot(T_g, z(1:end-1), 'linewidth', 6,'color', gascol)
+plot(T_g, z(1:end), 'linewidth', 6,'color', gascol)
 plot(T_s, z(2:end), 'linewidth', 6,'color', solidscol)
 
 xlabel('Temperature (^oC)')
