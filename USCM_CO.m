@@ -102,6 +102,7 @@ k1 = 29.2*exp(-66974/(R*T))/5; %Takenaka
 k2 = 15.6*exp(-75345/(R*T))/5;
 k3 = 2858.3*exp(-66974/(R*T))/5;
 
+
 %French latest thesis
 % k1 = 13*exp(-113859/(R*T));
 % k2 = 0.053*exp(-73674/(R*T));
