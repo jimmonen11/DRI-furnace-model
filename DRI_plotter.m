@@ -23,9 +23,8 @@ time_interp = linspace(0,time(end), 1000);
 hour_id = length(out.w_Fe.data(:,1));
 
 
-%z = linspace(0, h_furnace, n_furnace+2);
+z = linspace(0, h_furnace, n_furnace+2);
 
-z = flip(10 -dzfun);
 
 %rho_b = out.Fe2O3_conc.data(hour_id,:) + out.Fe3O4_conc.data(hour_id,:) + out.FeO_conc.data(hour_id,:) + out.Fe_conc.data(hour_id,:); 
 
