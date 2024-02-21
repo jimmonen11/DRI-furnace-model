@@ -100,7 +100,7 @@ hold on
 plot(w_Fe3O4, z(2:end), 'linewidth', 6, 'color', Fe3O4col)
 plot(w_FeO, z(1:end), 'linewidth', 6, 'color', FeOcol)
 plot(w_Fe, z(1:end), 'linewidth', 6, 'color', Fecol )
-plot(w_C, z(1:end), 'linewidth', 3, 'color', 'k', 'LineStyle', '--' )
+%plot(w_C, z(1:end), 'linewidth', 3, 'color', 'k', 'LineStyle', '--' )
 xlabel('Weight Fraction')
 ylabel('Furnace Height (m)')
 
