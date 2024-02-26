@@ -33,6 +33,7 @@ w_Fe2O3out = out.w_Fe2O3.data(hour_id, 1) + (out.w_Fe2O3.data(hour_id,1) - out.w
 w_FeOout = out.w_FeO.data(hour_id, 1) + (out.w_FeO.data(hour_id,1) - out.w_FeO.data(hour_id,2));
 w_Feout = out.w_Fe.data(hour_id, 1) + (out.w_Fe.data(hour_id,1) - out.w_Fe.data(hour_id,2));
 w_Cout = out.w_C.data(hour_id, 1) + (out.w_C.data(hour_id,1) - out.w_C.data(hour_id,2));
+w_Ganout = out.w_Gan.data(hour_id, 1) + (out.w_Gan.data(hour_id,1) - out.w_Gan.data(hour_id,2));
 
 
 T_gout = out.T_g.data(hour_id, end) + (out.T_g.data(hour_id,end) - out.T_g.data(hour_id,end-1)) - 273;

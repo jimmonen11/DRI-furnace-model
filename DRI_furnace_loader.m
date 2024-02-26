@@ -51,31 +51,31 @@ load('initcond.mat')
 % c_FeOinit = interp1([1:1:length(c_FeOinit)],c_FeOinit, linspace(1,length(c_FeOinit),n_furnace));
 % c_Fe3O4init = interp1([1:1:length(c_Fe3O4init)],c_Fe3O4init, linspace(1,length(c_Fe3O4init),n_furnace));
 % c_Fe2O3init = interp1([1:1:length(c_Fe2O3init)],c_Fe2O3init, linspace(1,length(c_Fe2O3init),n_furnace));
-
-c_Fe2O3init(c_Fe2O3init<0) = 0;
-c_FeOinit(c_FeOinit<0) = 0;
-c_Fe3O4init(c_Fe3O4init<0) = 0;
-c_Feinit(c_Feinit<0) = 0;
-
-
-
-%c_Cinit = zeros(size(T_ginit));
-
+% 
+% c_Fe2O3init(c_Fe2O3init<0) = 0;
+% c_FeOinit(c_FeOinit<0) = 0;
+% c_Fe3O4init(c_Fe3O4init<0) = 0;
+% c_Feinit(c_Feinit<0) = 0;
+% 
+% 
+% 
+% c_Cinit = zeros(size(T_ginit));
+% 
 % c_Cinit = interp1([1:1:length(c_Cinit)],c_Cinit, linspace(1,length(c_Cinit),n_furnace));
 % 
 % 
-% c_Feinit = zeros(size(T_ginit));
-% c_FeOinit = zeros(size(T_ginit));
-% c_Fe3O4init = zeros(size(T_ginit));
-% c_Fe2O3init = zeros(size(T_ginit));
+% % c_Feinit = zeros(size(T_ginit));
+% % c_FeOinit = zeros(size(T_ginit));
+% % c_Fe3O4init = zeros(size(T_ginit));
+% % c_Fe2O3init = zeros(size(T_ginit));
 % 
 % nr1init = interp1([1:1:length(nr1init)],nr1init, linspace(1,length(nr1init),n_furnace));
 % nr2init = interp1([1:1:length(nr2init)],nr2init, linspace(1,length(nr2init),n_furnace));
 % nr3init = interp1([1:1:length(nr3init)],nr3init, linspace(1,length(nr3init),n_furnace));
 % 
 % ndotinit = interp1([1:1:length(ndotinit)],ndotinit, linspace(1,length(ndotinit),n_furnace));
-% 
-%ndotinit = 2228.1*ones(size(T_ginit));
+
+% ndotinit = 2228.1*ones(size(T_ginit));
 
 % DRIflow = 50.46; %kg/s
 % Reducerflow = 8.4309; %kg/s
@@ -103,12 +103,6 @@ x_H2Oin = 0.042557156;
 x_CO2in = 0.024;
 x_N2in = 0.017379642;
 
-% x_CH4in = 0.0908;
-% x_H2in = 0.4977;
-% x_COin = 0.3271;
-% x_H2Oin = 0.0428;
-% x_CO2in = 0.024;
-% x_N2in = 0.0176;
 
 x_sumin = x_CH4in  + x_H2in + x_COin +x_H2Oin + x_CO2in + x_N2in;
 
@@ -118,6 +112,33 @@ DRIflow = 45.1;
 
 Reducerflow = 2228.1*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000;
 %Reducerflow = 2178*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000;
+
+% 25%
+x_CH4step = 0.02821;
+x_H2step = 0.86393;
+x_COstep = 0.08549;
+x_H2Ostep = 0.01134;
+x_CO2step = 0.00640;
+x_N2step = 0.00463;
+Reducerflowstep = 10.87540892;
+
+% 0%
+x_CH4step = 0.0;
+x_H2step = 0.95983;
+x_COstep = 0.00;
+x_H2Ostep = 0.01958;
+x_CO2step = 0.0;
+x_N2step = 0.02059;
+Reducerflowstep = 5.3877;
+
+
+% x_CH4step = x_CH4in;
+% x_H2step = x_H2in;
+% x_COstep = x_COin;
+% x_H2Ostep = x_H2Oin;
+% x_CO2step = x_CO2in;
+% x_N2step = x_N2in;
+% Reducerflowstep = Reducerflow;
 
 %Reducerflow = 501*()
 
@@ -129,6 +150,7 @@ h_furnace = 10;
 r_p = 15e-3/2; %m,
 %eps_bed = 0.5624;
 
+tau = 60*5; 
 
 % % Midrex reference
 % r_furnace = 6.6/2; %m, radius of furnace
@@ -173,3 +195,6 @@ a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange, 
 %a_sh = (2*pi*r_furnace*dz)/(A_furnace*dz); %m^2/m^3, surface area to lose heat to environment
 
 A_wall = (2*pi*r_furnace*dz); %m^2 surface area of furnace
+
+ExitReducerFlow = 2393.308*(0.4028*MM_H2 + 0.1958*MM_CO + 0.1903*MM_H2O +0.1709*MM_CO2 + 0.0102*MM_N2)/1000
+
