@@ -65,7 +65,7 @@ ylabel('Furnace Height (m)')
 xlim([0, 1])
 ylim([0, h_furnace])
 
-legend('Fe_2O_3','Fe_3O_4', 'FeO', 'Fe', 'Location', 'southwest')
+legend('Fe_2O_3','Fe_3O_4', 'FeO', 'Fe', 'Location', 'best')
 H = gca;
 grid on
 H.LineWidth = 3; %change to the desired value   
@@ -85,7 +85,7 @@ ylabel('Furnace Height (m)')
 xlim([0, 0.6])
 ylim([0, h_furnace])
 
-legend('H_2','H_2O', 'CO', 'CO_2', 'CH_4', 'Location', 'south')
+legend('H_2','H_2O', 'CO', 'CO_2', 'CH_4', 'Location', 'best')
 H = gca;
 grid on
 H.LineWidth = 3; %change to the desired value   

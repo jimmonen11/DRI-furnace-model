@@ -132,13 +132,13 @@ Reducerflowstep = 10.87540892;
 % Reducerflowstep = 5.3877;
 
 % 
-x_CH4step = x_CH4in;
-x_H2step = x_H2in;
-x_COstep = x_COin;
-x_H2Ostep = x_H2Oin;
-x_CO2step = x_CO2in;
-x_N2step = x_N2in;
-Reducerflowstep = Reducerflow;
+% x_CH4step = x_CH4in;
+% x_H2step = x_H2in;
+% x_COstep = x_COin;
+% x_H2Ostep = x_H2Oin;
+% x_CO2step = x_CO2in;
+% x_N2step = x_N2in;
+% Reducerflowstep = Reducerflow;
 
 %Reducerflow = 501*()
 
