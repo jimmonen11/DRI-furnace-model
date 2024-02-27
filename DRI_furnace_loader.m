@@ -11,7 +11,7 @@ rho_bed = rho_p*(1-eps_bed);
 
 % Molar mass of species in kg/mol
 MM_Fe2O3 = 159.69/1000;
-MM_Fe3O4 = 251.53/1000;
+MM_Fe3O4 = 231.53/1000;
 MM_FeO = 71.844/1000;
 MM_Fe = 55.845/1000;
 MM_C = 12.011/1000; 
@@ -32,7 +32,7 @@ load('initcond.mat')
 % % 
 % T_ginit = interp1([1:1:length(T_ginit)],T_ginit, linspace(1,length(T_ginit),n_furnace));
 % T_sinit = interp1([1:1:length(T_sinit)],T_sinit, linspace(1,length(T_sinit),n_furnace));
-% 
+
 % c_H2Oinit = interp1([1:1:length(c_H2Oinit)],c_H2Oinit, linspace(1,length(c_H2Oinit),n_furnace));
 % c_H2init = interp1([1:1:length(c_H2init)],c_H2init, linspace(1,length(c_H2init),n_furnace));
 % c_N2init = interp1([1:1:length(c_N2init)],c_N2init, linspace(1,length(c_N2init),n_furnace));
@@ -122,23 +122,23 @@ x_CO2step = 0.00640;
 x_N2step = 0.00463;
 Reducerflowstep = 10.87540892;
 
-% 0%
-x_CH4step = 0.0;
-x_H2step = 0.95983;
-x_COstep = 0.00;
-x_H2Ostep = 0.01958;
-x_CO2step = 0.0;
-x_N2step = 0.02059;
-Reducerflowstep = 5.3877;
+%0%
+% x_CH4step = 0.00;
+% x_H2step = 0.95983;
+% x_COstep = 0.00;
+% x_H2Ostep = 0.01958;
+% x_CO2step = 0.0;
+% x_N2step = 0.02059;
+% Reducerflowstep = 5.3877;
 
-
-% x_CH4step = x_CH4in;
-% x_H2step = x_H2in;
-% x_COstep = x_COin;
-% x_H2Ostep = x_H2Oin;
-% x_CO2step = x_CO2in;
-% x_N2step = x_N2in;
-% Reducerflowstep = Reducerflow;
+% 
+x_CH4step = x_CH4in;
+x_H2step = x_H2in;
+x_COstep = x_COin;
+x_H2Ostep = x_H2Oin;
+x_CO2step = x_CO2in;
+x_N2step = x_N2in;
+Reducerflowstep = Reducerflow;
 
 %Reducerflow = 501*()
 

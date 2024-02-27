@@ -15,8 +15,8 @@ c_CO2init = out.CO2_conc.data(end,:);
 c_CH4init = out.CH4_conc.data(end,:);
 
 
-T_ginit = out.T_g.data(end,:);
-T_sinit = out.T_s.data(end,:);
+T_ginit = out.T_g.data(end,2:end);
+T_sinit = out.T_s.data(end,1:end-1);
 
 nr1init = out.nr1.data(end,:);
 nr2init = out.nr2.data(end,:);

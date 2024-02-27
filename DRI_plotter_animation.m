@@ -39,11 +39,13 @@ w_FeO_plot = zeros(length(time_interp), n_furnace) ;
 w_Fe_plot = zeros(length(time_interp), n_furnace+1) ;
 w_C_plot = zeros(length(time_interp), n_furnace+1) ;
 w_Gan_plot = zeros(length(time_interp), n_furnace+1) ;
+Xred_plot = zeros(length(time_interp), n_furnace+1) ;
+
 
 
 for i =1:n_furnace+1
     properties = [out.x_H2.data(:,i), out.x_H2O.data(:,i), out.x_CO.data(:,i), out.x_CO2.data(:,i), out.x_CH4.data(:,i),...
-        out.w_Fe2O3.data(:,i),  out.w_Fe3O4.data(:,i),  out.w_FeO.data(:,i), out.w_Fe.data(:,i), out.w_C.data(:,i), out.w_Gan.data(:,i), ...
+        out.w_Fe2O3.data(:,i),  out.w_Fe3O4.data(:,i),  out.w_FeO.data(:,i), out.w_Fe.data(:,i), out.w_C.data(:,i), out.w_Gan.data(:,i), out.Xred.data(:,i), ...
         T_g(:,i), T_s(:,i)];
     
     vq = interp1(time, properties, time_interp);
@@ -60,9 +62,10 @@ for i =1:n_furnace+1
     w_Fe_plot(:,i) = vq(:,9);
     w_C_plot(:,i) = vq(:,10);
     w_Gan_plot(:,i) = vq(:,11);
+    Xred_plot(:,i) = vq(:,12);
 
-    T_g_plot(:,i) = vq(:,12);
-    T_s_plot(:,i) = vq(:,13);
+    T_g_plot(:,i) = vq(:,13);
+    T_s_plot(:,i) = vq(:,14);
 
 
 end
@@ -85,12 +88,14 @@ for i = hour1:length(time_interp)-1
     plot(w_Fe3O4_plot(i,:), z(2:end), 'linewidth', 6,'color', Fe3O4col)
     plot(w_FeO_plot(i,:), z(2:end), 'linewidth', 6, 'color',FeOcol)
     plot(w_Fe_plot(i,:), z(2:end), 'linewidth', 6,'color', Fecol)
+    plot(Xred_plot(i,:), z(2:end), 'linewidth', 3,'color', FeOcol, 'LineStyle', ':')
+
 
     
     xlabel('Weight Fraction')
     ylabel('Furnace Height (m)')
     xticks([0:0.25:1]);
-    legend('Fe_2O_3','Fe_3O_4', 'FeO', 'Fe', 'Location', 'east')
+    legend('Fe_2O_3','Fe_3O_4', 'FeO', 'Fe', 'Xred', 'Location', 'east')
     H = gca;
     grid on
     H.LineWidth = 3; %change to the desired value   

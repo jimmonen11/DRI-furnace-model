@@ -4,7 +4,7 @@ function [V1, V2, V3] = USCM(X1, X2, X3, r0, T, c_H2, ct, x_og, rxns, kf)
 
 % %Makes sure X values are positive
 
-tol = 1e-10;
+tol = 1e-15;
 if X1 <= tol && X2 <= tol
     rxns = 1;
 elseif X2 <= tol
@@ -171,7 +171,7 @@ else
 end
 
 
-if X2 >0.99
+if X2 >= 0.99
     V3 = 0;
 end
 
