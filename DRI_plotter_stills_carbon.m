@@ -92,7 +92,7 @@ end
 
 time1 = 0.5; %hours
 time2 = 1; %hours
-time3 = 1.5; % hours
+time3 = 6; % hours
 
 [minval,split1] = min(abs(time_interp-(3600*time1 + 1*3600)));
 [minval,split2] = min(abs(time_interp-(3600*time2 + 1*3600)));
@@ -100,8 +100,8 @@ time3 = 1.5; % hours
 
 %% Solids
 
-widthsize = 3.5;
-figure('units','inches','innerposition',[-5 -5 20 200])
+% widthsize = 3.5;
+% figure('units','inches','innerposition',[-5 -5 20 200])
 
 
 subplot(2,4,1)

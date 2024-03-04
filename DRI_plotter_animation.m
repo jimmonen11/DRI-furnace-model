@@ -88,14 +88,11 @@ for i = hour1:length(time_interp)-1
     plot(w_Fe3O4_plot(i,:), z(2:end), 'linewidth', 6,'color', Fe3O4col)
     plot(w_FeO_plot(i,:), z(2:end), 'linewidth', 6, 'color',FeOcol)
     plot(w_Fe_plot(i,:), z(2:end), 'linewidth', 6,'color', Fecol)
-    %plot(Xred_plot(i,:), z(2:end), 'linewidth', 3,'color', FeOcol, 'LineStyle', ':')
-
-
     
     xlabel('Weight Fraction')
     ylabel('Furnace Height (m)')
     xticks([0:0.25:1]);
-    legend('Fe_2O_3','Fe_3O_4', 'FeO', 'Fe', 'Xred', 'Location', 'west')
+    legend('Fe_2O_3','Fe_3O_4', 'FeO', 'Fe','Location', 'west')
     H = gca;
     grid on
     H.LineWidth = 3; %change to the desired value   

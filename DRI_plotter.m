@@ -95,8 +95,8 @@ set(gca,'FontWeight', 'bold','FontSize',18)
 subplot(1,3,3)
 box on
 hold on
-plot(T_g, z(1:end-1), 'linewidth', 6,'color', gascol)
-plot(T_s, z(2:end), 'linewidth', 6,'color', solidscol)
+plot(T_g, z(1:end-1), 'linewidth', 6,'color', gasTcol)
+plot(T_s, z(2:end), 'linewidth', 6,'color', solidsTcol)
 
 xlabel('Temperature (^oC)')
 ylabel('Furnace Height (m)')
