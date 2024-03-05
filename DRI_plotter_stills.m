@@ -23,7 +23,6 @@ solidsmcol = '#7d072d' ;
 fontsize = 16;
 fontsizetit = 19;
 
-
 time = out.Fe2O3_conc.time;
 time_interp = linspace(0,time(end), 1000);
 
@@ -90,9 +89,9 @@ end
 
 %Choose where want time 'slices' to be
 
-time1 = 1; %hours
-time2 = 6; %hours
-time3 = 12; % hours
+time1 = 0.5; %hours
+time2 = 1; %hours
+time3 = 4; % hours
 
 [minval,split1] = min(abs(time_interp-(3600*time1 + 1*3600)));
 [minval,split2] = min(abs(time_interp-(3600*time2 + 1*3600)));
@@ -100,7 +99,7 @@ time3 = 12; % hours
 
 %% Solids
 
-% widthsize = 3.5;
+widthsize = 3.5;
 % figure('units','inches','innerposition',[-5 -5 20 200])
 
 

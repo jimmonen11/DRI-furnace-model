@@ -91,8 +91,8 @@ end
 %Choose where want time 'slices' to be
 
 time1 = 0.5; %hours
-time2 = 1; %hours
-time3 = 6; % hours
+time2 = 5.16; %hours
+time3 = 12; % hours
 
 [minval,split1] = min(abs(time_interp-(3600*time1 + 1*3600)));
 [minval,split2] = min(abs(time_interp-(3600*time2 + 1*3600)));
@@ -100,7 +100,7 @@ time3 = 6; % hours
 
 %% Solids
 
-% widthsize = 3.5;
+widthsize = 3.5;
 % figure('units','inches','innerposition',[-5 -5 20 200])
 
 
@@ -221,7 +221,7 @@ legend('t = 0 hrs', append('t = ', num2str(time1, '%.1f'), ' hrs'),...
 ylabel('Furnace Height (m)')
 xlabel('Weight Fraction')
 xlim([0, 0.02])
-xticks([0:0.005:0.02]);
+xticks([0:0.01:0.02]);
 H = gca;
 grid on
 H.LineWidth = 3; %change to the desired value   

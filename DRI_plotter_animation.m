@@ -76,8 +76,11 @@ gif('test.gif')
 
 [minval,hour1] = min(abs(time_interp-3600));
 
+time_end = 6 ; %hours
+[minval, hour_end] = min(abs(time_interp-(3600*time_end + 1*3600)));
 
-for i = hour1:length(time_interp)-1
+
+for i = hour1:hour_end
     
     subplot(1,3,1)
     box on
@@ -131,7 +134,7 @@ for i = hour1:length(time_interp)-1
     xlabel('Temperature (^oC)')
     %ylabel('Furnace Height (m)')
     
-    xlim([250, 1000]);
+    xlim([250, 1100]);
     ylim([0, h_furnace])
     
     legend('T_g','T_s', 'Location', 'south')
@@ -145,9 +148,10 @@ for i = hour1:length(time_interp)-1
     sgtitle(num2str(time_interp(i)/3600-1, '%.2f' ) + " hours", 'FontSize',24,'FontWeight', 'bold')
     
     gif('DelayTime',1/10)
-    %gif()
+
     if i < length(time_interp)-1
         clf
     end
 end
 
+close all
