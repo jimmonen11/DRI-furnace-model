@@ -1,6 +1,8 @@
 
 changenodes = false;
+
 H2only = true;
+NGstart = false;
 
 n_furnace = 75;
 
@@ -33,6 +35,8 @@ MM_CH4 = 16.04;
 R = 8.314; %(m^3*Pa)/(K*mol)
 
 Solids_In_Flow = 45.1;
+Solids_In_Flow_Step = 45.1;
+
 T_sin = -10 + 273; %K, solids temperature in
 P_gin = 101325*1.785; %Pa, pressure of gas in
 
@@ -46,19 +50,31 @@ w_Ganin = 0.0335;
 
 if H2only == true
     load('initcond_H2.mat')
+    %load('initcond_H2-SOE.mat')
+
     h_furnace = 5;
     
     x_CH4in = 0.0;
-    x_H2in = 0.959823515;
+    x_H2in = 0.963133748;
     x_COin = 0.0;
-    x_H2Oin = 0.019588237;
+    x_H2Oin = 0.019591391;
     x_CO2in = 0.0;
-    x_N2in = 0.020588248;
+    x_N2in = 0.017274862;
+    Gas_In_Flow = 2241.614*(x_H2in*MM_H2 + x_H2Oin*MM_H2O + x_N2in*MM_N2)/1000; %kg/s
+    T_gin = 947 + 273; %K, temperature of gas in
 
-    Gas_In_Flow = 1880.8584*1.05*(x_H2in*MM_H2 + x_H2Oin*MM_H2O + x_N2in*MM_N2)/1000; %kg/s
-    T_gin = 1047 + 273; %K, temperature of gas in
+    % x_CH4in = 0.00;
+    % x_H2in = 0.882955;
+    % x_COin = 0.00;
+    % x_H2Oin = 0.098106;
+    % x_CO2in = 0.0;
+    % x_N2in = 0.018939;
+    % Gas_In_Flow = 3293.942*(x_H2step*MM_H2 + x_COstep*MM_CO + x_H2Ostep*MM_H2O +x_CO2step*MM_CO2 + x_N2step*MM_N2 + x_CH4step*MM_CH4)/1000; %kg/s
+    % T_gin = 900+273; %K, temperature of gas in
+
+   
     
-else
+elseif NGstart == true
     load('initcond.mat')
     
     x_CH4in = 0.105824828;
@@ -69,6 +85,18 @@ else
     x_N2in = 0.017379642;
     Gas_In_Flow = 2228.1*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000; %kg/s
     T_gin = 947 + 273; %K, temperature of gas in
+
+else
+    load('initcond_NG-H2.mat')
+
+    x_CH4in = 0.11138;
+    x_H2in = 0.76842;
+    x_COin = 0.08439;
+    x_H2Oin = 0.01120;
+    x_CO2in = 0.00632;
+    x_N2in = 0.01829;
+    Gas_In_Flow = 14.16536754;
+    T_gin = 1047+273;
 
 end
 
@@ -114,6 +142,17 @@ x_sumin = x_CH4in  + x_H2in + x_COin +x_H2Oin + x_CO2in + x_N2in; %check to make
 % Gas_In_Flow_Step = 14.16536754;
 % T_ginstep = 947+273;
 
+% Step back to normal NG operation!
+% x_CH4step = 0.105824828;
+% x_H2step = 0.489526511;
+% x_COstep = 0.320711862;
+% x_H2Ostep = 0.042557156;
+% x_CO2step = 0.024;
+% x_N2step = 0.017379642;
+% Gas_In_Flow_Step = 2228.1*(x_H2step*MM_H2 + x_COstep*MM_CO + x_H2Ostep*MM_H2O +x_CO2step*MM_CO2 + x_N2step*MM_N2 + x_CH4step*MM_CH4)/1000; %kg/s
+% T_ginstep = 947 + 273; %K, temperature of gas in
+
+
 % 50 with CH4/N2 still
 % x_CH4step = 0.10947;
 % x_H2step = 0.67225;
@@ -125,14 +164,16 @@ x_sumin = x_CH4in  + x_H2in + x_COin +x_H2Oin + x_CO2in + x_N2in; %check to make
 % Solids_In_Flow_Step = Solids_In_Flow;
 
 
-%0%
+% SOE step
 % x_CH4step = 0.00;
-% x_H2step = 0.95983;
+% x_H2step = 0.882955;
 % x_COstep = 0.00;
-% x_H2Ostep = 0.01958;
+% x_H2Ostep = 0.098106;
 % x_CO2step = 0.0;
-% x_N2step = 0.02059;
-% Reducerflowstep = 5.3877;
+% x_N2step = 0.018939;
+% Gas_In_Flow_Step = 3293.942*(x_H2step*MM_H2 + x_COstep*MM_CO + x_H2Ostep*MM_H2O +x_CO2step*MM_CO2 + x_N2step*MM_N2 + x_CH4step*MM_CH4)/1000; %kg/s
+% T_ginstep = T_gin; %K, temperature of gas in
+
 
 %
 % x_CH4step = x_CH4in;
@@ -141,7 +182,8 @@ x_sumin = x_CH4in  + x_H2in + x_COin +x_H2Oin + x_CO2in + x_N2in; %check to make
 % x_H2Ostep = x_H2Oin;
 % x_CO2step = x_CO2in;
 % x_N2step = x_N2in;
-% Gas_In_Flow_Step = Gas_In_Flow;
+% Gas_In_Flow_Step = 12.5;
+% T_ginstep = 800+273;
 
 % H2 step
 x_CH4step = x_CH4in;
@@ -150,10 +192,16 @@ x_COstep = x_COin;
 x_H2Ostep = x_H2Oin;
 x_CO2step = x_CO2in;
 x_N2step = x_N2in;
-Gas_In_Flow_Step = Gas_In_Flow*0.75;
+Gas_In_Flow_Step = Gas_In_Flow*1;
 Solids_In_Flow_Step = Solids_In_Flow*1;
-T_ginstep = T_gin;
+T_ginstep = T_gin-100;
 
+
+% zpts = 1:1:n_furnace+2;
+% b = log(h_furnace+1)/(n_furnace+1);
+% a = 1/exp(b);
+% dzfun = a*exp(b.*zpts)-1;
+% dz = flip(diff(dzfun));
 
 
 tau = 60*5; % seconds, time constant for 1st order step changes

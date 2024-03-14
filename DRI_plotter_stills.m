@@ -113,7 +113,7 @@ plot(w_Fe2O3_plot(split2,:), z(2:end), 'linewidth', widthsize,'color', Fe2O3col,
 plot(w_Fe2O3_plot(split3,:), z(2:end), 'linewidth', widthsize,'color', Fe2O3col, 'linestyle', ':')
 
 
-legend('t = 0 hrs', append('t = ', num2str(time1, '%.0f'), ' hrs'),...
+legend('t = 0 hrs', append('t = ', num2str(time1, '%.1f'), ' hrs'),...
      append('t = ', num2str(time2, '%.0f'), ' hrs'),...
      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
@@ -141,7 +141,7 @@ plot(w_Fe3O4_plot(split1,:), z(2:end), 'linewidth', widthsize,'color', Fe3O4col,
 plot(w_Fe3O4_plot(split2,:), z(2:end), 'linewidth', widthsize,'color', Fe3O4col, 'linestyle', '--')
 plot(w_Fe3O4_plot(split3,:), z(2:end), 'linewidth', widthsize,'color', Fe3O4col, 'linestyle', ':')
 
-legend('t = 0 hrs', append('t = ', num2str(time1, '%.0f'), ' hrs'),...
+legend('t = 0 hrs', append('t = ', num2str(time1, '%.1f'), ' hrs'),...
      append('t = ', num2str(time2, '%.0f'), ' hrs'),...
      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
@@ -166,7 +166,7 @@ plot(w_FeO_plot(split2,:), z(2:end), 'linewidth', widthsize,'color', FeOcol, 'li
 plot(w_FeO_plot(split3,:), z(2:end), 'linewidth', widthsize,'color', FeOcol, 'linestyle', ':')
 
 
-legend('t = 0 hrs', append('t = ', num2str(time1, '%.0f'), ' hrs'),...
+legend('t = 0 hrs', append('t = ', num2str(time1, '%.1f'), ' hrs'),...
      append('t = ', num2str(time2, '%.0f'), ' hrs'),...
      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
@@ -190,7 +190,7 @@ plot(w_Fe_plot(split1,:), z(2:end), 'linewidth', widthsize,'color', Fecol, 'line
 plot(w_Fe_plot(split2,:), z(2:end), 'linewidth', widthsize,'color', Fecol, 'linestyle', '--')
 plot(w_Fe_plot(split3,:), z(2:end), 'linewidth', widthsize,'color', Fecol, 'linestyle', ':')
 
-legend('t = 0 hrs', append('t = ', num2str(time1, '%.0f'), ' hrs'),...
+legend('t = 0 hrs', append('t = ', num2str(time1, '%.1f'), ' hrs'),...
      append('t = ', num2str(time2, '%.0f'), ' hrs'),...
      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
@@ -203,6 +203,33 @@ H.LineWidth = 3; %change to the desired value
 set(gca,'FontWeight', 'bold','FontSize',fontsize)
 title('Fe', 'FontSize',fontsizetit)
 
+
+% subplot(2,4,5)
+% box on
+% hold on
+% 
+% plot(x_N2_plot(1,:), z(1:end-1), 'linewidth', widthsize,'color', N2col)
+% plot(x_N2_plot(split1,:), z(1:end-1), 'linewidth', widthsize,'color', N2col, 'linestyle', '-.')
+% plot(x_N2_plot(split2,:), z(1:end-1), 'linewidth', widthsize,'color', N2col, 'linestyle', '--')
+% plot(x_N2_plot(split3,:), z(1:end-1), 'linewidth', widthsize,'color', N2col, 'linestyle', ':')
+% 
+% 
+% legend('t = 0 hrs', append('t = ', num2str(time1, '%.1f'), ' hrs'),...
+%      append('t = ', num2str(time2, '%.0f'), ' hrs'),...
+%      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
+% 
+% xlabel('Mole Fraction')
+% ylabel('Furnace Height (m)')
+% 
+% %xlim([0, 0.4])
+% %xticks([0:0.1:0.4]);
+% 
+% H = gca;
+% grid on
+% H.LineWidth = 3; %change to the desired value   
+% set(gca,'FontWeight', 'bold','FontSize',fontsize)
+% title('N_2', 'FontSize',fontsizetit)
+
 subplot(2,4,6)
 box on
 hold on
@@ -212,12 +239,13 @@ plot(w_Gan_plot(split1,:), z(2:end), 'linewidth', widthsize,'color', Gancol, 'li
 plot(w_Gan_plot(split2,:), z(2:end), 'linewidth', widthsize,'color', Gancol, 'linestyle', '--')
 plot(w_Gan_plot(split3,:), z(2:end), 'linewidth', widthsize,'color', Gancol, 'linestyle', ':')
 
-legend('t = 0 hrs', append('t = ', num2str(time1, '%.0f'), ' hrs'),...
+legend('t = 0 hrs', append('t = ', num2str(time1, '%.1f'), ' hrs'),...
      append('t = ', num2str(time2, '%.0f'), ' hrs'),...
      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
 xlabel('Weight Fraction')
 ylabel('Furnace Height (m)')
+
 
 %xlim([0, 0.05])
 %xticks([0:0.01:0.05]);
@@ -237,12 +265,12 @@ plot(T_s_plot(split1,:), z(2:end), 'linewidth', widthsize,'color', solidsTcol, '
 plot(T_s_plot(split2,:), z(2:end), 'linewidth', widthsize,'color', solidsTcol, 'linestyle', '--')
 plot(T_s_plot(split3,:), z(2:end), 'linewidth', widthsize,'color', solidsTcol, 'linestyle', ':')
 
-legend('t = 0 hrs', append('t = ', num2str(time1, '%.0f'), ' hrs'),...
+legend('t = 0 hrs', append('t = ', num2str(time1, '%.1f'), ' hrs'),...
      append('t = ', num2str(time2, '%.0f'), ' hrs'),...
      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
 xlabel('Temperature (^oC)')
-xlim([250, 1000]);
+xlim([-10, 1000]);
 %xticks([250:100:850]);
 
 H = gca;
@@ -261,12 +289,12 @@ plot(m_s_plot(split1,:), z(2:end), 'linewidth', widthsize,'color', solidsmcol, '
 plot(m_s_plot(split2,:), z(2:end), 'linewidth', widthsize,'color', solidsmcol, 'linestyle', '--')
 plot(m_s_plot(split3,:), z(2:end), 'linewidth', widthsize,'color', solidsmcol, 'linestyle', ':')
 
-legend('t = 0 hrs', append('t = ', num2str(time1, '%.0f'), ' hrs'),...
+legend('t = 0 hrs', append('t = ', num2str(time1, '%.1f'), ' hrs'),...
      append('t = ', num2str(time2, '%.0f'), ' hrs'),...
      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
 xlabel('Mass Flow (kg/s)')
-%xlim([250, 850]);
+xlim([30, 50]);
 %xticks([250:100:850]);
 
 H = gca;
@@ -294,7 +322,7 @@ plot(x_H2_plot(split2,:), z(1:end-1), 'linewidth', widthsize,'color', H2col, 'li
 plot(x_H2_plot(split3,:), z(1:end-1), 'linewidth', widthsize,'color', H2col, 'linestyle', ':')
 
 
-legend('t = 0 hrs', append('t = ', num2str(time1, '%.0f'), ' hrs'),...
+legend('t = 0 hrs', append('t = ', num2str(time1, '%.1f'), ' hrs'),...
      append('t = ', num2str(time2, '%.0f'), ' hrs'),...
      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
@@ -320,12 +348,12 @@ plot(x_H2O_plot(split2,:), z(1:end-1), 'linewidth', widthsize,'color', H2Ocol, '
 plot(x_H2O_plot(split3,:), z(1:end-1), 'linewidth', widthsize,'color', H2Ocol, 'linestyle', ':')
 
 
-legend('t = 0 hrs', append('t = ', num2str(time1, '%.0f'), ' hrs'),...
+legend('t = 0 hrs', append('t = ', num2str(time1, '%.1f'), ' hrs'),...
      append('t = ', num2str(time2, '%.0f'), ' hrs'),...
      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
 xlabel('Mole Fraction')
-xlim([0, 0.4])
+xlim([0, 0.5])
 %xticks([0:0.1:0.4]);
 
 H = gca;
@@ -343,7 +371,7 @@ plot(T_g_plot(split1,:), z(1:end-1), 'linewidth', widthsize,'color', gasTcol, 'l
 plot(T_g_plot(split2,:), z(1:end-1), 'linewidth', widthsize,'color', gasTcol, 'linestyle', '--')
 plot(T_g_plot(split3,:), z(1:end-1), 'linewidth', widthsize,'color', gasTcol, 'linestyle', ':')
 
-legend('t = 0 hrs', append('t = ', num2str(time1, '%.0f'), ' hrs'),...
+legend('t = 0 hrs', append('t = ', num2str(time1, '%.1f'), ' hrs'),...
      append('t = ', num2str(time2, '%.0f'), ' hrs'),...
      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
@@ -368,12 +396,12 @@ plot(m_g_plot(split1,:), z(1:end-1), 'linewidth', widthsize,'color', gasmcol, 'l
 plot(m_g_plot(split2,:), z(1:end-1), 'linewidth', widthsize,'color', gasmcol, 'linestyle', '--')
 plot(m_g_plot(split3,:), z(1:end-1), 'linewidth', widthsize,'color', gasmcol, 'linestyle', ':')
 
-legend('t = 0 hrs', append('t = ', num2str(time1, '%.0f'), ' hrs'),...
+legend('t = 0 hrs', append('t = ', num2str(time1, '%.1f'), ' hrs'),...
      append('t = ', num2str(time2, '%.0f'), ' hrs'),...
      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
 xlabel('Mass Flow (kg/s)')
-xlim([0, 30]);
+xlim([0, 20]);
 %xticks([250:100:850]);
 
 H = gca;

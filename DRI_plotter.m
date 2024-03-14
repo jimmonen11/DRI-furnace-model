@@ -38,6 +38,8 @@ w_Fe3O4 = out.w_Fe3O4.data(hour_id,:);
 w_FeO =  out.w_FeO.data(hour_id,:);
 w_Fe =  out.w_Fe.data(hour_id,:) ;
 w_C =  out.w_C.data(hour_id,:) ;
+Xred =  out.Xred.data(hour_id,:) ;
+
 
 x_H2 = out.x_H2.data(hour_id,:);
 x_H2O = out.x_H2O.data(hour_id,:);
@@ -60,7 +62,7 @@ hold on
 plot(w_Fe3O4, z(2:end), 'linewidth', 6, 'color', Fe3O4col)
 plot(w_FeO, z(2:end), 'linewidth', 6, 'color', FeOcol)
 plot(w_Fe, z(2:end), 'linewidth', 6, 'color', Fecol )
-%plot(w_C, z(1:end), 'linewidth', 3, 'color', 'k', 'LineStyle', '--' )
+%plot(Xred, z(2:end), 'linewidth', 3, 'color', 'k', 'LineStyle', '--' )
 xlabel('Weight Fraction')
 ylabel('Furnace Height (m)')
 
@@ -78,13 +80,13 @@ box on
 plot(x_H2, z(1:end-1), 'linewidth', 6, 'color', H2col )
 hold on
 plot(x_H2O, z(1:end-1), 'linewidth', 6, 'color', H2Ocol)
-plot(x_CO, z(1:end-1), 'linestyle', ':','linewidth', 6, 'color', COcol)
-plot(x_CO2, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CO2col)
-plot(x_CH4, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CH4col)
+%plot(x_CO, z(1:end-1), 'linestyle', ':','linewidth', 6, 'color', COcol)
+%plot(x_CO2, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CO2col)
+%plot(x_CH4, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CH4col)
 xlabel('Mole Fraction')
 ylabel('Furnace Height (m)')
 
-xlim([0, 0.6])
+xlim([0, 1])
 ylim([0, h_furnace])
 
 legend('H_2','H_2O', 'CO', 'CO_2', 'CH_4', 'Location', 'best')
@@ -103,7 +105,7 @@ plot(T_s, z(2:end), 'linewidth', 6,'color', solidsTcol)
 xlabel('Temperature (^oC)')
 ylabel('Furnace Height (m)')
 
-xlim([250, 1000]);
+xlim([-10, 1000]);
 ylim([0, h_furnace])
 
 legend('T_g','T_s', 'Location', 'south')

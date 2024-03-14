@@ -91,8 +91,8 @@ end
 %Choose where want time 'slices' to be
 
 time1 = 0.5; %hours
-time2 = 5.16; %hours
-time3 = 12; % hours
+time2 = 1; %hours
+time3 = 4; % hours
 
 [minval,split1] = min(abs(time_interp-(3600*time1 + 1*3600)));
 [minval,split2] = min(abs(time_interp-(3600*time2 + 1*3600)));
@@ -266,7 +266,7 @@ legend('t = 0 hrs', append('t = ', num2str(time1, '%.1f'), ' hrs'),...
      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
 xlabel('Temperature (^oC)')
-xlim([250, 1000]);
+xlim([-10, 1000]);
 %xticks([250:100:850]);
 
 H = gca;
