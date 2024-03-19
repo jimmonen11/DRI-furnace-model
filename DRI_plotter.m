@@ -80,11 +80,12 @@ box on
 plot(x_H2, z(1:end-1), 'linewidth', 6, 'color', H2col )
 hold on
 plot(x_H2O, z(1:end-1), 'linewidth', 6, 'color', H2Ocol)
-%plot(x_CO, z(1:end-1), 'linestyle', ':','linewidth', 6, 'color', COcol)
-%plot(x_CO2, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CO2col)
-%plot(x_CH4, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CH4col)
+plot(x_CO, z(1:end-1), 'linestyle', ':','linewidth', 6, 'color', COcol)
+plot(x_CO2, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CO2col)
+plot(x_CH4, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CH4col)
+
 xlabel('Mole Fraction')
-ylabel('Furnace Height (m)')
+%ylabel('Furnace Height (m)')
 
 xlim([0, 1])
 ylim([0, h_furnace])
@@ -103,7 +104,7 @@ plot(T_g, z(1:end-1), 'linewidth', 6,'color', gasTcol)
 plot(T_s, z(2:end), 'linewidth', 6,'color', solidsTcol)
 
 xlabel('Temperature (^oC)')
-ylabel('Furnace Height (m)')
+% ylabel('Furnace Height (m)')
 
 xlim([-10, 1000]);
 ylim([0, h_furnace])

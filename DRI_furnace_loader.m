@@ -1,10 +1,10 @@
 
 changenodes = false;
 
-H2only = true;
-NGstart = false;
+H2only = false;
+NGstart = true;
 
-n_furnace = 75;
+n_furnace = 100;
 
 % Geometry of furnace, pellets, etc. come from data from a plant in Quebec taken from 
 % Hamadeh, H. (2017). Modélisation mathématique détaillée du procédé de réduction directe du minerai de fer. 1–143. https://theses.hal.science/tel-01740462v1/document
@@ -38,7 +38,8 @@ Solids_In_Flow = 45.1;
 Solids_In_Flow_Step = 45.1;
 
 T_sin = -10 + 273; %K, solids temperature in
-P_gin = 101325*1.785; %Pa, pressure of gas in
+P_gin = 101325*1.8; %Pa, pressure of gas in
+
 
 w_Fe2O3in = 0.9665;
 w_Fe3O4in = 0;
@@ -61,7 +62,7 @@ if H2only == true
     x_CO2in = 0.0;
     x_N2in = 0.017274862;
     Gas_In_Flow = 2241.614*(x_H2in*MM_H2 + x_H2Oin*MM_H2O + x_N2in*MM_N2)/1000; %kg/s
-    T_gin = 947 + 273; %K, temperature of gas in
+    T_gin = 935 + 273; %K, temperature of gas in
 
     % x_CH4in = 0.00;
     % x_H2in = 0.882955;
@@ -75,8 +76,8 @@ if H2only == true
    
     
 elseif NGstart == true
-    load('initcond.mat')
-    
+    load('initcond_NG.mat')
+    % 
     x_CH4in = 0.105824828;
     x_H2in = 0.489526511;
     x_COin = 0.320711862;
@@ -85,6 +86,17 @@ elseif NGstart == true
     x_N2in = 0.017379642;
     Gas_In_Flow = 2228.1*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000; %kg/s
     T_gin = 947 + 273; %K, temperature of gas in
+
+    % x_CH4in = 0.0924;
+    % x_H2in = 0.5165;
+    % x_COin = 0.3207;
+    % x_H2Oin = 0.0426;
+    % x_CO2in = 0.024;
+    % x_N2in = 0.0174;
+    % Gas_In_Flow = 2258.1*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000; %kg/s
+    % T_gin = 930 + 273; %K, temperature of gas in
+
+
 
 else
     load('initcond_NG-H2.mat')
@@ -133,14 +145,14 @@ x_sumin = x_CH4in  + x_H2in + x_COin +x_H2Oin + x_CO2in + x_N2in; %check to make
 %Reducerflow = 2178*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000;
 
 % 25% with CH4/N2 still -  GOOD!
-% x_CH4step = 0.11138;
-% x_H2step = 0.76842;
-% x_COstep = 0.08439;
-% x_H2Ostep = 0.01120;
-% x_CO2step = 0.00632;
-% x_N2step = 0.01829;
-% Gas_In_Flow_Step = 14.16536754;
-% T_ginstep = 947+273;
+x_CH4step = 0.11138;
+x_H2step = 0.76842;
+x_COstep = 0.08439;
+x_H2Ostep = 0.01120;
+x_CO2step = 0.00632;
+x_N2step = 0.01829;
+Gas_In_Flow_Step = 14.16536754;
+T_ginstep = 947+273;
 
 % Step back to normal NG operation!
 % x_CH4step = 0.105824828;
@@ -194,7 +206,7 @@ x_CO2step = x_CO2in;
 x_N2step = x_N2in;
 Gas_In_Flow_Step = Gas_In_Flow*1;
 Solids_In_Flow_Step = Solids_In_Flow*1;
-T_ginstep = T_gin-100;
+T_ginstep = T_gin;
 
 
 % zpts = 1:1:n_furnace+2;
