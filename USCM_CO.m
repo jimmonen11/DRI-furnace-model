@@ -54,13 +54,14 @@ R = 8.314; %J/mol*K
 % K3 = exp((-2070/T)+1.30);
 
 %Thermodynamic Analyses of Iron Oxides Redox Reactions 
-K1 = exp((5128.6./T)+5.7);
-K2 = exp((-3132.5./T)+3.661);
-K3 = exp((2240.6./T)-2.667);
+K1 = exp((5128.6/T)+5.7);
+K2 = exp((-3132.5/T)+3.661);
+K3 = exp((2240.6/T)-2.667);
 
-K1 = exp(6.0259 - 0.000525*T + 5635.3/T);
-K2 = exp(12.2909 - 0.006183*T - 5388.3/T);
-K3 = exp(-1.5304 + 0.000729*T +1610.03/T);
+% A. Rahimi, A. Niksiar / International Journal of Mineral Processing 124 (2013) 58–66
+% K1 = exp(6.0259 - 0.000525*T + 5635.3/T);
+% K2 = exp(12.2909 - 0.006183*T - 5388.3/T);
+% K3 = exp(-1.5304 + 0.000729*T +1610.03/T);
 
 c_COeq1 = ((x_og)/(K1+1))*ct;
 c_COeq2 = ((x_og)/(K2+1))*ct;
@@ -90,19 +91,19 @@ x_COeq3 = c_COeq3/ct;
 % k3 = 2.45e7*exp(-1400/T)/3600;
 
 % Takahashi, Yagi, Operation for Direct and Simulation Reduction*
-
-% k1 = exp(3.16 - 50.2/(R*1e-3*T))/100;
-% k2 = exp(2.09 - 40/(R*1e-3*T))/100;
-% k3 = exp(5.42 - 61.4/(R*1e-3*T))/100;
+k1 = exp(3.16 - 50.2/(R*1e-3*T))/100;
+k2 = exp(2.09 - 40/(R*1e-3*T))/100;
+k3 = exp(5.42 - 61.4/(R*1e-3*T))/100;
 
 %Hara
 % k1 = 41.7*exp(-66512/(R*T))/5; %Hara
 % k2 = 22.2*exp(-74826/(R*T))/5;
 % k3 = 4083.3*exp(-116396/(R*T))/5;
+
 % 
-k1 = 29.2*exp(-66974/(R*T))/5; %Takenaka
-k2 = 15.6*exp(-75345/(R*T))/5;
-k3 = 2858.3*exp(-66974/(R*T))/5;
+% k1 = 29.2*exp(-66974/(R*T))/5; %Takenaka
+% k2 = 15.6*exp(-75345/(R*T))/5;
+% k3 = 2858.3*exp(-117204/(R*T))/5;
 
 
 %French latest thesis
@@ -113,11 +114,12 @@ k3 = 2858.3*exp(-66974/(R*T))/5;
 % k1 = -26177.6 -92.125*T + 0.096808*T^2;
 % k2 = 7744.5 +83.5404*T - 0.09669*T^2;
 % k3 = -4527.4 -34.5157*T + 0.023612*T^2;
-% 
+
+% Negri et al.
 % k1 = 2700*exp(-113859/(R*T));
 % k2 = 25*exp(-73674/(R*T));
 % k3 = 17*exp(-69488/(R*T));
-% % 
+% % % 
 % 
 % %French latest thesis 
 % k1 = 13*exp(-113859/(R*T));

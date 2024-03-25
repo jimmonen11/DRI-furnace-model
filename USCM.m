@@ -53,9 +53,10 @@ K1 = exp((1433.37/T)+9.083);
 K2 = exp((-7393.9/T)+7.563);
 K3 = exp((-2023.8/T)+1.239);
 
-K1 = exp(6.3082 + 0.003788*T + 1822.7/T);
-K2 = exp(19.3291 - 0.007725*T - 11238.4/T);
-K3 = exp(0.6122 + 0.000362*T -2056.8/T);
+% A. Rahimi, A. Niksiar / International Journal of Mineral Processing 124 (2013) 58–66
+% K1 = exp(6.3082 + 0.003788*T + 1822.7/T);
+% K2 = exp(19.3291 - 0.007725*T - 11238.4/T);
+% K3 = exp(0.6122 + 0.000362*T -2056.8/T);
 
 
 % K1 = exp((362/T)+10.32);
@@ -75,7 +76,6 @@ c_H2eq3 = ((x_og)/(K3+1))*ct;
 % k2 = 1.1290e-3*exp(-21570/(R*T));
 % k3 = 3.8337e-2*exp(-50129/(R*T));
 
-
 %da costa thesis m/s
 % k1 = 7.79e-4*exp(-27000/(R*T));
 % k2 = 1.11e-2*exp(-55000/(R*T));
@@ -90,17 +90,19 @@ c_H2eq3 = ((x_og)/(K3+1))*ct;
 % UyS. et al. A numerical study on the performance of the h2 shaft furnace with dual-row top gas recycling
 % Takahashi, Yagi, Operation for Direct and Simulation Reduction*
 % 
-% k1 = exp(4.49 - 33.4/(R*1e-3*T))/100;
-% k2 = exp(6.7 - 58.2/(R*1e-3*T))/100;
-% k3 = exp(6.97 - 57.1/(R*1e-3*T))/100;
-
+k1 = exp(4.49 - 33.4/(R*1e-3*T))/100;
+k2 = exp(6.7 - 58.2/(R*1e-3*T))/100;
+k3 = exp(6.97 - 57.1/(R*1e-3*T))/100;
+% % 
 % k1 = 41.7*exp(-66512/(R*T)); %Hara
 % k2 = 22.2*exp(-74826/(R*T));
 % k3 = 4083.3*exp(-116396/(R*T));
+% 
+% k1 = 29.2*exp(-66974/(R*T)); %Takenaka
+% k2 = 15.6*exp(-75345/(R*T));
+% k3 = 2858.3*exp(-117204/(R*T));
 
-k1 = 29.2*exp(-66974/(R*T)); %Takenaka
-k2 = 15.6*exp(-75345/(R*T));
-k3 = 2858.3*exp(-66974/(R*T));
+%k1 = 1e-2*exp(4.449)
 
 %k3 = 4083.3*exp(-116396/(R*T));
 
@@ -112,11 +114,12 @@ k3 = 2858.3*exp(-66974/(R*T));
 % k1 = 18437.9 -102.28*T + 0.097044*T^2;
 % k2 = 52360.5 +73.29*T - 0.097044*T^2;
 % k3 = 40087.4 -44.66*T + 0.023847*T^2;
-% 
+
+% Negri et al.
 % k1 = 160*exp(-92092/(R*T));
 % k2 = 23*exp(-71162/(R*T));
 % k3 = 30*exp(-63627/(R*T));
-% 
+% % 
 % %da costa thesis m/s
 % k1 = 7.79e-4*exp(-27000/(R*T))*100;
 % k2 = 1.11e-2*exp(-55000/(R*T))*100;

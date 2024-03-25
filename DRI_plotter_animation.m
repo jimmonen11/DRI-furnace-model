@@ -107,15 +107,15 @@ for i = hour1:hour_end
     hold on
     plot(x_H2_plot(i,:), z(1:end-1), 'linewidth', 6,'color', H2col)
     plot(x_H2O_plot(i,:), z(1:end-1), 'linewidth', 6,'color', H2Ocol)
-    %plot(x_CO_plot(i,:), z(1:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', ':')
-    %plot(x_CO2_plot(i,:), z(1:end-1), 'linewidth', 6,'color', CO2col, 'LineStyle', ':')
-    %plot(x_CH4_plot(i,:), z(1:end-1), 'linewidth', 6,'color', CH4col, 'LineStyle', ':')
+    plot(x_CO_plot(i,:), z(1:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', ':')
+    plot(x_CO2_plot(i,:), z(1:end-1), 'linewidth', 6,'color', CO2col, 'LineStyle', ':')
+    plot(x_CH4_plot(i,:), z(1:end-1), 'linewidth', 6,'color', CH4col, 'LineStyle', ':')
 
    
     xlabel('Mole Fraction')
     %ylabel('Furnace Height (m)')
     
-    xlim([0, 1])
+    xlim([0, 0.8])
     ylim([0, h_furnace])
     xticks([0:0.25:1]);
 
@@ -134,7 +134,7 @@ for i = hour1:hour_end
     xlabel('Temperature (^oC)')
     %ylabel('Furnace Height (m)')
     
-    xlim([250, 1100]);
+    xlim([250, 1000]);
     ylim([0, h_furnace])
     
     legend('T_g','T_s', 'Location', 'south')

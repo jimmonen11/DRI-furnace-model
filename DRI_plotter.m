@@ -25,12 +25,14 @@ fontsizetit = 19;
 
 z = linspace(0, h_furnace, n_furnace+2);
 
-hour_aim = 35;
+hour_aim = 0;
 time = out.w_Fe2O3.time(end);
 time_interp = linspace(0,time(end), 1000);
 
 [minval,hour_id] = min(abs(time_interp-3600*hour_aim));
 hour_id = length(out.w_Fe.data(:,1));
+
+%hour_id = 2;
 
 %%
 w_Fe2O3 =  out.w_Fe2O3.data(hour_id,:);
@@ -62,7 +64,7 @@ hold on
 plot(w_Fe3O4, z(2:end), 'linewidth', 6, 'color', Fe3O4col)
 plot(w_FeO, z(2:end), 'linewidth', 6, 'color', FeOcol)
 plot(w_Fe, z(2:end), 'linewidth', 6, 'color', Fecol )
-%plot(Xred, z(2:end), 'linewidth', 3, 'color', 'k', 'LineStyle', '--' )
+plot(Xred, z(2:end), 'linewidth', 3, 'color', 'k', 'LineStyle', '--' )
 xlabel('Weight Fraction')
 ylabel('Furnace Height (m)')
 
@@ -114,6 +116,37 @@ H = gca;
 grid on
 H.LineWidth = 3; %change to the desired value   
 set(gca,'FontWeight', 'bold','FontSize',18)
+
+%%
+
+w_Fe2O3val = 0;
+w_Fe3O4val = 0;
+w_FeOval = 0.0747;
+w_Feval = 0.8572;
+w_Cval = 0.02;
+w_Ganval = 0.0471;
+m_sval = 33.11;
+
+solids_val = [w_Fe2O3val  w_Fe3O4val w_FeOval w_Feval w_Cval w_Ganval ];
+solids_model = [w_Fe2O3(1)  w_Fe3O4(1) w_FeO(1) w_Fe(1) w_C(1) out.w_Gan.data(hour_id,1)]
+
+
+x_H2val = 0.4028;
+x_COval = 0.1958;
+x_H2Oval = 0.1903;
+x_CO2val = 0.1709;
+x_CH4val = 0.0295;
+x_N2val = 0.0102;
+m_gval = 41.96;
+
+gas_val = [x_H2val x_COval x_H2Oval x_CO2val x_CH4val x_N2val];
+gas_model = [x_H2(end) x_CO(end) x_H2O(end) x_CO2(end) x_CH4(end) x_N2(end)]
+
+mae_solids = mean(abs(solids_val - solids_model))*100
+mae_gas = mean(abs(gas_val - gas_model))*100
+
+re_mfs = abs(33.11 - out.m_s.data(hour_id, 1))/33.11*100
+re_mfg = abs(41.96 - out.m_g.data(hour_id, end))/41.96*100
 
 
 

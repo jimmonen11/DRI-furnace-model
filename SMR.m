@@ -22,7 +22,10 @@ R = 8.314;
 z = 1000/T - 1;
 %Keq = ((1.0267e10* exp(-0.2513*z^4 + 0.3665*z^3 + 0.5810*z^2 - 27.134*z + 3.2770)/101325^2)) %atm^2
 
-Keq = ((1.0267e10* exp(-0.2513*z^4 + 0.3665*z^3 + 0.5810*z^2 - 27.134*z + 3.2770))/101325^2); %atm^2
+%Keq = ((1.0267e10* exp(-0.2513*z^4 + 0.3665*z^3 + 0.5810*z^2 - 27.134*z + 3.2770))/101325^2) %atm^2
+
+Keq = (10266.76*10^6*exp (-26830/T + 30.11))/101325^2; %atm^2
+%Keq = exp(-26830/T +30.114)  %/101325^2 %atm^2
 
 
 %Keq  =exp(-26830/(T) + 30.114) 
@@ -40,16 +43,15 @@ if X < 0.5
 else
 
 
-    kf = 1.15e-9*exp(4.18/(R*1e-3*T))*100^3; %mol/s-m^3-atm^4
+    %kf = 1.15e-9*exp(4.18/(R*1e-3*T))*100^3; %mol/s-m^3-atm^4
     %kf = 5e-5*exp(4.18/(R*1e-3*T))*100^3; %mol/s-m^3-atm^4
 
     %kf = 1e-4*exp(6.77/(R*1e-3*T))*100^3; %mol/s-m^3-atm^2
     %kf = 1.15e-7*exp(4.18/(R*1e-3*T))*100^3; %mol/s-m^3-atm^4
 
     %kf = 1.15e-3*exp(4.18/(R*1e-3*T))*100^3; %mol/s-m^3-atm^2
-    kf = 392*exp(-6.77/(R*1e-3*T))*100^3; %mol/s-m^3-atm^2
+    %kf = 392*exp(-6.77/(R*1e-3*T))*100^3; %mol/s-m^3-atm^2
     %kb = 1.15e-9*exp(4.18/(R*1e-3*T))*100^3; %mol/s-m^3-atm^4
-
 
     %kf = 1.15e-9*exp(3/(R*1e-3*T))*100^3; %mol/s-m^3-atm^4
     %kf = 392*exp(6770/(R*T))*100^3;
@@ -59,7 +61,7 @@ else
     %kf = 4.225e16
     
     kf = (2395*exp(-231266/(R*T)) ) * 101325^2;
-    %kf = (3395*exp(-231266/(R*T)) ) * 101325^2;
+    %kf = (2395*exp(-231266/(R*T)) ) * 101325^2;
 
     % Three-dimensional simulation of chemically reacting gas f lows in the porous support structure of an integrated-planar solid oxide fuel cell
 
@@ -76,7 +78,7 @@ end
 %v = Vp* kf * P^2 * ((x_CH4*x_H2O/Keq) - x_CO*x_H2^3);
 
 %v = (Vp*kf*(P_CH4*P_H2O - (P_CO*(P_H2^3))*Keq));
-v = Vp* kf * (P_CH4*P_H2O - P_CO*P_H2^3/Keq)/200000;
+
 v = Vp* kf * (P_CH4*P_H2O - P_CO*P_H2^3/Keq);
 
 

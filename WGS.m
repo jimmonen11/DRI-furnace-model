@@ -11,10 +11,12 @@ P_CO2 = x_CO2 * P;
 
 R = 8.314;
 
-Keq = exp(3863.7/T - 3.5414);
+%Keq = exp(3863.7/T - 3.5414);
 
-Z = 1000/T - 1;
-Keq = (exp(-0.2935*Z^3 + 0.6351*Z^2 + 4.1788*Z + 0.3169));
+%Z = 1000/T - 1;
+%Keq = (exp(-0.2935*Z^3 + 0.6351*Z^2 + 4.1788*Z + 0.3169));
+
+Keq  = exp(4400/T - 4.063); %from Hamadeh who cites J. Xu and G. F. Froment, “Methane steam reforming, methanation and water‐gas shift: I. Intrinsic kinetics,” AIChE Journal, vol. 35, no. 1, pp. 88–96, 1989, doi: 10.1002/aic.690350109.
 
 if X < 0.5
     kf = 1.83e-5*exp(7.84e-3/(R*1e-3*T))*100^3;

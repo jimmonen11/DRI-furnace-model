@@ -7,14 +7,12 @@ c_FeOinit = out.FeO_conc.data(end,:);
 c_Feinit = out.Fe_conc.data(end,:);
 c_Cinit = out.C_conc.data(end,:);
 
-
 c_H2init = out.H2_conc.data(end,:);
 c_H2Oinit = out.H2O_conc.data(end,:);
 c_N2init = out.N2_conc.data(end,:);
 c_COinit = out.CO_conc.data(end,:);
 c_CO2init = out.CO2_conc.data(end,:);
 c_CH4init = out.CH4_conc.data(end,:);
-
 
 T_ginit = out.T_g.data(end,2:end);
 T_sinit = out.T_s.data(end,1:end-1);
