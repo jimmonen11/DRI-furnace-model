@@ -69,12 +69,12 @@ x_COeq3 = out.x_COeq3.data(hour_id,:);
 figure(1)
 subplot(1,3,1)
 box on
-plot(w_Fe2O3, z(2:end) , 'linewidth', 6, 'color', Fe2O3col )
+plot(w_Fe2O3, z(1:end) , 'linewidth', 6, 'color', Fe2O3col )
 hold on
-plot(w_Fe3O4, z(2:end), 'linewidth', 6, 'color', Fe3O4col)
-plot(w_FeO, z(2:end), 'linewidth', 6, 'color', FeOcol)
-plot(w_Fe, z(2:end), 'linewidth', 6, 'color', Fecol )
-plot(Xred, z(2:end), 'linewidth', 3, 'color', 'k', 'LineStyle', '--' )
+plot(w_Fe3O4, z(1:end), 'linewidth', 6, 'color', Fe3O4col)
+plot(w_FeO, z(1:end), 'linewidth', 6, 'color', FeOcol)
+plot(w_Fe, z(1:end), 'linewidth', 6, 'color', Fecol )
+%plot(Xred, z(1:end), 'linewidth', 3, 'color', 'k', 'LineStyle', '--' )
 xlabel('Weight Fraction')
 ylabel('Furnace Height (m)')
 
@@ -116,7 +116,7 @@ box on
 hold on
 
 plot([T_g out.T_gout.data(hour_id)-273], z(1:end), 'linewidth', 6,'color', gasTcol)
-plot(T_s, z(2:end), 'linewidth', 6,'color', solidsTcol)
+plot([out.T_sout.data(hour_id) - 273 T_s], z(1:end), 'linewidth', 6,'color', solidsTcol)
 
 xlabel('Temperature (^oC)')
 % ylabel('Furnace Height (m)')
