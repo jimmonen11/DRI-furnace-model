@@ -4,12 +4,12 @@ changenodes = false;
 H2only = false;
 NGstart = true;
 
-n_furnace = 75;
+n_furnace = 100;
 
 % Geometry of furnace, pellets, etc. come from data from a plant in Quebec taken from 
 % Hamadeh, H. (2017). Modélisation mathématique détaillée du procédé de réduction directe du minerai de fer. 1–143. https://theses.hal.science/tel-01740462v1/document
 
-rho_p = 3528; %kg/m^3 density of a pellet
+rho_p = 3528; % kg/m^3 density of a pellet
 eps_bed = 0.5; % m^3 gas/m^3 total
 
 r_furnace = 2.75; %m, radius of reducing section of furnace
@@ -78,7 +78,8 @@ if H2only == true
     
 elseif NGstart == true
     load('initcond_NG.mat')
-    % 
+    
+    % 0.10 slip 
     x_CH4in = 0.105824828;
     x_H2in = 0.489526511;
     x_COin = 0.320711862;
@@ -88,14 +89,15 @@ elseif NGstart == true
     Gas_In_Flow = 2228.1*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000; %kg/s
     T_gin = 947 + 273; %K, temperature of gas in
 
-    % x_CH4in = 0.0924;
-    % x_H2in = 0.5165;
-    % x_COin = 0.3207;
-    % x_H2Oin = 0.0426;
+    % 0.05 slip
+    % x_CH4in = 0.098397835;
+    % x_H2in = 0.493566787;
+    % x_COin = 0.323869613;
+    % x_H2Oin = 0.042677198;
     % x_CO2in = 0.024;
-    % x_N2in = 0.0174;
-    % Gas_In_Flow = 2258.1*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000; %kg/s
-    % T_gin = 930 + 273; %K, temperature of gas in
+    % x_N2in = 0.017488568;
+    % Gas_In_Flow = 2203.05*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000; %kg/s
+    % T_gin = 952 + 273; %K, temperature of gas in
 
 
 
@@ -249,3 +251,16 @@ V_s = (4/3)*pi*r_p^3*n_pellets_dz; % m^3, volume of solid
 a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange, Wagner thesis
 A_wall = (2*pi*r_furnace*dz); %m^2 surface area of furnace
 
+
+V_ref = 193*1000/3600;
+
+ndot_ref = 101325*V_ref/(R*273.15)
+
+x_H2val = 0.4028;
+x_COval = 0.1958;
+x_H2Oval = 0.1903;
+x_CO2val = 0.1709;
+x_CH4val = 0.0295;
+x_N2val = 0.0102;
+
+ndot_ref*(x_H2val*MM_H2 + x_COval*MM_CO + x_H2Oval*MM_H2O +x_CO2val*MM_CO2 + x_N2val*MM_N2 + x_CH4val*MM_CH4)/1000 %kg/s

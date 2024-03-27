@@ -54,6 +54,16 @@ x_CH4 = out.x_CH4.data(hour_id,:);
 T_g = out.T_g.data(hour_id,:)-273;
 T_s = out.T_s.data(hour_id,:)-273;
 
+
+x_H2eq1 = out.x_H2eq1.data(hour_id,:);
+x_H2eq2 = out.x_H2eq2.data(hour_id,:);
+x_H2eq3 = out.x_H2eq3.data(hour_id,:);
+
+x_COeq1 = out.x_COeq1.data(hour_id,:);
+x_COeq2 = out.x_COeq2.data(hour_id,:);
+x_COeq3 = out.x_COeq3.data(hour_id,:);
+
+
 %%
 
 figure(1)
@@ -89,8 +99,10 @@ plot(x_CH4, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CH4col)
 xlabel('Mole Fraction')
 %ylabel('Furnace Height (m)')
 
-xlim([0, 1])
+xlim([0, 0.6])
 ylim([0, h_furnace])
+xticks(0:0.1:0.6)
+
 
 legend('H_2','H_2O', 'CO', 'CO_2', 'CH_4', 'Location', 'best')
 H = gca;
@@ -102,6 +114,7 @@ set(gca,'FontWeight', 'bold','FontSize',18)
 subplot(1,3,3)
 box on
 hold on
+
 plot(T_g, z(1:end-1), 'linewidth', 6,'color', gasTcol)
 plot(T_s, z(2:end), 'linewidth', 6,'color', solidsTcol)
 
@@ -116,6 +129,32 @@ H = gca;
 grid on
 H.LineWidth = 3; %change to the desired value   
 set(gca,'FontWeight', 'bold','FontSize',18)
+
+%%
+figure(2)
+subplot(1,3,1)
+
+box on
+plot(x_H2, z(1:end-1) , 'linewidth', 6, 'color', H2col, 'LineStyle', '-'  )
+hold on
+plot(x_H2eq2, z(2:end-1), 'linewidth', 6, 'color', H2col, 'LineStyle', '--' )
+plot(x_H2eq3, z(2:end-1), 'linewidth', 6, 'color', H2col, 'LineStyle', ':' )
+plot(x_CO, z(1:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', '-'  )
+plot(x_COeq2, z(2:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', '--' )
+plot(x_COeq3, z(2:end-1), 'linewidth', 6, 'color', COcol ,'LineStyle', ':' )
+
+xlabel('Weight Fraction')
+ylabel('Furnace Height (m)')
+
+xlim([0, 0.6])
+ylim([0, h_furnace])
+
+legend('H_2','H_2eq2','H_2eq3','CO', 'COeq2', 'COeq3', 'Location', 'best')
+H = gca;
+grid on
+H.LineWidth = 3; %change to the desired value   
+set(gca,'FontWeight', 'bold','FontSize',18)
+
 
 %%
 
@@ -137,7 +176,7 @@ x_H2Oval = 0.1903;
 x_CO2val = 0.1709;
 x_CH4val = 0.0295;
 x_N2val = 0.0102;
-m_gval = 41.96;
+m_gval = 43.07;
 
 gas_val = [x_H2val x_COval x_H2Oval x_CO2val x_CH4val x_N2val];
 gas_model = [x_H2(end) x_CO(end) x_H2O(end) x_CO2(end) x_CH4(end) x_N2(end)]
