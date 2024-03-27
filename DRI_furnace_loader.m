@@ -4,7 +4,7 @@ changenodes = false;
 H2only = false;
 NGstart = true;
 
-n_furnace = 100;
+n_furnace = 75;
 
 % Geometry of furnace, pellets, etc. come from data from a plant in Quebec taken from 
 % Hamadeh, H. (2017). Modélisation mathématique détaillée du procédé de réduction directe du minerai de fer. 1–143. https://theses.hal.science/tel-01740462v1/document
@@ -38,7 +38,7 @@ Solids_In_Flow = 45.1;
 Solids_In_Flow_Step = 45.1;
 
 T_sin = -10 + 273; %K, solids temperature in
-P_gin = 101325*1.8; %Pa, pressure of gas in
+P_gin = 101325*1.785; %Pa, pressure of gas in
 
 
 w_Fe2O3in = 0.9665;
@@ -158,15 +158,15 @@ Gas_In_Flow_Step = 14.16536754;
 T_ginstep = 947+273;
 
 % 50% with CH4/N2 still -  GOOD!
-% x_CH4step = 0.10947;
-% x_H2step = 0.67225;
-% x_COstep = 0.16588;
-% x_H2Ostep = 0.02201;
-% x_CO2step = 0.01241;
-% x_N2step = 0.01798;
-% %Gas_In_Flow_Step = 14.16536754;
-% Gas_In_Flow_Step = 2154.0*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000; %kg/s
-% T_ginstep = 947+273;
+x_CH4step = 0.10947;
+x_H2step = 0.67225;
+x_COstep = 0.16588;
+x_H2Ostep = 0.02201;
+x_CO2step = 0.01241;
+x_N2step = 0.01798;
+%Gas_In_Flow_Step = 14.16536754;
+Gas_In_Flow_Step = 2154.0*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000; %kg/s
+T_ginstep = 947+273;
 
 % Step back to normal NG operation!
 % x_CH4step = 0.105824828;

@@ -89,12 +89,12 @@ set(gca,'FontWeight', 'bold','FontSize',18)
 
 subplot(1,3,2)
 box on
-plot(x_H2, z(1:end-1), 'linewidth', 6, 'color', H2col )
+plot(x_H2, z(1:end), 'linewidth', 6, 'color', H2col )
 hold on
-plot(x_H2O, z(1:end-1), 'linewidth', 6, 'color', H2Ocol)
-plot(x_CO, z(1:end-1), 'linestyle', ':','linewidth', 6, 'color', COcol)
-plot(x_CO2, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CO2col)
-plot(x_CH4, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CH4col)
+plot(x_H2O, z(1:end), 'linewidth', 6, 'color', H2Ocol)
+plot(x_CO, z(1:end), 'linestyle', ':','linewidth', 6, 'color', COcol)
+plot(x_CO2, z(1:end), 'linestyle', ':', 'linewidth', 6, 'color', CO2col)
+plot(x_CH4, z(1:end), 'linestyle', ':', 'linewidth', 6, 'color', CH4col)
 
 xlabel('Mole Fraction')
 %ylabel('Furnace Height (m)')
@@ -115,7 +115,7 @@ subplot(1,3,3)
 box on
 hold on
 
-plot(T_g, z(1:end-1), 'linewidth', 6,'color', gasTcol)
+plot([T_g out.T_gout.data(hour_id)-273], z(1:end), 'linewidth', 6,'color', gasTcol)
 plot(T_s, z(2:end), 'linewidth', 6,'color', solidsTcol)
 
 xlabel('Temperature (^oC)')
@@ -131,29 +131,29 @@ H.LineWidth = 3; %change to the desired value
 set(gca,'FontWeight', 'bold','FontSize',18)
 
 %%
-figure(2)
-subplot(1,3,1)
-
-box on
-plot(x_H2, z(1:end-1) , 'linewidth', 6, 'color', H2col, 'LineStyle', '-'  )
-hold on
-plot(x_H2eq2, z(2:end-1), 'linewidth', 6, 'color', H2col, 'LineStyle', '--' )
-plot(x_H2eq3, z(2:end-1), 'linewidth', 6, 'color', H2col, 'LineStyle', ':' )
-plot(x_CO, z(1:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', '-'  )
-plot(x_COeq2, z(2:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', '--' )
-plot(x_COeq3, z(2:end-1), 'linewidth', 6, 'color', COcol ,'LineStyle', ':' )
-
-xlabel('Weight Fraction')
-ylabel('Furnace Height (m)')
-
-xlim([0, 0.6])
-ylim([0, h_furnace])
-
-legend('H_2','H_2eq2','H_2eq3','CO', 'COeq2', 'COeq3', 'Location', 'best')
-H = gca;
-grid on
-H.LineWidth = 3; %change to the desired value   
-set(gca,'FontWeight', 'bold','FontSize',18)
+% figure(2)
+% subplot(1,3,1)
+% 
+% box on
+% plot(x_H2, z(1:end-1) , 'linewidth', 6, 'color', H2col, 'LineStyle', '-'  )
+% hold on
+% plot(x_H2eq2, z(2:end-1), 'linewidth', 6, 'color', H2col, 'LineStyle', '--' )
+% plot(x_H2eq3, z(2:end-1), 'linewidth', 6, 'color', H2col, 'LineStyle', ':' )
+% plot(x_CO, z(1:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', '-'  )
+% plot(x_COeq2, z(2:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', '--' )
+% plot(x_COeq3, z(2:end-1), 'linewidth', 6, 'color', COcol ,'LineStyle', ':' )
+% 
+% xlabel('Weight Fraction')
+% ylabel('Furnace Height (m)')
+% 
+% xlim([0, 0.6])
+% ylim([0, h_furnace])
+% 
+% legend('H_2','H_2eq2','H_2eq3','CO', 'COeq2', 'COeq3', 'Location', 'best')
+% H = gca;
+% grid on
+% H.LineWidth = 3; %change to the desired value   
+% set(gca,'FontWeight', 'bold','FontSize',18)
 
 
 %%
