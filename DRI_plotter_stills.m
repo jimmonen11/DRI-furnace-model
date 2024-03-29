@@ -26,7 +26,7 @@ fontsizetit = 19;
 time = out.Fe2O3_conc.time;
 time_interp = linspace(0,time(end), 1000);
 
-z = linspace(0, h_furnace, n_furnace+2);
+z = linspace(-dz(1), h_furnace + dz(1), n_furnace+2);
 
 T_s = out.T_s.data -273;
 T_g = out.T_g.data -273;
@@ -147,6 +147,8 @@ plot(w_Fe3O4_plot(split3,:), z(2:end), 'linewidth', widthsize,'color', Fe3O4col,
 
 xlabel('Weight Fraction')
 xlim([0, 1])
+ylim([0, h_furnace])
+
 xticks([0:0.25:1]);
 
 H = gca;
@@ -172,6 +174,8 @@ plot(w_FeO_plot(split3,:), z(2:end), 'linewidth', widthsize,'color', FeOcol, 'li
 
 xlabel('Weight Fraction')
 xlim([0, 1])
+ylim([0, h_furnace])
+
 xticks([0:0.25:1]);
 
 H = gca;
@@ -196,6 +200,8 @@ plot(w_Fe_plot(split3,:), z(2:end), 'linewidth', widthsize,'color', Fecol, 'line
 
 xlabel('Weight Fraction')
 xlim([0, 1])
+ylim([0, h_furnace])
+
 xticks([0:0.25:1]);
 H = gca;
 grid on
@@ -248,6 +254,8 @@ ylabel('Furnace Height (m)')
 
 
 %xlim([0, 0.05])
+ylim([0, h_furnace])
+
 %xticks([0:0.01:0.05]);
 H = gca;
 grid on
@@ -271,7 +279,10 @@ plot(T_s_plot(split3,:), z(2:end), 'linewidth', widthsize,'color', solidsTcol, '
 
 xlabel('Temperature (^oC)')
 xlim([-10, 1000]);
-%xticks([250:100:850]);
+ylim([0, h_furnace])
+
+xticks(0:250:1000);
+xtickangle(0)
 
 H = gca;
 grid on
@@ -295,6 +306,8 @@ plot(m_s_plot(split3,:), z(2:end), 'linewidth', widthsize,'color', solidsmcol, '
 
 xlabel('Mass Flow (kg/s)')
 xlim([30, 50]);
+ylim([0, h_furnace])
+
 %xticks([250:100:850]);
 
 H = gca;
@@ -329,7 +342,9 @@ plot(x_H2_plot(split3,:), z(1:end-1), 'linewidth', widthsize,'color', H2col, 'li
 ylabel('Furnace Height (m)')
 xlabel('Mole Fraction')
 xlim([0.5, 1])
-%xticks([0.3:0.1:0.9]);
+ylim([0, h_furnace])
+
+xticks([0.5:0.1:1]);
 
 H = gca;
 grid on
@@ -354,7 +369,9 @@ plot(x_H2O_plot(split3,:), z(1:end-1), 'linewidth', widthsize,'color', H2Ocol, '
 
 xlabel('Mole Fraction')
 xlim([0, 0.5])
-%xticks([0:0.1:0.4]);
+ylim([0, h_furnace])
+
+xticks([0:0.1:0.5]);
 
 H = gca;
 grid on
@@ -376,8 +393,12 @@ plot(T_g_plot(split3,:), z(1:end-1), 'linewidth', widthsize,'color', gasTcol, 'l
 %      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
 xlabel('Temperature (^oC)')
-xlim([250, 1000]);
-%xticks([250:100:850]);
+
+xlim([0, 1000]);
+ylim([0, h_furnace])
+
+xticks(0:250:1000);
+xtickangle(0)
 
 
 H = gca;
@@ -401,7 +422,9 @@ plot(m_g_plot(split3,:), z(1:end-1), 'linewidth', widthsize,'color', gasmcol, 'l
 %      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
 xlabel('Mass Flow (kg/s)')
-xlim([0, 20]);
+xlim([5, 20]);
+ylim([0, h_furnace])
+
 %xticks([250:100:850]);
 
 H = gca;

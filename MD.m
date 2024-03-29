@@ -7,11 +7,11 @@ function v = MD(X, T, P, Vp, x_H2, x_CH4, Cratio)
 if Cratio > 0.5
     v = 1e-10;
 
-elseif X < 0.1
+elseif X < 0.4
     v = 1e-10;
 
 elseif Cratio < 1e-6
-    v = 1e-10;
+    v = 1e-20;
 else
     a_c = exp(2300/T - 0.92 + (3860/T)*Cratio + log(Cratio/(1-Cratio)) );
     
@@ -27,7 +27,7 @@ else
     % Kgraph = 5e-7*exp(0.0177*T);
     % Ggraph = 8.314*T*log(Kgraph);
     Ggraph = 21950.5; % estimated as graphite Del G from Equilibria of decomposition reactions of carbon monoxide and methane over nickel catalysts
-    %Ggraph = 25000;
+    Ggraph = 15000;
     %Ggraph = 0;
 
     G = G + Ggraph;
@@ -37,6 +37,9 @@ else
     Keq = exp(-G/(R*T))*P;
     
     k = 16250*exp(-55000/(R*T));
+    
+    %k = 16250*exp(-35000/(R*T));
+
 
     %v = ((k/(P_H2^0.5)) * (P_CH4 - P_H2^2*a_c/Keq)*(1-eps_bed));
     v = Vp*((k/(P_H2^0.5)) * (P_CH4 - P_H2^2*a_c/Keq));

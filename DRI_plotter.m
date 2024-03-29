@@ -23,7 +23,7 @@ solidsmcol = '#7d072d' ;
 fontsize = 16;
 fontsizetit = 19;
 
-z = linspace(0, h_furnace, n_furnace+2);
+z = linspace(-dz(1), h_furnace + dz(1), n_furnace+2);
 
 hour_aim = 0;
 time = out.w_Fe2O3.time(end);
@@ -69,12 +69,12 @@ x_COeq3 = out.x_COeq3.data(hour_id,:);
 figure(1)
 subplot(1,3,1)
 box on
-plot(w_Fe2O3, z(1:end) , 'linewidth', 6, 'color', Fe2O3col )
+plot(w_Fe2O3, z(2:end) , 'linewidth', 6, 'color', Fe2O3col )
 hold on
-plot(w_Fe3O4, z(1:end), 'linewidth', 6, 'color', Fe3O4col)
-plot(w_FeO, z(1:end), 'linewidth', 6, 'color', FeOcol)
-plot(w_Fe, z(1:end), 'linewidth', 6, 'color', Fecol )
-%plot(Xred, z(1:end), 'linewidth', 3, 'color', 'k', 'LineStyle', '--' )
+plot(w_Fe3O4, z(2:end), 'linewidth', 6, 'color', Fe3O4col)
+plot(w_FeO, z(2:end), 'linewidth', 6, 'color', FeOcol)
+plot(w_Fe, z(2:end), 'linewidth', 6, 'color', Fecol )
+% plot(Xred, z(2:end), 'linewidth', 3, 'color', 'k', 'LineStyle', '--' )
 xlabel('Weight Fraction')
 ylabel('Furnace Height (m)')
 
@@ -89,19 +89,20 @@ set(gca,'FontWeight', 'bold','FontSize',18)
 
 subplot(1,3,2)
 box on
-plot(x_H2, z(1:end), 'linewidth', 6, 'color', H2col )
+plot(x_H2, z(1:end-1), 'linewidth', 6, 'color', H2col )
 hold on
-plot(x_H2O, z(1:end), 'linewidth', 6, 'color', H2Ocol)
-plot(x_CO, z(1:end), 'linestyle', ':','linewidth', 6, 'color', COcol)
-plot(x_CO2, z(1:end), 'linestyle', ':', 'linewidth', 6, 'color', CO2col)
-plot(x_CH4, z(1:end), 'linestyle', ':', 'linewidth', 6, 'color', CH4col)
+plot(x_H2O, z(1:end-1), 'linewidth', 6, 'color', H2Ocol)
+plot(x_CO, z(1:end-1), 'linestyle', ':','linewidth', 6, 'color', COcol)
+plot(x_CO2, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CO2col)
+plot(x_CH4, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CH4col)
 
 xlabel('Mole Fraction')
 %ylabel('Furnace Height (m)')
 
-xlim([0, 0.6])
 ylim([0, h_furnace])
-xticks(0:0.1:0.6)
+
+%xlim([0, 0.6])
+%xticks(0:0.1:0.6)
 
 
 legend('H_2','H_2O', 'CO', 'CO_2', 'CH_4', 'Location', 'best')
@@ -115,14 +116,17 @@ subplot(1,3,3)
 box on
 hold on
 
-plot([T_g out.T_gout.data(hour_id)-273], z(1:end), 'linewidth', 6,'color', gasTcol)
-plot([out.T_sout.data(hour_id) - 273 T_s], z(1:end), 'linewidth', 6,'color', solidsTcol)
+plot(T_g, z(1:end-1), 'linewidth', 6,'color', gasTcol)
+plot(T_s, z(2:end), 'linewidth', 6,'color', solidsTcol)
 
 xlabel('Temperature (^oC)')
 % ylabel('Furnace Height (m)')
 
 xlim([-10, 1000]);
 ylim([0, h_furnace])
+
+xticks(0:200:1000)
+
 
 legend('T_g','T_s', 'Location', 'south')
 H = gca;
@@ -185,7 +189,7 @@ mae_solids = mean(abs(solids_val - solids_model))*100
 mae_gas = mean(abs(gas_val - gas_model))*100
 
 re_mfs = abs(33.11 - out.m_s.data(hour_id, 1))/33.11*100
-re_mfg = abs(41.96 - out.m_g.data(hour_id, end))/41.96*100
+re_mfg = abs(43.07 - out.m_g.data(hour_id, end))/43.07*100
 
-
+re_Tg = abs(558 - out.T_g.data(hour_id, end))/558 * 100
 

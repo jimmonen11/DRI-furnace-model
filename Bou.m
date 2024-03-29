@@ -24,8 +24,8 @@ if Cratio > 0.5
 elseif Cratio < 1e-6
     v = 1e-10;
 
-elseif X < 0.1
-    v = 1e-10;
+elseif X < 0.4
+    v = 1e-20;
 
 else
     a_c = exp(2300/T - 0.92 + (3860/T)*Cratio + log(Cratio/(1-Cratio)) );

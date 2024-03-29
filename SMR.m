@@ -37,9 +37,11 @@ Keq = (10266.76*10^6*exp (-26830/T + 30.11))/101325^2; %atm^2
 % 
 if X < 0.25
     kf = 1e-20; %mol/s-m^3-atm^4
+
     %kf = 1.15e-9*exp(4.18/(R*1e-3*T))*100^3; %mol/s-m^3-atm^4
     %kf = 392*exp(6770/(R*T))*100^3;
- 
+% 
+
 else
 
     %kf = 1.15e-9*exp(4.18/(R*1e-3*T))*100^3; %mol/s-m^3-atm^4
@@ -59,8 +61,24 @@ else
 
     %kf = 4.225e16
     
-kf = (2395*exp(-231266/(R*T)) ) * 101325^2;
-    %kf = (2395*exp(-231266/(R*T)) ) * 101325^2;
+%kf = (2395*exp(-231266/(R*T)) ) * 101325^2;
+
+
+% Xcut = 0.5;
+% 
+% Xfactor  = X/Xcut;
+% 
+% if Xfactor > 1
+%     Xfactor = 1;
+% end
+
+    kf = (2395*exp(-210000/(R*T)) ) * 101325^2;
+
+    % kf = (2395*exp(-185000/(R*T)) ) * 101325^2; have plots for this!
+
+
+    %kf = (5000*exp(-231266/(R*T)) ) * 101325^2;
+
 
     % Three-dimensional simulation of chemically reacting gas f lows in the porous support structure of an integrated-planar solid oxide fuel cell
 

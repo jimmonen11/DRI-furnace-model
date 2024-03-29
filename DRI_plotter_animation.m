@@ -16,7 +16,7 @@ solidscol = "#D95319";
 time = out.Fe2O3_conc.time;
 time_interp = linspace(0,time(end), 250);
 
-z = linspace(0, h_furnace, n_furnace+2);
+z = linspace(-dz(1), h_furnace + dz(1), n_furnace+2);
 
 T_s = out.T_s.data -273;
 T_g = out.T_g.data -273;
@@ -94,8 +94,10 @@ for i = hour1:hour_end
     
     xlabel('Weight Fraction')
     ylabel('Furnace Height (m)')
+    ylim([0, h_furnace])
+
     xticks([0:0.25:1]);
-    legend('Fe_2O_3','Fe_3O_4', 'FeO', 'Fe','Location', 'west')
+    legend('Fe_2O_3','Fe_3O_4', 'FeO', 'Fe','Location', 'east')
     H = gca;
     grid on
     H.LineWidth = 3; %change to the desired value   
@@ -107,15 +109,15 @@ for i = hour1:hour_end
     hold on
     plot(x_H2_plot(i,:), z(1:end-1), 'linewidth', 6,'color', H2col)
     plot(x_H2O_plot(i,:), z(1:end-1), 'linewidth', 6,'color', H2Ocol)
-    plot(x_CO_plot(i,:), z(1:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', ':')
-    plot(x_CO2_plot(i,:), z(1:end-1), 'linewidth', 6,'color', CO2col, 'LineStyle', ':')
-    plot(x_CH4_plot(i,:), z(1:end-1), 'linewidth', 6,'color', CH4col, 'LineStyle', ':')
+    % plot(x_CO_plot(i,:), z(1:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', ':')
+    % plot(x_CO2_plot(i,:), z(1:end-1), 'linewidth', 6,'color', CO2col, 'LineStyle', ':')
+    % plot(x_CH4_plot(i,:), z(1:end-1), 'linewidth', 6,'color', CH4col, 'LineStyle', ':')
 
    
     xlabel('Mole Fraction')
     %ylabel('Furnace Height (m)')
     
-    xlim([0, 0.8])
+    %xlim([0, 0.8])
     ylim([0, h_furnace])
     xticks([0:0.25:1]);
 
@@ -134,8 +136,11 @@ for i = hour1:hour_end
     xlabel('Temperature (^oC)')
     %ylabel('Furnace Height (m)')
     
-    xlim([250, 1000]);
+    xlim([-10, 1000]);
     ylim([0, h_furnace])
+    
+    xticks(0:250:1000);
+    xtickangle(0)
     
     legend('T_g','T_s', 'Location', 'south')
     H = gca;
@@ -145,7 +150,8 @@ for i = hour1:hour_end
     
    
     %text(0.1, 1, num2str(time_interp(i)/3600, '%.2f' ) + "hours", 'FontSize',14,'FontWeight', 'bold')
-    sgtitle(num2str(time_interp(i)/3600-1, '%.2f' ) + " hours", 'FontSize',24,'FontWeight', 'bold')
+    time_interp(time_interp < 0) = 0 ;
+    sgtitle(num2str(time_interp(i)/3600-1+.005, '%.2f' ) + " hours", 'FontSize',24,'FontWeight', 'bold')
     
     gif('DelayTime',1/10)
 
