@@ -76,7 +76,7 @@ gif('test.gif')
 
 [minval,hour1] = min(abs(time_interp-3600));
 
-time_end = 6 ; %hours
+time_end = 4; %hours
 [minval, hour_end] = min(abs(time_interp-(3600*time_end + 1*3600)));
 
 
@@ -117,7 +117,7 @@ for i = hour1:hour_end
     xlabel('Mole Fraction')
     %ylabel('Furnace Height (m)')
     
-    %xlim([0, 0.8])
+    xlim([0, 0.8])
     ylim([0, h_furnace])
     xticks([0:0.25:1]);
 

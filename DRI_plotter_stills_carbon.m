@@ -225,7 +225,7 @@ plot(w_C_plot(split3,:), z(2:end), 'linewidth', widthsize,'color', Ccol, 'linest
 ylabel('Furnace Height (m)')
 xlabel('Weight Fraction')
 
-xlim([0, 0.02])
+%xlim([0, 0.02])
 ylim([0, h_furnace])
 
 xticks([0:0.01:0.02]);
@@ -530,7 +530,7 @@ plot(m_g_plot(split3,:), z(1:end-1), 'linewidth', widthsize,'color', gasmcol, 'l
 %      append('t = ', num2str(time3, '%.0f'), ' hrs'), 'Location', 'best')
 
 xlabel('Mass Flow (kg/s)')
-xlim([10, 60]);
+%xlim([10, 60]);
 ylim([0, h_furnace])
 
 %xticks([250:100:850]);
