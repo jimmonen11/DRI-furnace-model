@@ -152,11 +152,11 @@ V_furnace = A_furnace*h_furnace; %m^3, volume of reducing section of furnace
 V_pellet_bed = ((4/3)*pi*r_p^3)/(1-eps_bed); %m^3, volume of pellets in furnace
 
 
-dz = ones(1, n_furnace+1)* (h_furnace/(n_furnace-1)); %m, spacing of nodes
+dz = (h_furnace/(n_furnace-1)); %m, spacing of nodes
 
 
 n_pellets = V_furnace/V_pellet_bed; % no. of pellets in reducing section
-n_pellets_dz = n_pellets.*dz/h_furnace; % no. of pellets per node
+n_pellets_dz = n_pellets*dz/h_furnace; % no. of pellets per node
 
 % Volume of gas and solid in each spatial node - constant
 V_g = (4/3)*pi*r_p^3*n_pellets_dz*(eps_bed/(1-eps_bed)); % m^3, volume of gas

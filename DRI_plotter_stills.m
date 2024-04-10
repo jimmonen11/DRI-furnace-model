@@ -26,7 +26,7 @@ fontsizetit = 19;
 time = out.Fe2O3_conc.time;
 time_interp = linspace(0,time(end), 1000);
 
-z = linspace(-dz(1), h_furnace + dz(1), n_furnace+2);
+z = linspace(-dz, h_furnace + dz, n_furnace+2);
 
 T_s = out.T_s.data -273;
 T_g = out.T_g.data -273;

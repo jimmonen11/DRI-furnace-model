@@ -23,7 +23,7 @@ solidsmcol = '#7d072d';
 fontsize = 16;
 fontsizetit = 19;
 
-z = linspace(-dz(1), h_furnace + dz(1), n_furnace+2);
+z = linspace(-dz, h_furnace + dz, n_furnace+2);
 
 hour_aim = 0;
 time = out.w_Fe2O3.time(end);
