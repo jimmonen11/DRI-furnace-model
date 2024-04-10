@@ -1,20 +1,48 @@
-
-changenodes = false;
-
-H2only = false;
-NGstart = true;
+%% Number of discretization modes and type of operation
 
 n_furnace = 75;
 
+changenodes = false; %set to true if plan on changing n_furnace to something other than 75
+H2only = false; % set to true for a furnace that only uses H2
+
+steady_state = true; % set to true if want constant inlet conditions to be constant
+stepcase1 = false;
+stepcase2 = false;
+stepcase3 = false;
+
+%% Furnace Geometry and Solids Parameters
 % Geometry of furnace, pellets, etc. come from data from a plant in Quebec taken from 
 % Hamadeh, H. (2017). Modélisation mathématique détaillée du procédé de réduction directe du minerai de fer. 1–143. https://theses.hal.science/tel-01740462v1/document
-
 rho_p = 3528; % kg/m^3 density of a pellet
 eps_bed = 0.5; % m^3 gas/m^3 total
 
 r_furnace = 2.75; %m, radius of reducing section of furnace
 h_furnace = 10; %m, height of reducing section of furnace
 r_p = 15e-3/2; %m, radius of iron ore pellets
+
+A_furnace = pi*r_furnace^2; %m^2, c.s. area of flow
+A_furnace_pel = A_furnace*(1-eps_bed); %c.s. area for pellet flow - excludes gas lanes
+A_furnace_gas = A_furnace*(eps_bed); %c.s. area for gas flow - excludes solids lanes
+
+V_p = 4/3*pi*r_p^3; %m^3, volume of a pellet
+V_furnace = A_furnace*h_furnace; %m^3, volume of reducing section of furnace
+V_pellet_bed = ((4/3)*pi*r_p^3)/(1-eps_bed); %m^3, volume of pellets in furnace
+
+dz = (h_furnace/(n_furnace-1)); %m, spacing of nodes
+
+n_pellets = V_furnace/V_pellet_bed; % no. of pellets in reducing section
+n_pellets_dz = n_pellets*dz/h_furnace; % no. of pellets per node
+
+% Volume of gas and solid in each spatial node - constant
+V_g = (4/3)*pi*r_p^3*n_pellets_dz*(eps_bed/(1-eps_bed)); % m^3, volume of gas
+V_s = (4/3)*pi*r_p^3*n_pellets_dz; % m^3, volume of solid
+
+a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange, Wagner thesis
+A_wall = (2*pi*r_furnace*dz); %m^2 surface area of furnace
+
+tau = 60*5; % seconds, time constant for 1st order step changes
+
+%% Constants
 
 % Molar mass of species in kg/mol
 MM_Fe2O3 = 159.69/1000;
@@ -42,12 +70,13 @@ CO2_diff_prop = [MM_CO2, 26.9];
 % ideal gas constant
 R = 8.314; %(m^3*Pa)/(K*mol)
 
-Solids_In_Flow = 45.1;
+%% Solid Inlet Conditions
+Solids_In_Flow = 45.1; %kg/s, flow of solids in
 
 T_sin = -10 + 273; %K, solids temperature in
-P_gin = 101325*1.785; %Pa, pressure of gas in
+P_gin = 101325*1.785; %Pa, pressure of gas in (found via trial and error)
 
-
+% weight fraction of pellets in
 w_Fe2O3in = 0.9665;
 w_Fe3O4in = 0;
 w_FeOin = 0;
@@ -55,10 +84,11 @@ w_Fein = 0;
 w_Cin = 0;
 w_Ganin = 0.0335;
 
+%% Gas Inlet Conditions
 
 if H2only == true
     load('initcond_H2.mat')
-    %load('initcond_H2_10m.mat')
+    %load('initcond_H2_10m.mat') % can load 10 m results if want but change h_furnace
     h_furnace = 5;
     
     x_CH4in = 0.0;
@@ -68,13 +98,13 @@ if H2only == true
     x_CO2in = 0.0;
     x_N2in = 0.018627;
     Gas_In_Flow = 2078.874*(x_H2in*MM_H2 + x_H2Oin*MM_H2O + x_N2in*MM_N2)/1000; %kg/s
-    T_gin = 942 + 273; %K, temperature of gas in
+    T_gin = 942 + 273;
 
     
 else
     load('initcond_NG.mat')
     
-    % 0.10 slip 
+    % Steady state NG-DRI conditions
     x_CH4in = 0.105824828;
     x_H2in = 0.489526511;
     x_COin = 0.320711862;
@@ -82,12 +112,12 @@ else
     x_CO2in = 0.024;
     x_N2in = 0.017379642;
     Gas_In_Flow = 2228.1*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000; %kg/s
-    T_gin = 942 + 273; %K, temperature of gas in
+    T_gin = 942 + 273;
 
 
 end
 
-if changenodes == true
+if changenodes == true %this 'helps' change nodes, but will still required sim time to sort itself out
 
     T_ginit = interp1([1:1:length(T_ginit)],T_ginit, linspace(1,length(T_ginit),n_furnace));
     T_sinit = interp1([1:1:length(T_sinit)],T_sinit, linspace(1,length(T_sinit),n_furnace));
@@ -117,64 +147,65 @@ end
 x_sumin = x_CH4in  + x_H2in + x_COin +x_H2Oin + x_CO2in + x_N2in; %check to make sure equal to 1
 
 
-% 25% with CH4/N2 still -  GOOD!
-% x_CH4step = 0.11138;
-% x_H2step = 0.76842;
-% x_COstep = 0.08439;
-% x_H2Ostep = 0.01120;
-% x_CO2step = 0.00632;
-% x_N2step = 0.01829;
-% Gas_In_Flow_Step = 14.16536754;
-% T_ginstep = 942+273;
+if steady_state == true
+    
+    %inlet values are the same throughout simulation
+    x_CH4step = x_CH4in;
+    x_H2step = x_H2in;
+    x_COstep = x_COin;
+    x_H2Ostep = x_H2Oin;
+    x_CO2step = x_CO2in;
+    x_N2step = x_N2in;
+    Gas_In_Flow_Step = Gas_In_Flow*1;
+    Solids_In_Flow_Step = Solids_In_Flow*1;
+    T_ginstep = T_gin;
+
+end
+
+if stepcase1 == true
+
+    % 25% turndown of syngas with CH4/N2
+    x_CH4step = 0.11138;
+    x_H2step = 0.76842;
+    x_COstep = 0.08439;
+    x_H2Ostep = 0.01120;
+    x_CO2step = 0.00632;
+    x_N2step = 0.01829;
+    Gas_In_Flow_Step = 14.16536754;
+    T_ginstep = 942+273;
+
+end
 
 
+if stepcase2 == true 
+    
+    %Move to 80% of flow
+    x_CH4step = x_CH4in;
+    x_H2step = x_H2in;
+    x_COstep = x_COin;
+    x_H2Ostep = x_H2Oin;
+    x_CO2step = x_CO2in;
+    x_N2step = x_N2in;
+    Gas_In_Flow_Step = Gas_In_Flow*0.8;
+    Solids_In_Flow_Step = Solids_In_Flow*1;
+    T_ginstep = T_gin;
 
-%H2 step
-x_CH4step = x_CH4in;
-x_H2step = x_H2in;
-x_COstep = x_COin;
-x_H2Ostep = x_H2Oin;
-x_CO2step = x_CO2in;
-x_N2step = x_N2in;
-Gas_In_Flow_Step = Gas_In_Flow*1;
-Solids_In_Flow_Step = Solids_In_Flow*1;
-T_ginstep = T_gin;
+end
 
+if stepcase3 == true 
+    
+    %Move to 80% of flow
+    x_CH4step = x_CH4in;
+    x_H2step = x_H2in;
+    x_COstep = x_COin;
+    x_H2Ostep = x_H2Oin;
+    x_CO2step = x_CO2in;
+    x_N2step = x_N2in;
+    Gas_In_Flow_Step = Gas_In_Flow*1;
+    Solids_In_Flow_Step = Solids_In_Flow*1;
+    T_ginstep = T_gin-100;
 
-tau = 60*5; % seconds, time constant for 1st order step changes
+end
 
-A_furnace = pi*r_furnace^2; %m^2, c.s. area of flow
-A_furnace_pel = A_furnace*(1-eps_bed); %c.s. area for pellet flow - excludes gas lanes
-A_furnace_gas = A_furnace*(eps_bed); %c.s. area for gas flow - excludes solids lanes
+x_sumstep = x_CH4step  + x_H2step + x_COstep +x_H2Ostep + x_CO2step + x_N2step; %check to make sure equal to 1
 
-V_p = 4/3*pi*r_p^3; %m^3, volume of a pellet
-V_furnace = A_furnace*h_furnace; %m^3, volume of reducing section of furnace
-V_pellet_bed = ((4/3)*pi*r_p^3)/(1-eps_bed); %m^3, volume of pellets in furnace
-
-
-dz = (h_furnace/(n_furnace-1)); %m, spacing of nodes
-
-
-n_pellets = V_furnace/V_pellet_bed; % no. of pellets in reducing section
-n_pellets_dz = n_pellets*dz/h_furnace; % no. of pellets per node
-
-% Volume of gas and solid in each spatial node - constant
-V_g = (4/3)*pi*r_p^3*n_pellets_dz*(eps_bed/(1-eps_bed)); % m^3, volume of gas
-V_s = (4/3)*pi*r_p^3*n_pellets_dz; % m^3, volume of solid
-
-a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange, Wagner thesis
-A_wall = (2*pi*r_furnace*dz); %m^2 surface area of furnace
-
-
-V_ref = 193*1000/3600;
-
-ndot_ref = 101325*V_ref/(R*273.15)
-
-x_H2val = 0.4028;
-x_COval = 0.1958;
-x_H2Oval = 0.1903;
-x_CO2val = 0.1709;
-x_CH4val = 0.0295;
-x_N2val = 0.0102;
-
-ndot_ref*(x_H2val*MM_H2 + x_COval*MM_CO + x_H2Oval*MM_H2O +x_CO2val*MM_CO2 + x_N2val*MM_N2 + x_CH4val*MM_CH4)/1000 %kg/s
