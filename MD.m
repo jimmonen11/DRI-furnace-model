@@ -1,9 +1,6 @@
 function v = MD(X, T, P, Vp, x_H2, x_CH4, Cratio)
 
-% if X < 0.35
-%     v = 0;
-% else
-
+% keep reaction happening only when there is iron
 if Cratio > 0.5
     v = 1e-10;
 
@@ -26,9 +23,9 @@ else
     % G = G + 26485.7;
     % Kgraph = 5e-7*exp(0.0177*T);
     % Ggraph = 8.314*T*log(Kgraph);
-    Ggraph = 21950.5; % estimated as graphite Del G from Equilibria of decomposition reactions of carbon monoxide and methane over nickel catalysts
+    %Ggraph = 21950.5; % estimated as graphite Del G from Equilibria of decomposition reactions of carbon monoxide and methane over nickel catalysts
     Ggraph = 15000;
-    %Ggraph = 0;
+    %Ggraph = 10000;
 
     G = G + Ggraph;
     %5708.51; % J/mol

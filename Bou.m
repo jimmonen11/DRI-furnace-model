@@ -11,11 +11,8 @@ P_CO2 = x_CO2 * P;
 R = 8.314;
 
 % Modelling carbon formation using thermodynamic and kinetic methods in a steam methane reformer over nickel catalysts 
-%G = (-188030.19 + 402.82*T - 0.00524*T^2 + 828509.9/T - 32.026*T * log(T));
-
-%Keq = exp(-G/(R*T));
-
-Keq = (10^(9141/T + 0.000224*T-9.595)); %from wikipedia bou
+G = (-188030.19 + 402.82*T - 0.00524*T^2 + 828509.9/T - 32.026*T*log(T));
+Keq = exp(-G/(R*T))/P;
 
 
 if Cratio > 0.5
@@ -32,8 +29,7 @@ else
 
     k1 = 1.8*exp(-27200/(R*T));
     k2 = 2.2*exp(-8800/(R*T));
-    %k1 = 0;
     
-    v = Vp * ( (k1*(P_H2^0.5) + k2) * (P_CO^2 - P_CO2*a_c/Keq) );
-    %v = v/1000;
+        v = Vp * ( (k1*(P_H2^0.5) + k2) * (P_CO^2 - P_CO2*a_c/Keq) );
+    
 end

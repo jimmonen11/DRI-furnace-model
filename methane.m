@@ -1,5 +1,5 @@
-function [rho_methane, mu_methane, k_methane, C_methane] = nitrogen(T_methane)
-%CoolProp nitrogen properties at 1.15 bara
+function [rho_methane, mu_methane, k_methane, C_methane] = methane(T_methane)
+%CoolProp methane properties at 1.15 bara
 
 properties = [...
 290	0.777013435173747	1.09381182955814e-05	0.0330274143091115	2214.80188644815

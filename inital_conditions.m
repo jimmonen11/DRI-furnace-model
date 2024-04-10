@@ -21,7 +21,7 @@ nr1init = out.nr1.data(end,:);
 nr2init = out.nr2.data(end,:);
 nr3init = out.nr3.data(end,:);
 
-ndotinit = out.ndot.data(end,:);
+ndotinit = out.ndot.data(end,2:end);
 
 
 save("initcond_NG.mat","c_Fe2O3init","c_Fe3O4init","c_FeOinit","c_Feinit", "c_Cinit", "c_H2init", "c_H2Oinit", ...

@@ -18,7 +18,7 @@ gasTcol = '#0072BD';
 gasmcol = '#077b7d';
 
 solidsTcol = '#D95319';
-solidsmcol = '#7d072d' ;
+solidsmcol = '#7d072d';
 
 fontsize = 16;
 fontsizetit = 19;
@@ -63,6 +63,9 @@ x_COeq1 = out.x_COeq1.data(hour_id,:);
 x_COeq2 = out.x_COeq2.data(hour_id,:);
 x_COeq3 = out.x_COeq3.data(hour_id,:);
 
+ndot = out.ndot.data(hour_id,:);
+P_g = out.P_g.data(hour_id,:);
+u_g = out.u_g.data(hour_id,:);
 
 %%
 
@@ -135,29 +138,51 @@ H.LineWidth = 3; %change to the desired value
 set(gca,'FontWeight', 'bold','FontSize',18)
 
 %%
-% figure(2)
-% subplot(1,3,1)
-% 
-% box on
-% plot(x_H2, z(1:end-1) , 'linewidth', 6, 'color', H2col, 'LineStyle', '-'  )
-% hold on
-% plot(x_H2eq2, z(2:end-1), 'linewidth', 6, 'color', H2col, 'LineStyle', '--' )
-% plot(x_H2eq3, z(2:end-1), 'linewidth', 6, 'color', H2col, 'LineStyle', ':' )
-% plot(x_CO, z(1:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', '-'  )
-% plot(x_COeq2, z(2:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', '--' )
-% plot(x_COeq3, z(2:end-1), 'linewidth', 6, 'color', COcol ,'LineStyle', ':' )
-% 
-% xlabel('Weight Fraction')
-% ylabel('Furnace Height (m)')
-% 
-% xlim([0, 0.6])
-% ylim([0, h_furnace])
-% 
-% legend('H_2','H_2eq2','H_2eq3','CO', 'COeq2', 'COeq3', 'Location', 'best')
-% H = gca;
-% grid on
-% H.LineWidth = 3; %change to the desired value   
-% set(gca,'FontWeight', 'bold','FontSize',18)
+figure(2)
+subplot(1,3,1)
+
+box on
+plot(ndot, z(1:end-1) , 'linewidth', 6, 'color', 'k', 'LineStyle', '-'  )
+
+xlabel('Mole Flow Rate (mol/s)')
+ylabel('Furnace Height (m)')
+
+ylim([0, h_furnace])
+
+H = gca;
+grid on
+H.LineWidth = 3; %change to the desired value   
+set(gca,'FontWeight', 'bold','FontSize',18)
+
+subplot(1,3,2)
+
+box on
+plot(P_g, z(1:end-1) , 'linewidth', 6, 'color', 'k', 'LineStyle', '-'  )
+
+xlabel('Pressure (atm)')
+ylabel('Furnace Height (m)')
+
+ylim([0, h_furnace])
+
+H = gca;
+grid on
+H.LineWidth = 3; %change to the desired value   
+set(gca,'FontWeight', 'bold','FontSize',18)
+
+subplot(1,3,3)
+
+box on
+plot(u_g, z(1:end-1) , 'linewidth', 6, 'color', 'k', 'LineStyle', '-'  )
+
+xlabel('Gas velocity (m/s)')
+ylabel('Furnace Height (m)')
+
+ylim([0, h_furnace])
+
+H = gca;
+grid on
+H.LineWidth = 3; %change to the desired value   
+set(gca,'FontWeight', 'bold','FontSize',18)
 
 
 %%

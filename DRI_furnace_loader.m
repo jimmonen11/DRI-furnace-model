@@ -35,7 +35,6 @@ MM_CH4 = 16.04;
 R = 8.314; %(m^3*Pa)/(K*mol)
 
 Solids_In_Flow = 45.1;
-Solids_In_Flow_Step = 45.1;
 
 T_sin = -10 + 273; %K, solids temperature in
 P_gin = 101325*1.785; %Pa, pressure of gas in
@@ -158,14 +157,14 @@ x_sumin = x_CH4in  + x_H2in + x_COin +x_H2Oin + x_CO2in + x_N2in; %check to make
 %Reducerflow = 2178*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000;
 
 % 25% with CH4/N2 still -  GOOD!
-x_CH4step = 0.11138;
-x_H2step = 0.76842;
-x_COstep = 0.08439;
-x_H2Ostep = 0.01120;
-x_CO2step = 0.00632;
-x_N2step = 0.01829;
-Gas_In_Flow_Step = 14.16536754;
-T_ginstep = 942+273;
+% x_CH4step = 0.11138;
+% x_H2step = 0.76842;
+% x_COstep = 0.08439;
+% x_H2Ostep = 0.01120;
+% x_CO2step = 0.00632;
+% x_N2step = 0.01829;
+% Gas_In_Flow_Step = 14.16536754;
+% T_ginstep = 942+273;
 
 % % 50% with CH4/N2 still -  GOOD!
 % x_CH4step = 0.10947;
