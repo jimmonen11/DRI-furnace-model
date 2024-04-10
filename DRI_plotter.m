@@ -55,14 +55,6 @@ T_g = out.T_g.data(hour_id,:)-273;
 T_s = out.T_s.data(hour_id,:)-273;
 
 
-x_H2eq1 = out.x_H2eq1.data(hour_id,:);
-x_H2eq2 = out.x_H2eq2.data(hour_id,:);
-x_H2eq3 = out.x_H2eq3.data(hour_id,:);
-
-x_COeq1 = out.x_COeq1.data(hour_id,:);
-x_COeq2 = out.x_COeq2.data(hour_id,:);
-x_COeq3 = out.x_COeq3.data(hour_id,:);
-
 ndot = out.ndot.data(hour_id,:);
 P_g = out.P_g.data(hour_id,:);
 u_g = out.u_g.data(hour_id,:);

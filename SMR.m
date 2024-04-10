@@ -1,4 +1,4 @@
-function [v, Keq] = SMR(X, T, P, Vp, x_H2, x_H2O, x_CO, x_CH4)
+function v = SMR(X, T, P, Vp, x_H2, x_H2O, x_CO, x_CH4)
 
 
 P = P/101325; %atm, convert from Pa

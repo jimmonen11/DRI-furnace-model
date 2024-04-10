@@ -1,4 +1,5 @@
-function [V1, V2, V3, x_COeq1, x_COeq2, x_COeq3] = USCM_CO(X1, X2, X3, r0, T, c_CO, ct, x_og, rxns, kf)
+function [V1, V2, V3] = USCM_CO(X1, X2, X3, r0, T, c_CO, ct, x_og, kf)
+% Unreacted shrinking core model using CO
 
 %% Clean Up
 
@@ -12,8 +13,6 @@ elseif X2 <= tol
 else
     rxns = 3;
 end
-
-%rxns = 3;
 
 %% Effective Diffusion Relations
 %From:
@@ -39,10 +38,6 @@ K3 = exp((2240.6/T)-2.667);
 c_COeq1 = ((x_og)/(K1+1))*ct;
 c_COeq2 = ((x_og)/(K2+1))*ct;
 c_COeq3 = ((x_og)/(K3+1))*ct;
-
-x_COeq1 = c_COeq1/ct;
-x_COeq2 = c_COeq2/ct;
-x_COeq3 = c_COeq3/ct;
 
 %% Reaction rate Coefficient
 

@@ -1,4 +1,5 @@
-function [V1, V2, V3, x_H2eq1, x_H2eq2, x_H2eq3] = USCM_H2(X1, X2, X3, r0, T, c_H2, ct, x_og, kf)
+function [V1, V2, V3] = USCM_H2(X1, X2, X3, r0, T, c_H2, ct, x_og, kf)
+% Unreacted shrinking core model using H2
 
 %% Clean Up
 
@@ -37,10 +38,6 @@ K3 = exp((-2023.8/T)+1.239);
 c_H2eq1 = ((x_og)/(K1+1))*ct;
 c_H2eq2 = ((x_og)/(K2+1))*ct;
 c_H2eq3 = ((x_og)/(K3+1))*ct;
-
-x_H2eq1 = c_H2eq1/ct;
-x_H2eq2 = c_H2eq2/ct;
-x_H2eq3 = c_H2eq3/ct;
 
 
 %% Reaction rate Coefficient
