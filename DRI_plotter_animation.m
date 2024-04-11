@@ -72,7 +72,7 @@ end
 
 
 figure('units','normalized','outerposition',[0 0 1 1])
-gif('test.gif')
+gif('stepcase.gif')
 
 [minval,hour1] = min(abs(time_interp-3600));
 
@@ -107,17 +107,20 @@ for i = hour1:hour_end
     subplot(1,3,2)
     box on
     hold on
+    xlim([0, 1])
     plot(x_H2_plot(i,:), z(1:end-1), 'linewidth', 6,'color', H2col)
     plot(x_H2O_plot(i,:), z(1:end-1), 'linewidth', 6,'color', H2Ocol)
-    % plot(x_CO_plot(i,:), z(1:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', ':')
-    % plot(x_CO2_plot(i,:), z(1:end-1), 'linewidth', 6,'color', CO2col, 'LineStyle', ':')
-    % plot(x_CH4_plot(i,:), z(1:end-1), 'linewidth', 6,'color', CH4col, 'LineStyle', ':')
+    if H2only == false
+        plot(x_CO_plot(i,:), z(1:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', ':')
+        plot(x_CO2_plot(i,:), z(1:end-1), 'linewidth', 6,'color', CO2col, 'LineStyle', ':')
+        plot(x_CH4_plot(i,:), z(1:end-1), 'linewidth', 6,'color', CH4col, 'LineStyle', ':')
+        xlim([0, 0.8])
 
+    end
    
     xlabel('Mole Fraction')
     %ylabel('Furnace Height (m)')
     
-    xlim([0, 0.8])
     ylim([0, h_furnace])
     xticks([0:0.25:1]);
 

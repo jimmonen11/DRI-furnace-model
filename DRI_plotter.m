@@ -25,14 +25,13 @@ fontsizetit = 19;
 
 z = linspace(-dz, h_furnace + dz, n_furnace+2);
 
-hour_aim = 0;
+hour_aim = 0; % can change if looking for a specific hour
 time = out.w_Fe2O3.time(end);
 time_interp = linspace(0,time(end), 1000);
 
-[minval,hour_id] = min(abs(time_interp-3600*hour_aim));
+%[minval,hour_id] = min(abs(time_interp-3600*hour_aim));
 hour_id = length(out.w_Fe.data(:,1));
 
-%hour_id = 2;
 
 %%
 w_Fe2O3 =  out.w_Fe2O3.data(hour_id,:);
@@ -50,10 +49,8 @@ x_CO = out.x_CO.data(hour_id,:);
 x_CO2 = out.x_CO2.data(hour_id,:);
 x_CH4 = out.x_CH4.data(hour_id,:);
 
-
 T_g = out.T_g.data(hour_id,:)-273;
 T_s = out.T_s.data(hour_id,:)-273;
-
 
 ndot = out.ndot.data(hour_id,:);
 P_g = out.P_g.data(hour_id,:);
@@ -87,10 +84,11 @@ box on
 plot(x_H2, z(1:end-1), 'linewidth', 6, 'color', H2col )
 hold on
 plot(x_H2O, z(1:end-1), 'linewidth', 6, 'color', H2Ocol)
-plot(x_CO, z(1:end-1), 'linestyle', ':','linewidth', 6, 'color', COcol)
-plot(x_CO2, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CO2col)
-plot(x_CH4, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CH4col)
-
+if H2only == false
+    plot(x_CO, z(1:end-1), 'linestyle', ':','linewidth', 6, 'color', COcol)
+    plot(x_CO2, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CO2col)
+    plot(x_CH4, z(1:end-1), 'linestyle', ':', 'linewidth', 6, 'color', CH4col)
+end
 xlabel('Mole Fraction')
 %ylabel('Furnace Height (m)')
 

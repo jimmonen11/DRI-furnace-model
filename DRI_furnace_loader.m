@@ -3,12 +3,24 @@
 n_furnace = 75;
 
 changenodes = false; %set to true if plan on changing n_furnace to something other than 75
-H2only = false; % set to true for a furnace that only uses H2
+
+H2only = true; % set to true for a furnace that only uses H2
 
 steady_state = true; % set to true if want constant inlet conditions to be constant
+
+% set one of these to true to run a dynamic case - only can use 1
+% stepcase 1 has to have H2 false
 stepcase1 = false;
 stepcase2 = false;
 stepcase3 = false;
+
+if steady_state+stepcase1+stepcase2+stepcase3 > 1
+    error('Trying to run a steady state case and a step change case.')
+end
+
+if H2only + stepcase1 > 1
+    error('Hydrogen only case cannot be used with step case 1.')
+end
 
 %% Furnace Geometry and Solids Parameters
 % Geometry of furnace, pellets, etc. come from data from a plant in Quebec taken from 
@@ -19,28 +31,6 @@ eps_bed = 0.5; % m^3 gas/m^3 total
 r_furnace = 2.75; %m, radius of reducing section of furnace
 h_furnace = 10; %m, height of reducing section of furnace
 r_p = 15e-3/2; %m, radius of iron ore pellets
-
-A_furnace = pi*r_furnace^2; %m^2, c.s. area of flow
-A_furnace_pel = A_furnace*(1-eps_bed); %c.s. area for pellet flow - excludes gas lanes
-A_furnace_gas = A_furnace*(eps_bed); %c.s. area for gas flow - excludes solids lanes
-
-V_p = 4/3*pi*r_p^3; %m^3, volume of a pellet
-V_furnace = A_furnace*h_furnace; %m^3, volume of reducing section of furnace
-V_pellet_bed = ((4/3)*pi*r_p^3)/(1-eps_bed); %m^3, volume of pellets in furnace
-
-dz = (h_furnace/(n_furnace-1)); %m, spacing of nodes
-
-n_pellets = V_furnace/V_pellet_bed; % no. of pellets in reducing section
-n_pellets_dz = n_pellets*dz/h_furnace; % no. of pellets per node
-
-% Volume of gas and solid in each spatial node - constant
-V_g = (4/3)*pi*r_p^3*n_pellets_dz*(eps_bed/(1-eps_bed)); % m^3, volume of gas
-V_s = (4/3)*pi*r_p^3*n_pellets_dz; % m^3, volume of solid
-
-a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange, Wagner thesis
-A_wall = (2*pi*r_furnace*dz); %m^2 surface area of furnace
-
-tau = 60*5; % seconds, time constant for 1st order step changes
 
 %% Constants
 
@@ -209,3 +199,27 @@ end
 
 x_sumstep = x_CH4step  + x_H2step + x_COstep +x_H2Ostep + x_CO2step + x_N2step; %check to make sure equal to 1
 
+
+%% Furnace Geometry Again - Need to Know Height of Furnace
+
+A_furnace = pi*r_furnace^2; %m^2, c.s. area of flow
+A_furnace_pel = A_furnace*(1-eps_bed); %c.s. area for pellet flow - excludes gas lanes
+A_furnace_gas = A_furnace*(eps_bed); %c.s. area for gas flow - excludes solids lanes
+
+V_p = 4/3*pi*r_p^3; %m^3, volume of a pellet
+V_furnace = A_furnace*h_furnace; %m^3, volume of reducing section of furnace
+V_pellet_bed = ((4/3)*pi*r_p^3)/(1-eps_bed); %m^3, volume of pellets in furnace
+
+dz = (h_furnace/(n_furnace-1)); %m, spacing of nodes
+
+n_pellets = V_furnace/V_pellet_bed; % no. of pellets in reducing section
+n_pellets_dz = n_pellets*dz/h_furnace; % no. of pellets per node
+
+% Volume of gas and solid in each spatial node - constant
+V_g = (4/3)*pi*r_p^3*n_pellets_dz*(eps_bed/(1-eps_bed)); % m^3, volume of gas
+V_s = (4/3)*pi*r_p^3*n_pellets_dz; % m^3, volume of solid
+
+a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange, Wagner thesis
+A_wall = (2*pi*r_furnace*dz); %m^2 surface area of furnace
+
+tau = 60*5; % seconds, time constant for 1st order step changes
