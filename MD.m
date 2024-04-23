@@ -24,7 +24,8 @@ else
     % Kgraph = 5e-7*exp(0.0177*T);
     % Ggraph = 8.314*T*log(Kgraph);
     %Ggraph = 21950.5; % estimated as graphite Del G from Equilibria of decomposition reactions of carbon monoxide and methane over nickel catalysts
-    Ggraph = 15000;
+    %Ggraph = 15000;
+    Ggraph = 18000;
     %Ggraph = 10000;
 
     G = G + Ggraph;

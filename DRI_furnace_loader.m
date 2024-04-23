@@ -4,13 +4,13 @@ n_furnace = 75;
 
 changenodes = false; %set to true if plan on changing n_furnace to something other than 75
 
-H2only = true; % set to true for a furnace that only uses H2
+H2only = false; % set to true for a furnace that only uses H2
 
-steady_state = true; % set to true if want constant inlet conditions to be constant
+steady_state = false; % set to true if want constant inlet conditions to be constant
 
 % set one of these to true to run a dynamic case - only can use 1
 % stepcase 1 has to have H2 false
-stepcase1 = false;
+stepcase1 = true;
 stepcase2 = false;
 stepcase3 = false;
 
@@ -64,7 +64,7 @@ R = 8.314; %(m^3*Pa)/(K*mol)
 Solids_In_Flow = 45.1; %kg/s, flow of solids in
 
 T_sin = -10 + 273; %K, solids temperature in
-P_gin = 101325*1.785; %Pa, pressure of gas in (found via trial and error)
+P_gin = 101325*1.82; %Pa, pressure of gas in (found via trial and error)
 
 % weight fraction of pellets in
 w_Fe2O3in = 0.9665;
@@ -102,7 +102,7 @@ else
     x_CO2in = 0.024;
     x_N2in = 0.017379642;
     Gas_In_Flow = 2228.1*(x_H2in*MM_H2 + x_COin*MM_CO + x_H2Oin*MM_H2O +x_CO2in*MM_CO2 + x_N2in*MM_N2 + x_CH4in*MM_CH4)/1000; %kg/s
-    T_gin = 942 + 273;
+    T_gin = 947 + 273;
 
 
 end
@@ -129,7 +129,6 @@ if changenodes == true %this 'helps' change nodes, but will still required sim t
     nr1init = interp1([1:1:length(nr1init)],nr1init, linspace(1,length(nr1init),n_furnace));
     nr2init = interp1([1:1:length(nr2init)],nr2init, linspace(1,length(nr2init),n_furnace));
     nr3init = interp1([1:1:length(nr3init)],nr3init, linspace(1,length(nr3init),n_furnace));
-    ndotinit = interp1([1:1:length(ndotinit)],ndotinit, linspace(1,length(ndotinit),n_furnace));
 
 end
 
@@ -163,6 +162,7 @@ if stepcase1 == true
     x_N2step = 0.01829;
     Gas_In_Flow_Step = 14.16536754;
     T_ginstep = 942+273;
+    Solids_In_Flow_Step = Solids_In_Flow*1;
 
 end
 

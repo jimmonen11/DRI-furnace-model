@@ -24,7 +24,7 @@ else
 
     % Three-dimensional simulation of chemically reacting gas f lows in the porous support structure of an integrated-planar solid oxide fuel cell
     % Modified to give better validation
-    kf = (2395*exp(-210000/(R*T)) ) * 101325^2;
+    kf = (2395*exp(-180000/(R*T)) ) * 101325^2;
 
 end
 
