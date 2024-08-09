@@ -74,6 +74,7 @@ w_Fein = 0;
 w_Cin = 0;
 w_Ganin = 0.0335;
 
+
 %% Gas Inlet Conditions
 
 if H2only == true
@@ -163,7 +164,7 @@ if stepcase1 == true
     Gas_In_Flow_Step = 14.16536754;
     T_ginstep = 942+273;
     Solids_In_Flow_Step = Solids_In_Flow*1;
-
+   
 end
 
 
@@ -198,7 +199,8 @@ if stepcase3 == true
 end
 
 x_sumstep = x_CH4step  + x_H2step + x_COstep +x_H2Ostep + x_CO2step + x_N2step; %check to make sure equal to 1
-
+T_sinstep = T_sin;
+P_ginstep = P_gin;
 
 %% Furnace Geometry Again - Need to Know Height of Furnace
 
@@ -223,3 +225,4 @@ a_b = 6*(1-eps_bed)/(r_p*2); %m^2/m^3, suface area for gas solid heat exchange, 
 A_wall = (2*pi*r_furnace*dz); %m^2 surface area of furnace
 
 tau = 60*5; % seconds, time constant for 1st order step changes
+
