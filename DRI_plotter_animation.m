@@ -14,7 +14,7 @@ solidscol = "#D95319";
 
 
 time = out.Fe2O3_conc.time;
-time_interp = linspace(0,time(end), 250);
+time_interp = linspace(0,time(end), 150);
 
 z = linspace(-dz, h_furnace + dz, n_furnace+2);
 
@@ -97,7 +97,7 @@ for i = hour1:hour_end
     ylim([0, h_furnace])
 
     xticks([0:0.25:1]);
-    legend('Fe_2O_3','Fe_3O_4', 'FeO', 'Fe','Location', 'east')
+    legend('Fe_2O_3','Fe_3O_4', 'FeO', 'Fe','Location', 'southwest')
     H = gca;
     grid on
     H.LineWidth = 3; %change to the desired value   
@@ -114,7 +114,7 @@ for i = hour1:hour_end
         plot(x_CO_plot(i,:), z(1:end-1), 'linewidth', 6, 'color', COcol, 'LineStyle', ':')
         plot(x_CO2_plot(i,:), z(1:end-1), 'linewidth', 6,'color', CO2col, 'LineStyle', ':')
         plot(x_CH4_plot(i,:), z(1:end-1), 'linewidth', 6,'color', CH4col, 'LineStyle', ':')
-        xlim([0, 0.8])
+        xlim([0, 1])
 
     end
    
@@ -124,7 +124,7 @@ for i = hour1:hour_end
     ylim([0, h_furnace])
     xticks([0:0.25:1]);
 
-    legend('H_2','H_2O', 'CO', 'CO_2', 'CH_4', 'Location', 'east')
+    legend('H_2','H_2O', 'CO', 'CO_2', 'CH_4', 'Location', 'south')
     H = gca;
     grid on
     H.LineWidth = 3; %change to the desired value   

@@ -3,7 +3,7 @@ function [V1, V2, V3] = USCM_H2(X1, X2, X3, r0, T, c_H2, ct, x_og, kf)
 
 %% Clean Up
 
-% %Makes sure X values are positive
+%Makes sure X values are positive
 
 tol = 1e-15;
 if X1 <= tol && X2 <= tol
@@ -13,7 +13,6 @@ elseif X2 <= tol
 else
     rxns = 3;
 end
-
 
 %% Effective Diffusion Relations
 %From:

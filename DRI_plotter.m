@@ -41,6 +41,9 @@ w_Fe =  out.w_Fe.data(hour_id,:) ;
 w_C =  out.w_C.data(hour_id,:) ;
 Xred =  out.Xred.data(hour_id,:) ;
 
+X1 =  out.X1.data(hour_id,:) ;
+X2 =  out.X2.data(hour_id,:) ;
+X3 =  out.X3.data(hour_id,:) ;
 
 x_H2 = out.x_H2.data(hour_id,:);
 x_H2O = out.x_H2O.data(hour_id,:);
@@ -174,6 +177,31 @@ grid on
 H.LineWidth = 3; %change to the desired value   
 set(gca,'FontWeight', 'bold','FontSize',18)
 
+%% 
+figure(3)
+
+box on
+hold on
+% plot(X1, z(2:end), 'linewidth', 6, 'color', 'k', 'LineStyle', '-'  )
+% plot(X2, z(2:end), 'linewidth', 6, 'color', 'k', 'LineStyle', ':'  )
+% plot(X3, z(2:end), 'linewidth', 6, 'color', 'k', 'LineStyle', '-.'  )
+
+plot(z(2:end), X1,  'linewidth', 6, 'color', 'k', 'LineStyle', '-'  )
+plot(z(2:end), X2, 'linewidth', 6, 'color', 'k', 'LineStyle', ':'  )
+plot(z(2:end), X3, 'linewidth', 6, 'color', 'k', 'LineStyle', '-.'  )
+
+legend('X1', 'X2', 'X3')
+
+ylabel('Reaction fron X values (unitless)')
+xlabel('Furnace Height (m)')
+
+xlim([0, h_furnace])
+
+H = gca;
+grid on
+H.LineWidth = 3; %change to the desired value   
+set(gca,'FontWeight', 'bold','FontSize',18)
+
 
 %%
 
@@ -205,6 +233,5 @@ mae_gas = mean(abs(gas_val - gas_model))*100
 
 re_mfs = abs(33.11 - out.m_s.data(hour_id, 1))/33.11*100
 re_mfg = abs(43.07 - out.m_g.data(hour_id, end))/43.07*100
-
 re_Tg = abs(558 - out.T_g.data(hour_id, end))/558 * 100
 

@@ -225,7 +225,7 @@ plot(w_C_plot(split3,:), z(2:end), 'linewidth', widthsize,'color', Ccol, 'linest
 ylabel('Furnace Height (m)')
 xlabel('Weight Fraction')
 
-%xlim([0, 0.02])
+xlim([0, 0.02])
 ylim([0, h_furnace])
 
 xticks([0:0.01:0.02]);
